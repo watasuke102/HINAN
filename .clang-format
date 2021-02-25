@@ -1,0 +1,44 @@
+---
+Language:        Cpp
+# BasedOnStyle:  Google
+Standard:        Auto
+ColumnLimit:     80
+
+# =========================
+#  Align
+# =========================
+PointerAlignment:       Left
+DerivePointerAlignment: false
+
+AlignTrailingComments:        true
+AlignConsecutiveMacros:       false
+AlignConsecutiveAssignments:  true
+AlignConsecutiveDeclarations: true
+
+# =========================
+#  Break
+# =========================
+BinPackArguments:  true
+BinPackParameters: true
+BreakBeforeBraces: Attach
+AlwaysBreakBeforeMultilineStrings:       true
+BreakConstructorInitializersBeforeComma: false
+
+# =========================
+#  Indentation
+# =========================
+IndentWidth:          2
+IndentCaseLabels:     true
+AccessModifierOffset: -1
+NamespaceIndentation: None
+
+# =========================
+#  Short
+# =========================
+AllowShortEnumsOnASingleLine:        true
+AllowShortBlocksOnASingleLine:       Never
+AllowShortCaseLabelsOnASingleLine:   true
+AllowShortFunctionsOnASingleLine:    All
+AllowShortLambdasOnASingleLine:      All
+AllowShortIfStatementsOnASingleLine: false
+AllowShortLoopsOnASingleLine:        false

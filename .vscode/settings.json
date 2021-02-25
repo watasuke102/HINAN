@@ -1,0 +1,7 @@
+{
+	"files.associations": {
+		"qapplication": "cpp",
+		"qtwidgets": "cpp",
+		"qmainwindow": "cpp"
+	}
+}
