@@ -13,35 +13,39 @@
 #include <QString>
 
 namespace hinan {
-bool IncludingTextByRegExp(QString target, QRegExp reg_exp) {
-  if (reg_exp.indexIn(target) != -1)
-    return true;
+void RemoveCommentAndSpace(QString& text) {
+  const QRegExp remove_target[] = {QRegExp("//.*"), QRegExp("[ ]+")};
+  for (auto reg_exp : remove_target) {
+    if (reg_exp.indexIn(text) != -1) {
+      text.remove(reg_exp);
+    }
+  }
+}
+bool IsSkipRequired(QString text) {
+  const QRegExp skip_target[] = {QRegExp("^\n"), QRegExp("#include.*")};
+  for (auto reg_exp : skip_target) {
+    if (reg_exp.indexIn(text) != -1) {
+      return true;
+    }
+  }
   return false;
 }
 CppReader::CppReader(QString path) {
   QFile file(path);
   if (!file.open(QIODevice::ReadOnly)) {
-    qDebug() << "File cannot open";
+    qFatal("File cannot open");
     return;
   }
-  // Remove comments and includes
-  QString       read;
-  const QRegExp include("#include.*");
-  const QRegExp line_comment("//.*");
+  QString read;
+  // Read from file and remove unnecessary part
   while (!file.atEnd()) {
     read = file.readLine();
-    qDebug() << "[debug] read(before) = 「" + read + "」";
-    if (read == "\n" || read == "" || IncludingTextByRegExp(read, include)) {
-      qDebug() << "!!ignored";
+    RemoveCommentAndSpace(read);
+    if (read.isEmpty() || IsSkipRequired(read))
       continue;
-    }
-    if (IncludingTextByRegExp(read, line_comment)) {
-      read.remove(line_comment);
-    }
-    qDebug() << "[debug] read(after)  = 「" + read + "」";
     cpp_ += read + '\n';
   }
 }
 
-void CppReader::PrintCpp() { qDebug() << cpp_; }
+void CppReader::PrintCpp() { qDebug("%s", qUtf8Printable(cpp_)); }
 } // namespace hinan
