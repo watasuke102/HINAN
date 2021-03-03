@@ -14,7 +14,6 @@
 #include <QString>
 #include <angelscript.h>
 #include <scriptbuilder/scriptbuilder.h>
-#include <scriptstdstring/scriptstdstring.h>
 
 namespace hinan {
 class ProgramReader : public QObject {

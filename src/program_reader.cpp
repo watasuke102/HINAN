@@ -12,32 +12,29 @@
 #include <angelscript.h>
 #include <iostream>
 #include <scriptbuilder/scriptbuilder.h>
-#include <scriptstdstring/scriptstdstring.h>
-#include <string>
 
 void ScriptLog(const asSMessageInfo* msg) {
-  qDebug("[Script:%d] %s", msg->row, msg->message);
+  qInfo("[Script:%d] %s", msg->row, msg->message);
 }
 
 namespace hinan {
 ProgramReader::ProgramReader(QString path) {
   engine_ = asCreateScriptEngine();
   if (engine_ == 0) {
-    qFatal("[Failed] cannot create script engine_");
+    qFatal("[Failed] Cannot create script engine_");
     return;
   }
   // Open script file
   builder_.StartNewModule(engine_, "main");
   if (builder_.AddSectionFromFile(path.toUtf8().data()) < 0) {
-    qFatal("[Failed] cannot open script file");
+    qFatal("[Failed] Cannot open script file");
     return;
   }
-  if (builder_.BuildModule() < 0) {
-    qFatal("[Failed] script build failed!");
-    return;
-  }
-  RegisterStdString(engine_);
   engine_->SetMessageCallback(asFUNCTION(ScriptLog), 0, asCALL_CDECL);
+  if (builder_.BuildModule() < 0) {
+    qFatal("[Failed] Cannot build the script");
+    return;
+  }
 }
 ProgramReader::~ProgramReader() { engine_->ShutDownAndRelease(); }
 
