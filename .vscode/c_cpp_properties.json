@@ -6,7 +6,8 @@
                 "${workspaceFolder}/inc",
                 "/usr/include/qt",
                 "/usr/include/qt/QtCore",
-                "/usr/include/qt/QtWidgets"
+                "/usr/include/qt/QtWidgets",
+                "/usr/share/angelscript/add_on"
             ],
             "defines": [],
             "compilerPath": "/usr/bin/gcc",

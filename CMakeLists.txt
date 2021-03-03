@@ -14,17 +14,20 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(QT NAMES Qt6 Qt5 COMPONENTS Widgets LinguistTools REQUIRED)
 find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets LinguistTools REQUIRED)
+set(AS_ADD_ON /usr/share/angelscript/add_on)
 
-include_directories("./inc")
+include_directories("./inc" ${AS_ADD_ON})
 set(TS_FILES lang/${PROJECT_NAME}_ja_JP.ts)
 
 # Add headers what written "Q_OBJECT"
 qt_wrap_cpp(HEADERS
-  inc/cpp_reader.h
+  inc/program_reader.h
 )
 set(PROJECT_SOURCES ${HEADERS} ${TS_FILES}
   src/main.cpp
-  src/cpp_reader.cpp
+  src/program_reader.cpp
+  ${AS_ADD_ON}/scriptbuilder/scriptbuilder.cpp
+  ${AS_ADD_ON}/scriptstdstring/scriptstdstring.cpp
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
@@ -35,4 +38,9 @@ else()
     qt5_create_translation(QM_FILES ${CMAKE_SOURCE_DIR} ${TS_FILES})
 endif()
 
-target_link_libraries(${PROJECT_NAME} PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
+target_link_libraries(
+  ${PROJECT_NAME}
+  PRIVATE
+  Qt${QT_VERSION_MAJOR}::Widgets
+  -langelscript
+)

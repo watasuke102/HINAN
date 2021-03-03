@@ -7,14 +7,12 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
-#include "cpp_reader.h"
+#include "program_reader.h"
 #include <QDebug>
-#include <string.h>
 
 void Help() {
-  qDebug() << "usage: ./hinan <option>";
-  qDebug() << " Options: -h | --help   Show this help message.";
-  qDebug() << "\n";
+  qInfo("usage: ./hinan <option>");
+  qInfo(" Options: -h | --help   Show this help message.\n");
 }
 
 int main(int argc, char* argv[]) {
@@ -26,7 +24,7 @@ int main(int argc, char* argv[]) {
     Help();
     return 0;
   }
-  hinan::CppReader cpp_render(argv[1]);
-  cpp_render.PrintCpp();
+  hinan::ProgramReader reader(argv[1]);
+  reader.Run();
   return 0;
 }
