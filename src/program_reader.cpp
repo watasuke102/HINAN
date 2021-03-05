@@ -9,27 +9,51 @@
 
 #include "program_reader.h"
 #include <QDebug>
+#include <QDir>
+#include <QFile>
 #include <angelscript.h>
-#include <iostream>
 #include <scriptbuilder/scriptbuilder.h>
 
 void ScriptLog(const asSMessageInfo* msg) {
   qInfo("[Script:%d] %s", msg->row, msg->message);
 }
 
+void FileOpen(QFile& file, QString path) {
+  file.setFileName(path);
+  if (!file.open(QIODevice::ReadOnly))
+    qFatal("File cannot open (%s)", path.toUtf8().data());
+}
+
 namespace hinan {
 ProgramReader::ProgramReader(QString path) {
+  QString script = "";
+  QFile   file;
+  // Open template file and read all
+  FileOpen(file, "assets/template.txt");
+  script = file.readAll();
+  file.close();
+  // Open program file and read without include
+  FileOpen(file, path);
+  QString read;
+  // Read from file and remove unnecessary part
+  while (!file.atEnd()) {
+    read = file.readLine();
+    // Skip #include
+    if (QRegExp("#include.*").indexIn(read) != -1) {
+      continue;
+    }
+    if (read.isEmpty())
+      continue;
+    script += read;
+  }
+  // AngelScript Engine
   engine_ = asCreateScriptEngine();
   if (engine_ == 0) {
     qFatal("[Failed] Cannot create script engine_");
     return;
   }
-  // Open script file
   builder_.StartNewModule(engine_, "main");
-  if (builder_.AddSectionFromFile(path.toUtf8().data()) < 0) {
-    qFatal("[Failed] Cannot open script file");
-    return;
-  }
+  builder_.AddSectionFromMemory("main", script.toUtf8().data());
   engine_->SetMessageCallback(asFUNCTION(ScriptLog), 0, asCALL_CDECL);
   if (builder_.BuildModule() < 0) {
     qFatal("[Failed] Cannot build the script");
