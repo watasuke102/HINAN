@@ -10,6 +10,7 @@
 #include "port.h"
 #include "program_reader.h"
 #include <QDebug>
+#include <QTextStream>
 
 void Help() {
   qInfo("usage: ./hinan <option>");
@@ -25,9 +26,24 @@ int main(int argc, char* argv[]) {
     Help();
     return 0;
   }
-  hinan::ProgramReader reader(argv[1]);
-  reader.Run();
-  qDebug() << reader.GetPortStat(hinan::port::P4DDR);
-  qDebug() << reader.GetPortStat(hinan::port::PBDR);
+  hinan::ProgramReaderManager manager(argv[1]);
+  QString                     line;
+  QTextStream                 qstdin(stdin);
+  while (!qstdin.atEnd()) {
+    line = qstdin.readLine();
+    if (line == QString("run")) {
+      qDebug("-> Start Script");
+      manager.LaunchScript();
+    } else if (line == QString("kill") || line == QString("quit")) {
+      qDebug("-> killed");
+      manager.FinishScript();
+      if (line == QString("quit")) {
+        break;
+      }
+    } else {
+      qDebug("-> 0x%02x", manager.GetPortStat(line.toUtf8().data()));
+    }
+  }
+  qDebug("-> finish");
   return 0;
 }

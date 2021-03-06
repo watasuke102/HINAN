@@ -8,9 +8,11 @@
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 #include "program_reader.h"
+#include "port.h"
 #include <QDebug>
 #include <QDir>
 #include <QFile>
+#include <QThread>
 #include <angelscript.h>
 #include <scriptbuilder/scriptbuilder.h>
 
@@ -25,6 +27,7 @@ void FileOpen(QFile& file, QString path) {
 }
 
 namespace hinan {
+// Reader
 ProgramReader::ProgramReader(QString path) {
   QString script = "";
   QFile   file;
@@ -67,6 +70,7 @@ void ProgramReader::Run() {
   if (engine_ == 0) {
     qFatal("[Failed] Engine is not yet to initialized");
   }
+  qDebug("---START---");
   asIScriptModule*  module  = engine_->GetModule("main");
   asIScriptContext* context = engine_->CreateContext();
 
@@ -92,5 +96,22 @@ int ProgramReader::GetPortStat(const char* port) {
   int result = context->GetReturnDWord();
   context->Release();
   return result;
+}
+
+// Manager
+ProgramReaderManager::ProgramReaderManager(QString path) {
+  reader_thread_ = new QThread(this);
+  reader_        = new ProgramReader(path);
+  reader_->moveToThread(reader_thread_);
+  connect(this, SIGNAL(LaunchScriptSignal()), reader_, SLOT(Run()));
+  connect(reader_thread_, SIGNAL(finished()), reader_, SLOT(deleteLater()));
+  reader_thread_->start();
+}
+ProgramReaderManager::~ProgramReaderManager() { reader_thread_->quit(); }
+
+void ProgramReaderManager::LaunchScript() { emit LaunchScriptSignal(); }
+void ProgramReaderManager::FinishScript() { reader_thread_->quit(); }
+int  ProgramReaderManager::GetPortStat(const char* port) {
+  return reader_->GetPortStat(port);
 }
 } // namespace hinan

@@ -12,6 +12,7 @@
 
 #include <QObject>
 #include <QString>
+#include <QThread>
 #include <angelscript.h>
 #include <scriptbuilder/scriptbuilder.h>
 
@@ -25,8 +26,27 @@ class ProgramReader : public QObject {
  public:
   ProgramReader(QString);
   ~ProgramReader();
+  int GetPortStat(const char*);
+
+ public slots:
   void Run();
+};
+
+class ProgramReaderManager : public QObject {
+  Q_OBJECT
+ private:
+  ProgramReader* reader_;
+  QThread*       reader_thread_;
+
+ public:
+  ProgramReaderManager(QString);
+  ~ProgramReaderManager();
+  void LaunchScript();
+  void FinishScript();
   int  GetPortStat(const char*);
+
+ signals:
+  void LaunchScriptSignal();
 };
 } // namespace hinan
 
