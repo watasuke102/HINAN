@@ -2,6 +2,12 @@
 	"files.associations": {
 		"qapplication": "cpp",
 		"qtwidgets": "cpp",
-		"qmainwindow": "cpp"
+		"qmainwindow": "cpp",
+		"*.tcc": "cpp",
+		"future": "cpp",
+		"istream": "cpp",
+		"ostream": "cpp",
+		"stop_token": "cpp",
+		"typeinfo": "cpp"
 	}
 }
