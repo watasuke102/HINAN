@@ -28,10 +28,6 @@ namespace hinan {
 ProgramReader::ProgramReader(QString path) {
   QString script = "";
   QFile   file;
-  // Open template file and read all
-  FileOpen(file, "assets/template.txt");
-  script = file.readAll();
-  file.close();
   // Open program file and read without include
   FileOpen(file, path);
   QString read;
@@ -46,6 +42,11 @@ ProgramReader::ProgramReader(QString path) {
       continue;
     script += read;
   }
+  file.close();
+  // Open template file and read all
+  FileOpen(file, "assets/template.txt");
+  script += file.readAll();
+  file.close();
   // AngelScript Engine
   engine_ = asCreateScriptEngine();
   if (engine_ == 0) {

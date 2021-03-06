@@ -2,8 +2,8 @@
  * C言語ほぼそのまま
  */
 
-//#include <h8/reg3067.h>
-//#include <mes2.h>
+#include <h8/reg3067.h>
+#include <mes2.h>
 
 void myWait() {
   int i;

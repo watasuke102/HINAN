@@ -10,8 +10,8 @@
 			"request": "launch",
 			"program": "${workspaceFolder}/build/hinan",
 			"args": [
-				//"${workspaceFolder}/test/script.as"
-				"${workspaceFolder}/test/reader_test.c"
+				/**"${workspaceFolder}/test/script.as"/*/
+				"${workspaceFolder}/test/reader_test.c"/**/
 			],
 			"stopAtEntry": false,
 			"cwd": "${workspaceFolder}",

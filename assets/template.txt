@@ -20,3 +20,26 @@ int16 P8DR  = 0x00;
 int16 P9DR  = 0x00;
 int16 PADR  = 0x00;
 int16 PBDR  = 0x00;
+
+int16 GetP1DDR() { return P1DDR; }
+int16 GetP2DDR() { return P2DDR; }
+int16 GetP3DDR() { return P3DDR; }
+int16 GetP4DDR() { return P4DDR; }
+int16 GetP5DDR() { return P5DDR; }
+int16 GetP6DDR() { return P6DDR; }
+int16 GetP7DDR() { return P7DDR; }
+int16 GetP8DDR() { return P8DDR; }
+int16 GetP9DDR() { return P9DDR; }
+int16 GetPADDR() { return PADDR; }
+int16 GetPBDDR() { return PBDDR; }
+int16 GetP1DR() { return P1DR; }
+int16 GetP2DR() { return P2DR; }
+int16 GetP3DR() { return P3DR; }
+int16 GetP4DR() { return P4DR; }
+int16 GetP5DR() { return P5DR; }
+int16 GetP6DR() { return P6DR; }
+int16 GetP7DR() { return P7DR; }
+int16 GetP8DR() { return P8DR; }
+int16 GetP9DR() { return P9DR; }
+int16 GetPADR() { return PADR; }
+int16 GetPBDR() { return PBDR; }
