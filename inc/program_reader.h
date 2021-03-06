@@ -7,8 +7,8 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
-#ifndef HINAN_Program_READER_H_
-#define HINAN_Program_READER_H_
+#ifndef HINAN_PROGRAM_READER_H_
+#define HINAN_PROGRAM_READER_H_
 
 #include <QObject>
 #include <QString>
@@ -26,7 +26,8 @@ class ProgramReader : public QObject {
   ProgramReader(QString);
   ~ProgramReader();
   void Run();
+  int  GetPortStat(const char*);
 };
 } // namespace hinan
 
-#endif // HINAN_Program_READER_H_
+#endif // HINAN_PROGRAM_READER_H_

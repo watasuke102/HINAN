@@ -7,6 +7,7 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
+#include "port.h"
 #include "program_reader.h"
 #include <QDebug>
 
@@ -26,5 +27,7 @@ int main(int argc, char* argv[]) {
   }
   hinan::ProgramReader reader(argv[1]);
   reader.Run();
+  qDebug() << reader.GetPortStat(hinan::port::P4DDR);
+  qDebug() << reader.GetPortStat(hinan::port::PBDR);
   return 0;
 }

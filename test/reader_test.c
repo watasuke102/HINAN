@@ -14,7 +14,7 @@ void myWait() {
 int main(void) {
   P4DDR = 0xff; // P4を出力用に
 
-  while (true) {
+  while (false) {
 
     P4DR = 0x11;
     myWait();

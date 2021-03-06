@@ -75,4 +75,22 @@ void ProgramReader::Run() {
 
   context->Release();
 }
+int ProgramReader::GetPortStat(const char* port) {
+  if (engine_ == 0) {
+    qFatal("[Failed] Engine is not yet to initialized");
+  }
+  asIScriptModule*  module  = engine_->GetModule("main");
+  asIScriptContext* context = engine_->CreateContext();
+
+  const QString function_name = QString("int16 Get%1()").arg(port);
+  context->Prepare(module->GetFunctionByDecl(function_name.toUtf8().data()));
+  if (context->Execute() != asEXECUTION_FINISHED) {
+    qCritical("[Failed] cannot launch port status get function");
+    context->Release();
+    return -1;
+  }
+  int result = context->GetReturnDWord();
+  context->Release();
+  return result;
+}
 } // namespace hinan

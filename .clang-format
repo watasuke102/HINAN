@@ -30,7 +30,7 @@ BreakConstructorInitializersBeforeComma: false
 IndentWidth:          2
 IndentCaseLabels:     true
 AccessModifierOffset: -1
-NamespaceIndentation: None
+NamespaceIndentation: Inner
 
 # =========================
 #  Short
