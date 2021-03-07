@@ -34,7 +34,6 @@ ProgramReader::ProgramReader(QString path) {
   // Open program file and read without include
   FileOpen(file, path);
   QString read;
-  // Read from file and remove unnecessary part
   while (!file.atEnd()) {
     read = file.readLine();
     // Skip #include
@@ -56,6 +55,7 @@ ProgramReader::ProgramReader(QString path) {
     qFatal("[Failed] Cannot create script engine_");
     return;
   }
+  // Build the script
   builder_.StartNewModule(engine_, "main");
   builder_.AddSectionFromMemory("main", script.toUtf8().data());
   engine_->SetMessageCallback(asFUNCTION(ScriptLog), 0, asCALL_CDECL);
@@ -70,14 +70,14 @@ void ProgramReader::Run() {
   if (engine_ == 0) {
     qFatal("[Failed] Engine is not yet to initialized");
   }
-  qDebug("---START---");
+  qDebug() << ("---START Reader::Run()---") << QThread::currentThread();
   asIScriptModule*  module  = engine_->GetModule("main");
   asIScriptContext* context = engine_->CreateContext();
 
   context->Prepare(module->GetFunctionByDecl("int main()"));
   context->Execute();
-
   context->Release();
+  qDebug("---FINISH Reader::Run()---");
 }
 int ProgramReader::GetPortStat(const char* port) {
   if (engine_ == 0) {
@@ -103,15 +103,22 @@ ProgramReaderManager::ProgramReaderManager(QString path) {
   reader_thread_ = new QThread(this);
   reader_        = new ProgramReader(path);
   reader_->moveToThread(reader_thread_);
+  // When called this->LaunchScript(), call reader_->Run()
   connect(this, SIGNAL(LaunchScriptSignal()), reader_, SLOT(Run()));
-  connect(reader_thread_, SIGNAL(finished()), reader_, SLOT(deleteLater()));
+  connect(this, SIGNAL(LaunchScriptSignal()), this, SLOT(debug()));
   reader_thread_->start();
 }
-ProgramReaderManager::~ProgramReaderManager() { reader_thread_->quit(); }
+ProgramReaderManager::~ProgramReaderManager() {
+  reader_thread_->quit();
+  reader_thread_->wait();
+}
 
 void ProgramReaderManager::LaunchScript() { emit LaunchScriptSignal(); }
-void ProgramReaderManager::FinishScript() { reader_thread_->quit(); }
-int  ProgramReaderManager::GetPortStat(const char* port) {
+void ProgramReaderManager::FinishScript() {
+  reader_thread_->quit();
+  reader_thread_->wait();
+}
+int ProgramReaderManager::GetPortStat(const char* port) {
   return reader_->GetPortStat(port);
 }
 } // namespace hinan

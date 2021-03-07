@@ -10,6 +10,7 @@
 #ifndef HINAN_PROGRAM_READER_H_
 #define HINAN_PROGRAM_READER_H_
 
+#include <QDebug>
 #include <QObject>
 #include <QString>
 #include <QThread>
@@ -44,6 +45,9 @@ class ProgramReaderManager : public QObject {
   void LaunchScript();
   void FinishScript();
   int  GetPortStat(const char*);
+
+ public slots:
+  void debug() { qDebug()<<("**START** (in manager's slot)")<<QThread::currentThread(); }
 
  signals:
   void LaunchScriptSignal();
