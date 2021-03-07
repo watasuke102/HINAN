@@ -37,6 +37,7 @@ void Core::Run() {
   qDebug("===finish===");
   QCoreApplication::exit(0);
 }
+
 void Core::MainLoop(QString path) {
   hinan::ProgramReaderManager manager(path);
   QString                     line;
@@ -44,12 +45,15 @@ void Core::MainLoop(QString path) {
   // manager.LaunchScript();
   while (!qstdin.atEnd()) {
     line = qstdin.readLine();
-    if (line == QString("run")) {
-      qDebug("-> Start Script");
+    if (line == QString("reload")) {
+      manager.Reload();
+      qDebug("-> Reload Script");
+    } else if (line == QString("run")) {
       manager.LaunchScript();
+      qDebug("-> Start Script");
     } else if (line == QString("kill") || line == QString("quit")) {
+      manager.TerminateScript();
       qDebug("-> killed");
-      manager.FinishScript();
       if (line == QString("quit")) {
         break;
       }

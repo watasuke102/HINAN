@@ -21,13 +21,16 @@ namespace hinan {
 class ProgramReader : public QObject {
   Q_OBJECT
  private:
-  asIScriptEngine* engine_;
-  CScriptBuilder   builder_;
+  QString           path_;
+  asIScriptEngine*  engine_;
+  asIScriptContext* main_context_;
+  asIScriptContext* port_getter_context_;
 
  public:
   ProgramReader(QString);
   ~ProgramReader();
-  int GetPortStat(const char*);
+  int  GetPortStat(const char*);
+  void Load();
 
  public slots:
   void Run();

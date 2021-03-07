@@ -28,11 +28,18 @@ void FileOpen(QFile& file, QString path) {
 
 namespace hinan {
 // Reader
-ProgramReader::ProgramReader(QString path) {
+ProgramReader::ProgramReader(QString path) : path_(path) { Load(); }
+ProgramReader::~ProgramReader() {
+  main_context_->Abort();
+  port_getter_context_->Abort();
+  engine_->ShutDownAndRelease();
+}
+
+void ProgramReader::Load() {
   QString script = "";
   QFile   file;
   // Open program file and read without include
-  FileOpen(file, path);
+  FileOpen(file, path_);
   QString read;
   while (!file.atEnd()) {
     read = file.readLine();
@@ -46,6 +53,7 @@ ProgramReader::ProgramReader(QString path) {
   }
   file.close();
   // Open template file and read all
+  // if read this first, the error occurs line will be shifted
   FileOpen(file, "assets/template.txt");
   script += file.readAll();
   file.close();
@@ -56,13 +64,17 @@ ProgramReader::ProgramReader(QString path) {
     return;
   }
   // Build the script
-  builder_.StartNewModule(engine_, "main");
-  builder_.AddSectionFromMemory("main", script.toUtf8().data());
+  CScriptBuilder builder;
+  builder.StartNewModule(engine_, "main");
+  builder.AddSectionFromMemory("main", script.toUtf8().data());
   engine_->SetMessageCallback(asFUNCTION(ScriptLog), 0, asCALL_CDECL);
-  if (builder_.BuildModule() < 0) {
+  if (builder.BuildModule() < 0) {
     qFatal("[Failed] Cannot build the script");
     return;
   }
+  // Create context
+  main_context_        = engine_->CreateContext();
+  port_getter_context_ = engine_->CreateContext();
 }
 ProgramReader::~ProgramReader() { engine_->ShutDownAndRelease(); }
 
@@ -71,30 +83,32 @@ void ProgramReader::Run() {
     qFatal("[Failed] Engine is not yet to initialized");
   }
   qDebug() << ("---START Reader::Run()---") << QThread::currentThread();
-  asIScriptModule*  module  = engine_->GetModule("main");
-  asIScriptContext* context = engine_->CreateContext();
+  asIScriptModule* module = engine_->GetModule("main");
 
-  context->Prepare(module->GetFunctionByDecl("int main()"));
-  context->Execute();
-  context->Release();
+  main_context_->Prepare(module->GetFunctionByDecl("int main()"));
+  main_context_->Execute();
+  main_context_->Release();
   qDebug("---FINISH Reader::Run()---");
 }
+
+// If call this function, please use hinan::port.
+// Ex. GetPortStat(hinan::port::P1DDR);
 int ProgramReader::GetPortStat(const char* port) {
   if (engine_ == 0) {
     qFatal("[Failed] Engine is not yet to initialized");
   }
-  asIScriptModule*  module  = engine_->GetModule("main");
-  asIScriptContext* context = engine_->CreateContext();
+  asIScriptModule* module = engine_->GetModule("main");
 
   const QString function_name = QString("int16 Get%1()").arg(port);
-  context->Prepare(module->GetFunctionByDecl(function_name.toUtf8().data()));
-  if (context->Execute() != asEXECUTION_FINISHED) {
+  port_getter_context_->Prepare(
+      module->GetFunctionByDecl(function_name.toUtf8().data()));
+  if (port_getter_context_->Execute() != asEXECUTION_FINISHED) {
     qCritical("[Failed] cannot launch port status get function");
-    context->Release();
+    port_getter_context_->Release();
     return -1;
   }
-  int result = context->GetReturnDWord();
-  context->Release();
+  int result = port_getter_context_->GetReturnDWord();
+  port_getter_context_->Release();
   return result;
 }
 
@@ -113,8 +127,7 @@ ProgramReaderManager::~ProgramReaderManager() {
   reader_thread_->wait();
 }
 
-void ProgramReaderManager::LaunchScript() { emit LaunchScriptSignal(); }
-void ProgramReaderManager::FinishScript() {
+void ProgramReaderManager::Reload() { reader_->Load(); }
   reader_thread_->quit();
   reader_thread_->wait();
 }
