@@ -42,7 +42,6 @@ void Core::MainLoop(QString path) {
   hinan::ProgramReaderManager manager(path);
   QString                     line;
   QTextStream                 qstdin(stdin);
-  // manager.LaunchScript();
   while (!qstdin.atEnd()) {
     line = qstdin.readLine();
     if (line == QString("reload")) {

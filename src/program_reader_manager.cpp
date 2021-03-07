@@ -18,7 +18,6 @@ ProgramReaderManager::ProgramReaderManager(QString path) {
   reader_->moveToThread(reader_thread_);
   // When called this->LaunchScript(), call reader_->Run()
   connect(this, SIGNAL(Launch()), reader_, SLOT(Run()));
-  connect(this, SIGNAL(Terminate()), reader_, SLOT(Terminate()));
   reader_thread_->start();
 }
 ProgramReaderManager::~ProgramReaderManager() {
