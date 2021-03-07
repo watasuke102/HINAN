@@ -12,10 +12,13 @@
 
 #include <QCoreApplication>
 #include <QObject>
+#include <QString>
 
 namespace hinan {
 class Core : public QObject {
   Q_OBJECT
+ public:
+  void MainLoop(QString);
  public slots:
   void Run();
 };

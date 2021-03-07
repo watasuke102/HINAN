@@ -24,14 +24,21 @@ void Core::Run() {
   if (QCoreApplication::arguments().size() < 2) {
     Help();
     QCoreApplication::exit(1);
+    return;
   }
   const QStringList argv = QCoreApplication::arguments();
   if (strcmp(argv[1].toUtf8().data(), "--help") == 0 ||
       strcmp(argv[1].toUtf8().data(), "-h") == 0) {
     Help();
     QCoreApplication::exit(0);
+    return;
   }
-  hinan::ProgramReaderManager manager(argv[1]);
+  MainLoop(argv[1]);
+  qDebug("===finish===");
+  QCoreApplication::exit(0);
+}
+void Core::MainLoop(QString path) {
+  hinan::ProgramReaderManager manager(path);
   QString                     line;
   QTextStream                 qstdin(stdin);
   // manager.LaunchScript();
@@ -51,6 +58,5 @@ void Core::Run() {
       qDebug("-> 0x%02x(%d)", p, p);
     }
   }
-  qDebug("===finish===");
 }
 } // namespace hinan
