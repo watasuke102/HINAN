@@ -15,7 +15,7 @@
 #include <QObject>
 
 void Help() {
-  qInfo("usage: ./hinan <option>");
+  qInfo("usage: ./hinan <option> file_path");
   qInfo(" Options: -h | --help   Show this help message.\n");
 }
 
