@@ -9,7 +9,7 @@
 
 #include "core.h"
 #include "port.h"
-#include "program_reader_manager.h"
+#include "practice_kit.h"
 #include <QCoreApplication>
 #include <QDebug>
 #include <QObject>
@@ -39,9 +39,9 @@ void Core::Run() {
 }
 
 void Core::MainLoop(QString path) {
-  hinan::ProgramReaderManager manager(path);
-  QString                     line;
-  QTextStream                 qstdin(stdin);
+  hinan::PracticeKit manager(path);
+  QString            line;
+  QTextStream        qstdin(stdin);
   while (!qstdin.atEnd()) {
     line = qstdin.readLine();
     if (line == QString("reload")) {

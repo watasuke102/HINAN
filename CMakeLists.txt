@@ -23,13 +23,13 @@ set(TS_FILES lang/${PROJECT_NAME}_ja_JP.ts)
 qt_wrap_cpp(HEADERS
   inc/core.h
   inc/program_reader.h
-  inc/program_reader_manager.h
+  inc/practice_kit.h
 )
 set(PROJECT_SOURCES ${HEADERS} ${TS_FILES}
   src/main.cpp
   src/core.cpp
   src/program_reader.cpp
-  src/program_reader_manager.cpp
+  src/practice_kit.cpp
   ${AS_ADD_ON}/scriptbuilder/scriptbuilder.cpp
   ${AS_ADD_ON}/scriptstdstring/scriptstdstring.cpp
 )

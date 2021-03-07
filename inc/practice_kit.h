@@ -1,5 +1,5 @@
 // HINAN - simulate H8 microcomputer practice kit
-// program-reader_manager.h
+// practice_kit.h
 //
 // CopyRight (c) 2021 Watasuke
 // Email  : <watasuke102@gmail.com>
@@ -7,8 +7,8 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
-#ifndef HINAN_PROGRAM_READER_MANAGER_H_
-#define HINAN_PROGRAM_READER_MANAGER_H_
+#ifndef HINAN_PRACTICE_KIT_H_
+#define HINAN_PRACTICE_KIT_H_
 
 #include "program_reader.h"
 #include <QDebug>
@@ -17,15 +17,15 @@
 #include <QThread>
 
 namespace hinan {
-class ProgramReaderManager : public QObject {
+class PracticeKit : public QObject {
   Q_OBJECT
  private:
   ProgramReader* reader_;
   QThread*       reader_thread_;
 
  public:
-  ProgramReaderManager(QString);
-  ~ProgramReaderManager();
+  PracticeKit(QString);
+  ~PracticeKit();
   void Reload();
   void LaunchScript();
   void TerminateScript();
@@ -36,4 +36,4 @@ class ProgramReaderManager : public QObject {
 };
 } // namespace hinan
 
-#endif // HINAN_PROGRAM_READER_MANAGER_H_
+#endif // HINAN_PRACTICE_KIT_H_

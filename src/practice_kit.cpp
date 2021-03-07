@@ -1,5 +1,5 @@
 // HINAN - simulate H8 microcomputer practice kit
-// program-reader_manager.cpp
+// practice_kit.cpp
 //
 // CopyRight (c) 2021 Watasuke
 // Email  : <watasuke102@gmail.com>
@@ -7,12 +7,12 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
-#include "program_reader_manager.h"
+#include "practice_kit.h"
 #include <QDebug>
 #include <QThread>
 
 namespace hinan {
-ProgramReaderManager::ProgramReaderManager(QString path) {
+PracticeKit::PracticeKit(QString path) {
   reader_thread_ = new QThread(this);
   reader_        = new ProgramReader(path);
   reader_->moveToThread(reader_thread_);
@@ -20,21 +20,19 @@ ProgramReaderManager::ProgramReaderManager(QString path) {
   connect(this, SIGNAL(Launch()), reader_, SLOT(Run()));
   reader_thread_->start();
 }
-ProgramReaderManager::~ProgramReaderManager() {
+PracticeKit::~PracticeKit() {
   reader_thread_->quit();
   reader_thread_->wait();
 }
 
-void ProgramReaderManager::Reload() {
+void PracticeKit::Reload() {
   reader_->Terminate();
   reader_->Load();
 }
 
-void ProgramReaderManager::LaunchScript() { emit Launch(); }
-void ProgramReaderManager::TerminateScript() {
-  reader_->Terminate();
-}
-int ProgramReaderManager::GetPortStat(const char* port) {
+void PracticeKit::LaunchScript() { emit Launch(); }
+void PracticeKit::TerminateScript() { reader_->Terminate(); }
+int  PracticeKit::GetPortStat(const char* port) {
   return reader_->GetPortStat(port);
 }
 } // namespace hinan
