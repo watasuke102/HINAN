@@ -20,6 +20,8 @@ PortManager::PortManager(ProgramReader* reader) : reader_(reader) {
 
 void PortManager::Update() {
   for (auto str : port::port_list) {
+    if(!reader_->IsActive())
+      return;
     int stat = reader_->GetPortStat(str.toUtf8().data());
     if (stat != -1)
       map_[str] = stat;
@@ -27,10 +29,11 @@ void PortManager::Update() {
 }
 
 void PortManager::Run() {
+  while (!reader_->IsActive())
+    ;
   qDebug("[Portmgr] Start run");
-  while (reader_->IsActive()) {
+  while (reader_->IsActive())
     Update();
-  }
   qDebug("[Portmgr] Finish run");
 }
 

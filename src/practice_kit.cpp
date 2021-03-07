@@ -22,8 +22,8 @@ PracticeKit::PracticeKit(QString path) {
   reader_->moveToThread(reader_thread_);
   manager_->moveToThread(manager_thread_);
   // When called this->LaunchScript(), call Run() on reader and manager
-  connect(this, SIGNAL(Launch()), reader_, SLOT(Run()));
-  connect(this, SIGNAL(Launch()), manager_, SLOT(Run()));
+  connect(this, &PracticeKit::Launch, reader_, &ProgramReader::Run);
+  connect(this, &PracticeKit::Launch, manager_, &PortManager::Run);
   reader_thread_->start();
   manager_thread_->start();
 }
@@ -42,6 +42,6 @@ void PracticeKit::ReloadScript() {
 void PracticeKit::LaunchScript() { emit Launch(); }
 void PracticeKit::TerminateScript() { reader_->Terminate(); }
 int  PracticeKit::GetPortStat(const char* port) {
-  return reader_->GetPortStat(port);
+  return manager_->Value(port);
 }
 } // namespace hinan
