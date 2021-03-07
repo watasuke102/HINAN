@@ -56,9 +56,19 @@ void Core::MainLoop(QString path) {
       if (line == QString("quit")) {
         break;
       }
+    } else if (line == QString("all")) {
+      for (auto str : hinan::port::port_list) {
+        int p = practice_kit.GetPortStat(str.toUtf8().data());
+        qDebug("%5s: 0x%02x(%d)", str.toUtf8().data(), p, p);
+      }
     } else {
-      int p = practice_kit.GetPortStat(line.toUtf8().data());
-      qDebug("-> 0x%02x(%d)", p, p);
+      for (auto str : hinan::port::port_list) {
+        if (line == str) {
+          int p = practice_kit.GetPortStat(line.toUtf8().data());
+          qDebug("%5s: 0x%02x(%d)", str.toUtf8().data(), p, p);
+          break;
+        }
+      }
     }
   }
 }
