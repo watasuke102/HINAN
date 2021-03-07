@@ -31,11 +31,6 @@ class ProgramReaderManager : public QObject {
   void TerminateScript();
   int  GetPortStat(const char*);
 
- public slots:
-  void debug() {
-    qDebug() << ("**START** (in manager's slot)") << QThread::currentThread();
-  }
-
  signals:
   void Launch();
   void Terminate();

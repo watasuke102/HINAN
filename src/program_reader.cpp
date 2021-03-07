@@ -81,13 +81,14 @@ void ProgramReader::Load() {
 void ProgramReader::Terminate() {
   main_context_->Abort();
   port_getter_context_->Abort();
+  qDebug("ABORTED!!");
 }
 
 void ProgramReader::Run() {
   if (engine_ == 0) {
     qFatal("[Failed] Engine is not yet to initialized");
   }
-  qDebug() << ("---START Reader::Run()---") << QThread::currentThread();
+  qDebug("---START Reader::Run()---");
   asIScriptModule* module = engine_->GetModule("main");
 
   main_context_->Prepare(module->GetFunctionByDecl("int main()"));
