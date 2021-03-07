@@ -34,6 +34,7 @@ class ProgramReader : public QObject {
 
  public slots:
   void Run();
+  void Terminate();
 };
 
 class ProgramReaderManager : public QObject {
@@ -45,15 +46,19 @@ class ProgramReaderManager : public QObject {
  public:
   ProgramReaderManager(QString);
   ~ProgramReaderManager();
+  void Reload();
   void LaunchScript();
-  void FinishScript();
+  void TerminateScript();
   int  GetPortStat(const char*);
 
  public slots:
-  void debug() { qDebug()<<("**START** (in manager's slot)")<<QThread::currentThread(); }
+  void debug() {
+    qDebug() << ("**START** (in manager's slot)") << QThread::currentThread();
+  }
 
  signals:
-  void LaunchScriptSignal();
+  void Launch();
+  void Terminate();
 };
 } // namespace hinan
 

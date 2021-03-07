@@ -31,7 +31,9 @@ namespace hinan {
 ProgramReader::ProgramReader(QString path) : path_(path) { Load(); }
 ProgramReader::~ProgramReader() {
   main_context_->Abort();
+  main_context_->Release();
   port_getter_context_->Abort();
+  port_getter_context_->Release();
   engine_->ShutDownAndRelease();
 }
 
@@ -76,7 +78,11 @@ void ProgramReader::Load() {
   main_context_        = engine_->CreateContext();
   port_getter_context_ = engine_->CreateContext();
 }
-ProgramReader::~ProgramReader() { engine_->ShutDownAndRelease(); }
+
+void ProgramReader::Terminate() {
+  main_context_->Abort();
+  port_getter_context_->Abort();
+}
 
 void ProgramReader::Run() {
   if (engine_ == 0) {
@@ -87,7 +93,6 @@ void ProgramReader::Run() {
 
   main_context_->Prepare(module->GetFunctionByDecl("int main()"));
   main_context_->Execute();
-  main_context_->Release();
   qDebug("---FINISH Reader::Run()---");
 }
 
@@ -104,11 +109,9 @@ int ProgramReader::GetPortStat(const char* port) {
       module->GetFunctionByDecl(function_name.toUtf8().data()));
   if (port_getter_context_->Execute() != asEXECUTION_FINISHED) {
     qCritical("[Failed] cannot launch port status get function");
-    port_getter_context_->Release();
     return -1;
   }
   int result = port_getter_context_->GetReturnDWord();
-  port_getter_context_->Release();
   return result;
 }
 
@@ -118,8 +121,9 @@ ProgramReaderManager::ProgramReaderManager(QString path) {
   reader_        = new ProgramReader(path);
   reader_->moveToThread(reader_thread_);
   // When called this->LaunchScript(), call reader_->Run()
-  connect(this, SIGNAL(LaunchScriptSignal()), reader_, SLOT(Run()));
-  connect(this, SIGNAL(LaunchScriptSignal()), this, SLOT(debug()));
+  connect(this, SIGNAL(Launch()), reader_, SLOT(Run()));
+  connect(this, SIGNAL(Launch()), this, SLOT(debug()));
+  connect(this, SIGNAL(Terminate()), reader_, SLOT(Terminate()));
   reader_thread_->start();
 }
 ProgramReaderManager::~ProgramReaderManager() {
@@ -127,9 +131,16 @@ ProgramReaderManager::~ProgramReaderManager() {
   reader_thread_->wait();
 }
 
-void ProgramReaderManager::Reload() { reader_->Load(); }
-  reader_thread_->quit();
-  reader_thread_->wait();
+void ProgramReaderManager::Reload() {
+  reader_->Terminate();
+  reader_->Load();
+}
+
+void ProgramReaderManager::LaunchScript() { emit Launch(); }
+void ProgramReaderManager::TerminateScript() {
+  emit Terminate();
+  // reader_thread_->quit();
+  // reader_thread_->wait();
 }
 int ProgramReaderManager::GetPortStat(const char* port) {
   return reader_->GetPortStat(port);

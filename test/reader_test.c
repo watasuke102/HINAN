@@ -17,7 +17,7 @@ int main(void) {
   P1DR  = 0xf0;
 
   // while (true) {
-  for (int i = 0; i < 100; i++) {
+  for (int i = 0; i < 1000000; i++) {
     P4DR = 0x11;
     myWait();
     P4DR = 0x22;
