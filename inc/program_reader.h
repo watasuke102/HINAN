@@ -20,6 +20,7 @@ namespace hinan {
 class ProgramReader : public QObject {
   Q_OBJECT
  private:
+  bool              isActive_ = false;
   QString           path_;
   asIScriptEngine*  engine_;
   asIScriptContext* main_context_;
@@ -28,6 +29,7 @@ class ProgramReader : public QObject {
  public:
   ProgramReader(QString);
   ~ProgramReader();
+  bool IsActive();
   int  GetPortStat(const char*);
   void Load();
 

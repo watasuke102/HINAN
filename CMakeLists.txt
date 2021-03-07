@@ -22,14 +22,16 @@ set(TS_FILES lang/${PROJECT_NAME}_ja_JP.ts)
 # Add headers what written "Q_OBJECT"
 qt_wrap_cpp(HEADERS
   inc/core.h
-  inc/program_reader.h
+  inc/port_manager.h
   inc/practice_kit.h
+  inc/program_reader.h
 )
 set(PROJECT_SOURCES ${HEADERS} ${TS_FILES}
   src/main.cpp
   src/core.cpp
-  src/program_reader.cpp
+  src/port_manager.cpp
   src/practice_kit.cpp
+  src/program_reader.cpp
   ${AS_ADD_ON}/scriptbuilder/scriptbuilder.cpp
   ${AS_ADD_ON}/scriptstdstring/scriptstdstring.cpp
 )

@@ -36,6 +36,8 @@ ProgramReader::~ProgramReader() {
   engine_->ShutDownAndRelease();
 }
 
+bool ProgramReader::IsActive() { return isActive_; }
+
 void ProgramReader::Load() {
   QString script = "";
   QFile   file;
@@ -81,6 +83,7 @@ void ProgramReader::Load() {
 void ProgramReader::Terminate() {
   main_context_->Abort();
   port_getter_context_->Abort();
+  isActive_ = false;
 }
 
 void ProgramReader::Run() {
@@ -88,10 +91,12 @@ void ProgramReader::Run() {
     qFatal("[Failed] Engine is not yet to initialized");
   }
   qDebug("---START Reader::Run()---");
+  isActive_               = true;
   asIScriptModule* module = engine_->GetModule("main");
 
   main_context_->Prepare(module->GetFunctionByDecl("int main()"));
   main_context_->Execute();
+  isActive_ = false;
   qDebug("---FINISH Reader::Run()---");
 }
 

@@ -10,6 +10,7 @@
 #ifndef HINAN_PRACTICE_KIT_H_
 #define HINAN_PRACTICE_KIT_H_
 
+#include "port_manager.h"
 #include "program_reader.h"
 #include <QDebug>
 #include <QObject>
@@ -21,12 +22,14 @@ class PracticeKit : public QObject {
   Q_OBJECT
  private:
   ProgramReader* reader_;
+  PortManager*   manager_;
   QThread*       reader_thread_;
+  QThread*       manager_thread_;
 
  public:
   PracticeKit(QString);
   ~PracticeKit();
-  void Reload();
+  void ReloadScript();
   void LaunchScript();
   void TerminateScript();
   int  GetPortStat(const char*);

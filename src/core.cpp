@@ -45,7 +45,7 @@ void Core::MainLoop(QString path) {
   while (!qstdin.atEnd()) {
     line = qstdin.readLine();
     if (line == QString("reload")) {
-      practice_kit.Reload();
+      practice_kit.ReloadScript();
       qDebug("-> Reload Script");
     } else if (line == QString("run")) {
       practice_kit.LaunchScript();
@@ -65,7 +65,7 @@ void Core::MainLoop(QString path) {
       for (auto str : hinan::port::port_list) {
         if (line == str) {
           int p = practice_kit.GetPortStat(line.toUtf8().data());
-          qDebug("%5s: 0x%02x(%d)", str.toUtf8().data(), p, p);
+          qDebug("%5s: 0x%02x(%d)", line, p, p);
           break;
         }
       }
