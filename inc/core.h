@@ -24,4 +24,4 @@ class Core : public QObject {
 };
 } // namespace hinan
 
-#endif
+#endif // HINAN_CORE_H_

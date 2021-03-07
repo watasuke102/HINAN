@@ -9,7 +9,7 @@
 
 #include "core.h"
 #include "port.h"
-#include "program_reader.h"
+#include "program_reader_manager.h"
 #include <QCoreApplication>
 #include <QDebug>
 #include <QObject>

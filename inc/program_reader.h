@@ -13,7 +13,6 @@
 #include <QDebug>
 #include <QObject>
 #include <QString>
-#include <QThread>
 #include <angelscript.h>
 #include <scriptbuilder/scriptbuilder.h>
 
@@ -34,30 +33,6 @@ class ProgramReader : public QObject {
 
  public slots:
   void Run();
-  void Terminate();
-};
-
-class ProgramReaderManager : public QObject {
-  Q_OBJECT
- private:
-  ProgramReader* reader_;
-  QThread*       reader_thread_;
-
- public:
-  ProgramReaderManager(QString);
-  ~ProgramReaderManager();
-  void Reload();
-  void LaunchScript();
-  void TerminateScript();
-  int  GetPortStat(const char*);
-
- public slots:
-  void debug() {
-    qDebug() << ("**START** (in manager's slot)") << QThread::currentThread();
-  }
-
- signals:
-  void Launch();
   void Terminate();
 };
 } // namespace hinan
