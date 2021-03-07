@@ -39,25 +39,25 @@ void Core::Run() {
 }
 
 void Core::MainLoop(QString path) {
-  hinan::PracticeKit manager(path);
+  hinan::PracticeKit practice_kit(path);
   QString            line;
   QTextStream        qstdin(stdin);
   while (!qstdin.atEnd()) {
     line = qstdin.readLine();
     if (line == QString("reload")) {
-      manager.Reload();
+      practice_kit.Reload();
       qDebug("-> Reload Script");
     } else if (line == QString("run")) {
-      manager.LaunchScript();
+      practice_kit.LaunchScript();
       qDebug("-> Start Script");
     } else if (line == QString("kill") || line == QString("quit")) {
-      manager.TerminateScript();
+      practice_kit.TerminateScript();
       qDebug("-> killed");
       if (line == QString("quit")) {
         break;
       }
     } else {
-      int p = manager.GetPortStat(line.toUtf8().data());
+      int p = practice_kit.GetPortStat(line.toUtf8().data());
       qDebug("-> 0x%02x(%d)", p, p);
     }
   }
