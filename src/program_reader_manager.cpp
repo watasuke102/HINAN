@@ -33,9 +33,7 @@ void ProgramReaderManager::Reload() {
 
 void ProgramReaderManager::LaunchScript() { emit Launch(); }
 void ProgramReaderManager::TerminateScript() {
-  emit Terminate();
-  // reader_thread_->quit();
-  // reader_thread_->wait();
+  reader_->Terminate();
 }
 int ProgramReaderManager::GetPortStat(const char* port) {
   return reader_->GetPortStat(port);

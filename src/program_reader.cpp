@@ -81,7 +81,6 @@ void ProgramReader::Load() {
 void ProgramReader::Terminate() {
   main_context_->Abort();
   port_getter_context_->Abort();
-  qDebug("ABORTED!!");
 }
 
 void ProgramReader::Run() {

@@ -33,7 +33,6 @@ class ProgramReaderManager : public QObject {
 
  signals:
   void Launch();
-  void Terminate();
 };
 } // namespace hinan
 
