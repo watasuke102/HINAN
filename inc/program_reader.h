@@ -30,7 +30,7 @@ class ProgramReader : public QObject {
   ProgramReader(QString);
   ~ProgramReader();
   bool IsActive();
-  int  GetPortStat(const char*);
+  int  GetPortStat(QString);
   void Load();
 
  public slots:

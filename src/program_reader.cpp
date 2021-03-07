@@ -102,7 +102,7 @@ void ProgramReader::Run() {
 
 // If call this function, please use hinan::port.
 // Ex. GetPortStat(hinan::port::P1DDR);
-int ProgramReader::GetPortStat(const char* port) {
+int ProgramReader::GetPortStat(QString port) {
   if (engine_ == 0) {
     qFatal("[Failed] Engine is not yet to initialized");
   }

@@ -41,7 +41,5 @@ void PracticeKit::ReloadScript() {
 
 void PracticeKit::LaunchScript() { emit Launch(); }
 void PracticeKit::TerminateScript() { reader_->Terminate(); }
-int  PracticeKit::GetPortStat(const char* port) {
-  return manager_->Value(port);
-}
+int  PracticeKit::GetPortStat(QString port) { return manager_->Value(port); }
 } // namespace hinan

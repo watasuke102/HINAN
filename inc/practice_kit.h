@@ -32,7 +32,7 @@ class PracticeKit : public QObject {
   void ReloadScript();
   void LaunchScript();
   void TerminateScript();
-  int  GetPortStat(const char*);
+  int  GetPortStat(QString);
 
  signals:
   void Launch();
