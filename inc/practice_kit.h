@@ -29,10 +29,13 @@ class PracticeKit : public QObject {
  public:
   PracticeKit(QString);
   ~PracticeKit();
+  // Operation script
   void ReloadScript();
   void LaunchScript();
   void TerminateScript();
-  int  GetPortStat(QString);
+  // Getter
+  int          GetPortStat(QString);
+  QVBoxLayout* PortStatusLabelList(QString);
 
  signals:
   void Launch();

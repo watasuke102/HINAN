@@ -11,20 +11,28 @@
 #include "port.h"
 #include "program_reader.h"
 #include <QDebug>
+#include <QLayout>
 
 namespace hinan {
 PortManager::PortManager(ProgramReader* reader) : reader_(reader) {
-  for (auto str : port::port_list)
-    map_.insert(str, 0x00);
+  label_list_ = new QVBoxLayout();
+  for (auto str : port::port_list) {
+    map_.insert(str, new PortStatusLabel(0x00, str));
+    label_list_->addWidget(map_[str]->Label());
+  }
+}
+
+QVBoxLayout* PortManager::PortStatusLabelList(QString port) {
+  return label_list_;
 }
 
 void PortManager::Update() {
   for (auto str : port::port_list) {
-    if(!reader_->IsActive())
+    if (!reader_->IsActive())
       return;
     int stat = reader_->GetPortStat(str.toUtf8().data());
     if (stat != -1)
-      map_[str] = stat;
+      map_[str]->SetValue(stat);
   }
 }
 
@@ -40,7 +48,7 @@ void PortManager::Run() {
 int PortManager::Value(QString port) {
   for (auto str : hinan::port::port_list) {
     if (port == str)
-      return map_[port];
+      return map_[port]->Value();
   }
   return -1;
 }

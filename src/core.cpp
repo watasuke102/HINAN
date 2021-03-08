@@ -10,9 +10,11 @@
 #include "core.h"
 #include "port.h"
 #include "practice_kit.h"
-#include <QCoreApplication>
+#include <QApplication>
 #include <QDebug>
+#include <QMainWindow>
 #include <QObject>
+#include <QPushButton>
 
 void Help() {
   qInfo("usage: ./hinan <option> file_path");
@@ -20,56 +22,64 @@ void Help() {
 }
 
 namespace hinan {
-void Core::Run() {
-  if (QCoreApplication::arguments().size() < 2) {
+Core::Core() {
+  if (QApplication::arguments().size() < 2) {
     Help();
-    QCoreApplication::exit(1);
+    QApplication::exit(1);
     return;
   }
-  const QStringList argv = QCoreApplication::arguments();
-  if (strcmp(argv[1].toUtf8().data(), "--help") == 0 ||
-      strcmp(argv[1].toUtf8().data(), "-h") == 0) {
+  const QStringList argv = QApplication::arguments();
+  if (argv[1] == QString("--help") || argv[1] == QString("-h")) {
     Help();
-    QCoreApplication::exit(0);
+    QApplication::exit(0);
     return;
   }
-  MainLoop(argv[1]);
-  qDebug("===finish===");
-  QCoreApplication::exit(0);
+  QMainWindow* main_window = new QMainWindow();
+  practice_kit_             = new hinan::PracticeKit(argv[1]);
+  QWidget*     widget       = new QWidget();
+  QVBoxLayout* layout       = practice_kit_->PortStatusLabelList("all");
+  layout->addWidget(new QPushButton("TEST"));
+  widget->setLayout(layout);
+  main_window->setCentralWidget(widget);
+  main_window->show();
 }
+void Core::Run() {
+  practice_kit_->LaunchScript();
 
-void Core::MainLoop(QString path) {
-  hinan::PracticeKit practice_kit(path);
-  QString            line;
-  QTextStream        qstdin(stdin);
+  /**
+  QString     line;
+  QTextStream qstdin(stdin);
   while (!qstdin.atEnd()) {
     line = qstdin.readLine();
     if (line == QString("reload")) {
-      practice_kit.ReloadScript();
+      practice_kit_->ReloadScript();
       qDebug("-> Reload Script");
     } else if (line == QString("run")) {
-      practice_kit.LaunchScript();
+      practice_kit_->LaunchScript();
       qDebug("-> Start Script");
     } else if (line == QString("kill") || line == QString("quit")) {
-      practice_kit.TerminateScript();
+      practice_kit_->TerminateScript();
       qDebug("-> killed");
       if (line == QString("quit")) {
         break;
       }
     } else if (line == QString("all")) {
       for (auto str : hinan::port::port_list) {
-        int p = practice_kit.GetPortStat(str.toUtf8().data());
+        int p = practice_kit_->GetPortStat(str.toUtf8().data());
         qDebug("%5s: 0x%02x(%d)", str.toUtf8().data(), p, p);
       }
     } else {
       for (auto str : hinan::port::port_list) {
         if (line == str) {
-          int p = practice_kit.GetPortStat(line.toUtf8().data());
-          qDebug("%5s: 0x%02x(%d)", line, p, p);
+          int p = practice_kit_->GetPortStat(line.toUtf8().data());
+          qDebug("%5s: 0x%02x(%d)", line.toUtf8().data(), p, p);
           break;
         }
       }
     }
   }
+  /**/
+  qDebug("===finish===");
+  // QApplication::exit(0);
 }
 } // namespace hinan
