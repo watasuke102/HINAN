@@ -69,10 +69,6 @@ Core::Core() {
   main_window->show();
 }
 
-void Core::Reload() {
-  practice_kit_->ReloadScript();
-  qDebug("Script reloaded");
-}
 
 void Core::StartStop() {
   if (practice_kit_->IsScriptActive()) {
