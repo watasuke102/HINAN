@@ -12,6 +12,7 @@
 #include "practice_kit.h"
 #include <QApplication>
 #include <QDebug>
+#include <QDockWidget>
 #include <QMainWindow>
 #include <QObject>
 #include <QPushButton>
@@ -35,24 +36,42 @@ Core::Core() {
     return;
   }
   practice_kit_ = new hinan::PracticeKit(argv[1]);
-  // Window
-  QMainWindow* main_window = new QMainWindow();
-  QWidget*     widget      = new QWidget();
-  QVBoxLayout* layout      = practice_kit_->PortStatusLabelList();
-  QPushButton* start_stop  = new QPushButton("Start/Stop");
-  QPushButton* reload      = new QPushButton("Reload");
-  QPushButton* quit        = new QPushButton("Quit");
+  // Dock
+  QWidget* dock = new QWidget;
+  dock->setLayout(practice_kit_->PortStatusLabelList());
+  QDockWidget* port_status = new QDockWidget;
+  port_status->setWidget(dock);
+  // Central Widget
+  QWidget*     central    = new QWidget;
+  QVBoxLayout* layout     = new QVBoxLayout;
+  QPushButton* start_stop = new QPushButton("Start/Stop");
+  QPushButton* reload     = new QPushButton("Reload");
+  QPushButton* quit       = new QPushButton("Quit");
   layout->addWidget(start_stop);
   layout->addWidget(reload);
   layout->addWidget(quit);
+  layout->setAlignment(Qt::AlignBottom);
+  central->setLayout(layout);
+  // Window
+  QMainWindow* main_window = new QMainWindow();
+  main_window->setDockOptions(QMainWindow::AllowNestedDocks |
+                              QMainWindow::AnimatedDocks);
+  main_window->addDockWidget(Qt::RightDockWidgetArea, port_status);
+  main_window->setCentralWidget(central);
+  // Connect
   connect(start_stop, &QPushButton::pressed, this, &Core::StartStop);
-  connect(reload, &QPushButton::pressed, practice_kit_, &PracticeKit::ReloadScript);
+  connect(reload, &QPushButton::pressed, practice_kit_,
+          &PracticeKit::ReloadScript);
   connect(quit, &QPushButton::pressed, main_window, &QMainWindow::close);
   connect(quit, &QPushButton::pressed, practice_kit_,
           &PracticeKit::TerminateScript);
-  widget->setLayout(layout);
-  main_window->setCentralWidget(widget);
+
   main_window->show();
+}
+
+void Core::Reload() {
+  practice_kit_->ReloadScript();
+  qDebug("Script reloaded");
 }
 
 void Core::StartStop() {
