@@ -23,7 +23,8 @@ class Core : public QObject {
   Core();
 
  public slots:
-  void Run();
+  void StartStop();
+  void Reload();
 };
 } // namespace hinan
 

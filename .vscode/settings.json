@@ -9,6 +9,7 @@
 		"ostream": "cpp",
 		"stop_token": "cpp",
 		"typeinfo": "cpp",
-		"qcoreapplication": "cpp"
+		"qcoreapplication": "cpp",
+		"fstream": "cpp"
 	}
 }

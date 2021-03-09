@@ -22,7 +22,7 @@ PortManager::PortManager(ProgramReader* reader) : reader_(reader) {
   }
 }
 
-QVBoxLayout* PortManager::PortStatusLabelList(QString port) {
+QVBoxLayout* PortManager::PortStatusLabelList() {
   return label_list_;
 }
 

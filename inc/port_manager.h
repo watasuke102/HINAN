@@ -39,7 +39,8 @@ class PortStatusLabel : public QObject {
     UpdateLabel();
   }
   void UpdateLabel() {
-    QString body = QString::asprintf("%s: %04x", str_.toUtf8().data(), value_);
+    QString body =
+        QString::asprintf("%s: 0x%02x", str_.toUtf8().data(), value_);
     label_->setText(body);
   }
 };
@@ -55,7 +56,7 @@ class PortManager : public QObject {
   PortManager(ProgramReader*);
   int          Value(QString);
   void         Update();
-  QVBoxLayout* PortStatusLabelList(QString);
+  QVBoxLayout* PortStatusLabelList();
  public slots:
   void Run();
 };

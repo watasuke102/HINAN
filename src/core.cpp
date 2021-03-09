@@ -34,52 +34,34 @@ Core::Core() {
     QApplication::exit(0);
     return;
   }
+  practice_kit_ = new hinan::PracticeKit(argv[1]);
+  // Window
   QMainWindow* main_window = new QMainWindow();
-  practice_kit_             = new hinan::PracticeKit(argv[1]);
-  QWidget*     widget       = new QWidget();
-  QVBoxLayout* layout       = practice_kit_->PortStatusLabelList("all");
-  layout->addWidget(new QPushButton("TEST"));
+  QWidget*     widget      = new QWidget();
+  QVBoxLayout* layout      = practice_kit_->PortStatusLabelList();
+  QPushButton* start_stop  = new QPushButton("Start/Stop");
+  QPushButton* reload      = new QPushButton("Reload");
+  QPushButton* quit        = new QPushButton("Quit");
+  layout->addWidget(start_stop);
+  layout->addWidget(reload);
+  layout->addWidget(quit);
+  connect(start_stop, &QPushButton::pressed, this, &Core::StartStop);
+  connect(reload, &QPushButton::pressed, practice_kit_, &PracticeKit::ReloadScript);
+  connect(quit, &QPushButton::pressed, main_window, &QMainWindow::close);
+  connect(quit, &QPushButton::pressed, practice_kit_,
+          &PracticeKit::TerminateScript);
   widget->setLayout(layout);
   main_window->setCentralWidget(widget);
   main_window->show();
 }
-void Core::Run() {
-  practice_kit_->LaunchScript();
 
-  /**
-  QString     line;
-  QTextStream qstdin(stdin);
-  while (!qstdin.atEnd()) {
-    line = qstdin.readLine();
-    if (line == QString("reload")) {
-      practice_kit_->ReloadScript();
-      qDebug("-> Reload Script");
-    } else if (line == QString("run")) {
-      practice_kit_->LaunchScript();
-      qDebug("-> Start Script");
-    } else if (line == QString("kill") || line == QString("quit")) {
-      practice_kit_->TerminateScript();
-      qDebug("-> killed");
-      if (line == QString("quit")) {
-        break;
-      }
-    } else if (line == QString("all")) {
-      for (auto str : hinan::port::port_list) {
-        int p = practice_kit_->GetPortStat(str.toUtf8().data());
-        qDebug("%5s: 0x%02x(%d)", str.toUtf8().data(), p, p);
-      }
-    } else {
-      for (auto str : hinan::port::port_list) {
-        if (line == str) {
-          int p = practice_kit_->GetPortStat(line.toUtf8().data());
-          qDebug("%5s: 0x%02x(%d)", line.toUtf8().data(), p, p);
-          break;
-        }
-      }
-    }
+void Core::StartStop() {
+  if (practice_kit_->IsScriptActive()) {
+    practice_kit_->TerminateScript();
+    qDebug("Script terminated");
+  } else {
+    practice_kit_->LaunchScript();
+    qDebug("Script started");
   }
-  /**/
-  qDebug("===finish===");
-  // QApplication::exit(0);
 }
 } // namespace hinan

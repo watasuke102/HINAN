@@ -33,9 +33,10 @@ class PracticeKit : public QObject {
   void ReloadScript();
   void LaunchScript();
   void TerminateScript();
+  bool IsScriptActive();
   // Getter
   int          GetPortStat(QString);
-  QVBoxLayout* PortStatusLabelList(QString);
+  QVBoxLayout* PortStatusLabelList();
 
  signals:
   void Launch();

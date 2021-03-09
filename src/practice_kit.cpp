@@ -38,11 +38,12 @@ void PracticeKit::ReloadScript() {
   reader_->Terminate();
   reader_->Load();
 }
-
 void PracticeKit::LaunchScript() { emit Launch(); }
 void PracticeKit::TerminateScript() { reader_->Terminate(); }
-int  PracticeKit::GetPortStat(QString port) { return manager_->Value(port); }
-QVBoxLayout* PracticeKit::PortStatusLabelList(QString port = "") {
-  return manager_->PortStatusLabelList(port);
+bool PracticeKit::IsScriptActive() { return reader_->IsActive(); }
+
+int PracticeKit::GetPortStat(QString port) { return manager_->Value(port); }
+QVBoxLayout* PracticeKit::PortStatusLabelList() {
+  return manager_->PortStatusLabelList();
 }
 } // namespace hinan
