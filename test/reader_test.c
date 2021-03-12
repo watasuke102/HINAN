@@ -7,7 +7,7 @@
 
 void myWait() {
   int i, j;
-  for (i = 0; i < 40000; i++)
+  for (i = 0; i < 30000; i++)
     for (j = 0; j < 1000; j++)
       ;
 }

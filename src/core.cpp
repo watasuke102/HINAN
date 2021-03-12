@@ -54,8 +54,9 @@ Core::Core() {
   central->setLayout(layout);
   // Window
   QMainWindow* main_window = new QMainWindow();
-  main_window->setDockOptions(QMainWindow::AllowNestedDocks |
-                              QMainWindow::AnimatedDocks);
+  main_window->setDockOptions(QMainWindow::AnimatedDocks |
+                              QMainWindow::AllowNestedDocks |
+                              QMainWindow::AllowTabbedDocks);
   main_window->addDockWidget(Qt::RightDockWidgetArea, port_status);
   main_window->setCentralWidget(central);
   // Connect
@@ -68,7 +69,6 @@ Core::Core() {
 
   main_window->show();
 }
-
 
 void Core::StartStop() {
   if (practice_kit_->IsScriptActive()) {
