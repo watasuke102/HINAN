@@ -12,19 +12,46 @@
 #include "program_reader.h"
 #include <QDebug>
 #include <QLayout>
+#include <QTreeWidget>
 
 namespace hinan {
 PortManager::PortManager(ProgramReader* reader) : reader_(reader) {
-  label_list_ = new QVBoxLayout();
-  for (auto str : port::port_list) {
-    map_.insert(str, new PortStatusLabel(0x00, str));
-    label_list_->addWidget(map_[str]->Label());
+  widget_ = new QTreeWidget;
+  widget_->setColumnCount(4);
+  QTreeWidgetItem* header = widget_->headerItem();
+  header->setText(0, "Value");
+  header->setText(1, "HEX");
+  header->setText(2, "BIN");
+  header->setText(3, "DEC");
+  QTreeWidgetItem* direction = new QTreeWidgetItem(widget_);
+  QTreeWidgetItem* data      = new QTreeWidgetItem(widget_);
+  direction->setText(0, "Direction");
+  data->setText(0, "Data");
+  direction->setExpanded(true);
+  data->setExpanded(true);
+  widget_->addTopLevelItem(direction);
+  widget_->addTopLevelItem(data);
+
+  // Initialize direction data register
+  int              i = 0;
+  QTreeWidgetItem* item;
+  for (auto str : port::port_ddr) {
+    item = new QTreeWidgetItem(direction);
+    direction->addChild(item);
+    map_.insert(str, new PortStatusItem(0x00, str, direction->child(i)));
+    ++i;
+  }
+  i = 0;
+  // Initialize data register
+  for (auto str : port::port_dr) {
+    item = new QTreeWidgetItem(data);
+    data->addChild(item);
+    map_.insert(str, new PortStatusItem(0x00, str, data->child(i)));
+    ++i;
   }
 }
 
-QVBoxLayout* PortManager::PortStatusLabelList() {
-  return label_list_;
-}
+QTreeWidget* PortManager::PortStatusWidget() { return widget_; }
 
 void PortManager::Update() {
   for (auto str : port::port_list) {

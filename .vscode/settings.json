@@ -10,6 +10,7 @@
 		"stop_token": "cpp",
 		"typeinfo": "cpp",
 		"qcoreapplication": "cpp",
-		"fstream": "cpp"
+		"fstream": "cpp",
+		"qobject": "cpp"
 	}
 }

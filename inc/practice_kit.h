@@ -16,6 +16,7 @@
 #include <QObject>
 #include <QString>
 #include <QThread>
+#include <QTreeWidget>
 
 namespace hinan {
 class PracticeKit : public QObject {
@@ -36,7 +37,7 @@ class PracticeKit : public QObject {
   bool IsScriptActive();
   // Getter
   int          GetPortStat(QString);
-  QVBoxLayout* PortStatusLabelList();
+  QTreeWidget* PortStatusWidget();
 
  signals:
   void Launch();

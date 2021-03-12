@@ -11,18 +11,16 @@
 #define HINAN_MAINWINDOW_H_
 
 #include <QCloseEvent>
-#include <QLabel>
 #include <QMainWindow>
 #include <QObject>
 #include <QString>
 
 namespace hinan {
 namespace gui {
-
 class MainWindow : public QMainWindow {
   Q_OBJECT
  public:
-  MainWindow(QLayout*);
+  MainWindow(QWidget*);
   void closeEvent(QCloseEvent*);
 
  signals:

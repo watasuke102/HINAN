@@ -12,6 +12,7 @@
 #include "program_reader.h"
 #include <QDebug>
 #include <QThread>
+#include <QTreeWidget>
 
 namespace hinan {
 PracticeKit::PracticeKit(QString path) {
@@ -43,7 +44,7 @@ void PracticeKit::TerminateScript() { reader_->Terminate(); }
 bool PracticeKit::IsScriptActive() { return reader_->IsActive(); }
 
 int PracticeKit::GetPortStat(QString port) { return manager_->Value(port); }
-QVBoxLayout* PracticeKit::PortStatusLabelList() {
-  return manager_->PortStatusLabelList();
+QTreeWidget* PracticeKit::PortStatusWidget() {
+  return manager_->PortStatusWidget();
 }
 } // namespace hinan

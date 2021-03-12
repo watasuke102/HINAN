@@ -38,7 +38,7 @@ Core::Core() {
   }
   practice_kit_ = new hinan::PracticeKit(argv[1]);
   auto main_window =
-      new hinan::gui::MainWindow(practice_kit_->PortStatusLabelList());
+      new hinan::gui::MainWindow(practice_kit_->PortStatusWidget());
   // Connect
   connect(main_window, &hinan::gui::MainWindow::StartStop, this,
           &Core::StartStop);

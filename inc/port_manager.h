@@ -11,26 +11,27 @@
 #define HINAN_PORT_MANAGER_H_
 
 #include "port.h"
-#include "port_status_label.h"
+#include "port_status_item.h"
 #include "program_reader.h"
 #include <QLayout>
 #include <QMap>
 #include <QObject>
 #include <QString>
+#include <QTreeWidget>
 
 namespace hinan {
 class PortManager : public QObject {
   Q_OBJECT
  private:
-  QMap<QString, PortStatusLabel*> map_;
-  ProgramReader*                  reader_;
-  QVBoxLayout*                    label_list_;
+  QMap<QString, PortStatusItem*> map_;
+  ProgramReader*                 reader_;
+  QTreeWidget*                   widget_;
 
  public:
   PortManager(ProgramReader*);
   int          Value(QString);
   void         Update();
-  QVBoxLayout* PortStatusLabelList();
+  QTreeWidget* PortStatusWidget();
 
  public slots:
   void Run();

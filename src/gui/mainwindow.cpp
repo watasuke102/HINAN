@@ -15,12 +15,11 @@
 
 namespace hinan {
 namespace gui {
-MainWindow::MainWindow(QLayout* main_layout) {
+MainWindow::MainWindow(QWidget* port_status_widget) {
   // Dock
-  QWidget* dock = new QWidget;
-  dock->setLayout(main_layout);
   QDockWidget* port_status = new QDockWidget;
-  port_status->setWidget(dock);
+  port_status->setWindowTitle("Status");
+  port_status->setWidget(port_status_widget);
   // Central Widget
   QWidget*     central    = new QWidget;
   QVBoxLayout* layout     = new QVBoxLayout;
@@ -33,9 +32,8 @@ MainWindow::MainWindow(QLayout* main_layout) {
   layout->setAlignment(Qt::AlignBottom);
   central->setLayout(layout);
   // Window
-  setDockOptions(QMainWindow::AnimatedDocks |
-                              QMainWindow::AllowNestedDocks |
-                              QMainWindow::AllowTabbedDocks);
+  setDockOptions(QMainWindow::AnimatedDocks | QMainWindow::AllowNestedDocks |
+                 QMainWindow::AllowTabbedDocks);
   addDockWidget(Qt::RightDockWidgetArea, port_status);
   setCentralWidget(central);
   connect(start_stop, &QPushButton::pressed, this, &MainWindow::StartStop);
