@@ -5,6 +5,7 @@
             "includePath": [
                 "${workspaceFolder}/inc",
                 "/usr/include/qt",
+                "/usr/include/qt/QtGui",
                 "/usr/include/qt/QtCore",
                 "/usr/include/qt/QtWidgets",
                 "/usr/share/angelscript/add_on"

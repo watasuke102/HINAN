@@ -8,6 +8,7 @@
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 #include "core.h"
+#include "gui/mainwindow.h"
 #include "port.h"
 #include "practice_kit.h"
 #include <QApplication>
@@ -36,35 +37,14 @@ Core::Core() {
     return;
   }
   practice_kit_ = new hinan::PracticeKit(argv[1]);
-  // Dock
-  QWidget* dock = new QWidget;
-  dock->setLayout(practice_kit_->PortStatusLabelList());
-  QDockWidget* port_status = new QDockWidget;
-  port_status->setWidget(dock);
-  // Central Widget
-  QWidget*     central    = new QWidget;
-  QVBoxLayout* layout     = new QVBoxLayout;
-  QPushButton* start_stop = new QPushButton("Start/Stop");
-  QPushButton* reload     = new QPushButton("Reload");
-  QPushButton* quit       = new QPushButton("Quit");
-  layout->addWidget(start_stop);
-  layout->addWidget(reload);
-  layout->addWidget(quit);
-  layout->setAlignment(Qt::AlignBottom);
-  central->setLayout(layout);
-  // Window
-  QMainWindow* main_window = new QMainWindow();
-  main_window->setDockOptions(QMainWindow::AnimatedDocks |
-                              QMainWindow::AllowNestedDocks |
-                              QMainWindow::AllowTabbedDocks);
-  main_window->addDockWidget(Qt::RightDockWidgetArea, port_status);
-  main_window->setCentralWidget(central);
+  auto main_window =
+      new hinan::gui::MainWindow(practice_kit_->PortStatusLabelList());
   // Connect
-  connect(start_stop, &QPushButton::pressed, this, &Core::StartStop);
-  connect(reload, &QPushButton::pressed, practice_kit_,
+  connect(main_window, &hinan::gui::MainWindow::StartStop, this,
+          &Core::StartStop);
+  connect(main_window, &hinan::gui::MainWindow::Reload, practice_kit_,
           &PracticeKit::ReloadScript);
-  connect(quit, &QPushButton::pressed, main_window, &QMainWindow::close);
-  connect(quit, &QPushButton::pressed, practice_kit_,
+  connect(main_window, &hinan::gui::MainWindow::Close, practice_kit_,
           &PracticeKit::TerminateScript);
 
   main_window->show();
