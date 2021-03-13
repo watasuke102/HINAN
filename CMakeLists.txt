@@ -44,10 +44,10 @@ set(PROJECT_SOURCES ${HEADERS} ${TS_FILES}
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable( ${PROJECT_NAME} ${PROJECT_SOURCES} )
-    qt_create_translation(QM_FILES ${CMAKE_SOURCE_DIR} ${TS_FILES})
+    qt_create_translation(QM_FILES ${PROJECT_SOURCES} ${TS_FILES})
 else()
     add_executable(${PROJECT_NAME} ${PROJECT_SOURCES} )
-    qt5_create_translation(QM_FILES ${CMAKE_SOURCE_DIR} ${TS_FILES})
+    qt5_create_translation(QM_FILES ${PROJECT_SOURCES} ${TS_FILES})
 endif()
 
 target_link_libraries(
