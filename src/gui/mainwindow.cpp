@@ -35,6 +35,8 @@ MainWindow::MainWindow(QWidget* port_status_widget) {
   setDockOptions(QMainWindow::AnimatedDocks | QMainWindow::AllowNestedDocks |
                  QMainWindow::AllowTabbedDocks);
   addDockWidget(Qt::RightDockWidgetArea, port_status);
+  resize(800, 600);
+  resizeDocks({port_status}, {400}, Qt::Horizontal);
   setCentralWidget(central);
   connect(start_stop, &QPushButton::pressed, this, &MainWindow::StartStop);
   connect(reload, &QPushButton::pressed, this, &MainWindow::Reload);
