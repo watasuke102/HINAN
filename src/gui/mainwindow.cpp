@@ -19,14 +19,14 @@ namespace gui {
 MainWindow::MainWindow(QWidget* port_status_widget) {
   // Dock
   QDockWidget* port_status = new QDockWidget;
-  port_status->setWindowTitle("Status");
+  port_status->setWindowTitle(tr("Status"));
   port_status->setWidget(port_status_widget);
   // Central Widget
   QWidget*     central    = new QWidget;
   QVBoxLayout* layout     = new QVBoxLayout;
-  QPushButton* start_stop = new QPushButton("Start/Stop");
-  QPushButton* reload     = new QPushButton("Reload");
-  QPushButton* quit       = new QPushButton("Quit");
+  QPushButton* start_stop = new QPushButton(tr("Start/Stop"));
+  QPushButton* reload     = new QPushButton(tr("Reload"));
+  QPushButton* quit       = new QPushButton(tr("Quit"));
   layout->addWidget(start_stop);
   layout->addWidget(reload);
   layout->addWidget(quit);
