@@ -8,6 +8,7 @@
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 #include "gui/mainwindow.h"
+#include "actions.h"
 #include <QDockWidget>
 #include <QLayout>
 #include <QMainWindow>
@@ -38,6 +39,9 @@ MainWindow::MainWindow(QWidget* port_status_widget) {
   resize(800, 600);
   resizeDocks({port_status}, {400}, Qt::Horizontal);
   setCentralWidget(central);
+  Actions* actions = new Actions;
+  addToolBar(actions->Toolbar());
+  // connect
   connect(start_stop, &QPushButton::pressed, this, &MainWindow::StartStop);
   connect(reload, &QPushButton::pressed, this, &MainWindow::Reload);
   connect(quit, &QPushButton::pressed, this, &MainWindow::close);
