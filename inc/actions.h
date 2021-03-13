@@ -28,7 +28,7 @@ class Actions : public QObject {
   QToolBar* Toolbar();
 
  signals:
-  void Opened();
+  void Opened(QUrl);
 };
 } // namespace hinan
 

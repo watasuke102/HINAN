@@ -45,6 +45,7 @@ MainWindow::MainWindow(QWidget* port_status_widget) {
   connect(start_stop, &QPushButton::pressed, this, &MainWindow::StartStop);
   connect(reload, &QPushButton::pressed, this, &MainWindow::Reload);
   connect(quit, &QPushButton::pressed, this, &MainWindow::close);
+  connect(actions, &Actions::Opened, this, &MainWindow::Opened);
 }
 void MainWindow::closeEvent(QCloseEvent* event) {
   emit Close();

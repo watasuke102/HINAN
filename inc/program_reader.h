@@ -13,6 +13,7 @@
 #include <QDebug>
 #include <QObject>
 #include <QString>
+#include <QUrl>
 #include <angelscript.h>
 #include <scriptbuilder/scriptbuilder.h>
 
@@ -31,6 +32,7 @@ class ProgramReader : public QObject {
   ~ProgramReader();
   bool IsActive();
   int  GetPortStat(QString);
+  void SetPath(QUrl);
   void Load();
 
  public slots:

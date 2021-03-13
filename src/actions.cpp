@@ -31,5 +31,5 @@ Actions::Actions()
 }
 QToolBar* Actions::Toolbar() { return toolbar_; }
 
-void Actions::Open() { qDebug() << QFileDialog::getOpenFileUrl(); }
+void Actions::Open() { emit Opened(QFileDialog::getOpenFileUrl()); }
 } // namespace hinan

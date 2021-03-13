@@ -25,27 +25,26 @@ void Help() {
 
 namespace hinan {
 Core::Core() {
-  if (QApplication::arguments().size() < 2) {
-    Help();
-    QApplication::exit(1);
-    return;
-  }
+  QString           path;
   const QStringList argv = QApplication::arguments();
-  if (argv[1] == QString("--help") || argv[1] == QString("-h")) {
-    Help();
-    QApplication::exit(0);
-    return;
+  if (QApplication::arguments().size() > 2) {
+    if (argv[1] == QString("--help") || argv[1] == QString("-h")) {
+      Help();
+      QApplication::exit(0);
+      return;
+    }
+    path = argv[1];
   }
-  practice_kit_ = new hinan::PracticeKit(argv[1]);
-  auto main_window =
-      new hinan::gui::MainWindow(practice_kit_->PortStatusWidget());
+  practice_kit_    = new PracticeKit(path);
+  auto main_window = new gui::MainWindow(practice_kit_->PortStatusWidget());
   // Connect
-  connect(main_window, &hinan::gui::MainWindow::StartStop, this,
-          &Core::StartStop);
-  connect(main_window, &hinan::gui::MainWindow::Reload, practice_kit_,
+  connect(main_window, &gui::MainWindow::StartStop, this, &Core::StartStop);
+  connect(main_window, &gui::MainWindow::Reload, practice_kit_,
           &PracticeKit::ReloadScript);
-  connect(main_window, &hinan::gui::MainWindow::Close, practice_kit_,
+  connect(main_window, &gui::MainWindow::Close, practice_kit_,
           &PracticeKit::TerminateScript);
+  connect(main_window, &gui::MainWindow::Opened, practice_kit_,
+          &PracticeKit::Opened);
 
   main_window->show();
 }

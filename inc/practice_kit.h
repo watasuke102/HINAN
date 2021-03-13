@@ -41,6 +41,7 @@ class PracticeKit : public QObject {
 
  signals:
   void Launch();
+  void Opened(QUrl);
 };
 } // namespace hinan
 

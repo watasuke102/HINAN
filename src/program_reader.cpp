@@ -8,6 +8,7 @@
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 #include "program_reader.h"
+#include "actions.h"
 #include "port.h"
 #include <QDebug>
 #include <QDir>
@@ -27,7 +28,7 @@ void FileOpen(QFile& file, QString path) {
 }
 
 namespace hinan {
-ProgramReader::ProgramReader(QString path) : path_(path) { Load(); }
+ProgramReader::ProgramReader(QString path) { SetPath(path); }
 ProgramReader::~ProgramReader() {
   main_context_->Abort();
   main_context_->Release();
@@ -38,7 +39,13 @@ ProgramReader::~ProgramReader() {
 
 bool ProgramReader::IsActive() { return isActive_; }
 
+void ProgramReader::SetPath(QUrl url) {
+  path_ = url.toString().remove("file://");
+  Load();
+}
 void ProgramReader::Load() {
+  if (path_.isEmpty())
+    return;
   QString script = "";
   QFile   file;
   // Open program file and read without include
@@ -72,7 +79,7 @@ void ProgramReader::Load() {
   builder.AddSectionFromMemory("main", script.toUtf8().data());
   engine_->SetMessageCallback(asFUNCTION(ScriptLog), 0, asCALL_CDECL);
   if (builder.BuildModule() < 0) {
-    qFatal("[Failed] Cannot build the script");
+    qCritical("[Failed] Cannot build the script");
     return;
   }
   // Create context
@@ -81,14 +88,17 @@ void ProgramReader::Load() {
 }
 
 void ProgramReader::Terminate() {
-  main_context_->Abort();
-  port_getter_context_->Abort();
   isActive_ = false;
+  if (!path_.isEmpty()) {
+    main_context_->Abort();
+    port_getter_context_->Abort();
+  }
 }
 
 void ProgramReader::Run() {
-  if (engine_ == 0) {
-    qFatal("[Failed] Engine is not yet to initialized");
+  if (engine_ == 0 || path_.isEmpty()) {
+    qCritical("[Failed] Engine is not yet to initialized");
+    return;
   }
   qDebug("---START Reader::Run()---");
   isActive_               = true;

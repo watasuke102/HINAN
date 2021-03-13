@@ -25,6 +25,7 @@ PracticeKit::PracticeKit(QString path) {
   // When called this->LaunchScript(), call Run() on reader and manager
   connect(this, &PracticeKit::Launch, reader_, &ProgramReader::Run);
   connect(this, &PracticeKit::Launch, manager_, &PortManager::Run);
+  connect(this, &PracticeKit::Opened, reader_, &ProgramReader::SetPath);
   reader_thread_->start();
   manager_thread_->start();
 }
@@ -39,6 +40,7 @@ void PracticeKit::ReloadScript() {
   reader_->Terminate();
   reader_->Load();
 }
+// ToDo: Remove the top two function
 void PracticeKit::LaunchScript() { emit Launch(); }
 void PracticeKit::TerminateScript() { reader_->Terminate(); }
 bool PracticeKit::IsScriptActive() { return reader_->IsActive(); }

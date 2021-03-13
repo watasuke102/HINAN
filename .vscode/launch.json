@@ -10,7 +10,7 @@
 			"request": "launch",
 			"program": "${workspaceFolder}/build/hinan",
 			"args": [
-				/** "${workspaceFolder}/test/wrong.as" /*/
+				/** "${workspaceFolder}/test/wrong.as" /*
 				"${workspaceFolder}/test/reader_test.c" /**/
 			],
 			"stopAtEntry": false,
