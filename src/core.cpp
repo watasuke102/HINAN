@@ -9,7 +9,7 @@
 
 #include "core.h"
 #include "gui/mainwindow.h"
-#include "port.h"
+#include "port/port.h"
 #include "practice_kit.h"
 #include <QApplication>
 #include <QDebug>

@@ -9,7 +9,7 @@
 
 #include "program_reader.h"
 #include "actions.h"
-#include "port.h"
+#include "port/port.h"
 #include <QDebug>
 #include <QDir>
 #include <QFile>

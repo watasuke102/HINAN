@@ -8,7 +8,7 @@
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 #include "port_manager.h"
-#include "port.h"
+#include "port/port.h"
 #include "program_reader.h"
 #include <QDebug>
 #include <QLayout>

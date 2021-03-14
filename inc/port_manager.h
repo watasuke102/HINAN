@@ -10,7 +10,7 @@
 #ifndef HINAN_PORT_MANAGER_H_
 #define HINAN_PORT_MANAGER_H_
 
-#include "port.h"
+#include "port/port.h"
 #include "port_status_item.h"
 #include "program_reader.h"
 #include <QLayout>
