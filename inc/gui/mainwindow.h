@@ -27,7 +27,6 @@ class MainWindow : public QMainWindow {
   void StartStop();
   void Reload();
   void Close();
-  void Opened(QUrl);
 };
 } // namespace gui
 } // namespace hinan

@@ -21,18 +21,14 @@ class Actions : public QObject {
  private:
   QToolBar* toolbar_;
   QAction*  open_;
-  QAction*  launch_script_;
+  QAction*  startstop_script_;
   QAction*  reload_script_;
   void      OpenFileDialog();
+  void      ChangeStartStopActionsIcon();
 
  public:
   Actions();
   QToolBar* Toolbar();
-
- signals:
-  void Opened(QUrl);
-  void Reload();
-  void Launch();
 };
 } // namespace hinan
 

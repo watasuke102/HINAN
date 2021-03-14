@@ -45,9 +45,6 @@ Core::Core() {
           &PracticeKit::ReloadScript);
   connect(main_window, &gui::MainWindow::Close, &PracticeKit::Instance(),
           &PracticeKit::TerminateScript);
-  connect(main_window, &gui::MainWindow::Opened, &PracticeKit::Instance(),
-          &PracticeKit::Opened);
-
   main_window->show();
 }
 } // namespace hinan
