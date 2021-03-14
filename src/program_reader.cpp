@@ -78,6 +78,7 @@ void ProgramReader::Load() {
   engine_->SetMessageCallback(asFUNCTION(ScriptLog), 0, asCALL_CDECL);
   if (builder.BuildModule() < 0) {
     qCritical("[Failed] Cannot build the script");
+    path_ = "";
     return;
   }
   // Create context
