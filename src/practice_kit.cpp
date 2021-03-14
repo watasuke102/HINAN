@@ -40,7 +40,7 @@ void PracticeKit::ReloadScript() {
   reader_->Terminate();
   reader_->Load();
 }
-// ToDo: Remove the top two function
+
 void PracticeKit::LaunchScript() { emit Launch(); }
 void PracticeKit::TerminateScript() { reader_->Terminate(); }
 bool PracticeKit::IsScriptActive() { return reader_->IsActive(); }

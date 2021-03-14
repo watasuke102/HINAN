@@ -24,12 +24,23 @@ QIcon Icon(QStyle::StandardPixmap map) {
 namespace hinan {
 Actions::Actions()
     : toolbar_(new QToolBar()),
-      open_(new QAction(Icon(QStyle::SP_DialogOpenButton), "Open")) {
+      open_(new QAction(Icon(QStyle::SP_DialogOpenButton), tr("Open"))),
+      launch_script_(
+          new QAction(Icon(QStyle::SP_BrowserReload), tr("Reload script"))),
+      reload_script_(
+          new QAction(Icon(QStyle::SP_MediaPlay), tr("Launch script"))) {
+  // Add shortcut
   open_->setShortcut(QKeySequence::Open);
-  toolbar_->addAction(open_);
-  connect(open_, &QAction::triggered, this, &Actions::Open);
+  launch_script_->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_R));
+  reload_script_->setShortcut(Qt::Key_F5);
+  // Add to toolbar
+  toolbar_->addActions({open_, reload_script_, launch_script_});
+  // connect
+  connect(open_, &QAction::triggered, this, &Actions::OpenFileDialog);
+  connect(launch_script_, &QAction::triggered, this, &Actions::Launch);
+  connect(reload_script_, &QAction::triggered, this, &Actions::Reload);
 }
 QToolBar* Actions::Toolbar() { return toolbar_; }
 
-void Actions::Open() { emit Opened(QFileDialog::getOpenFileUrl()); }
+void Actions::OpenFileDialog() { emit Opened(QFileDialog::getOpenFileUrl()); }
 } // namespace hinan

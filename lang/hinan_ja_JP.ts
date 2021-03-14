@@ -2,6 +2,21 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="ja_JP">
 <context>
+    <name>hinan::Actions</name>
+    <message>
+        <source>Open</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Reload script</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Launch script</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>hinan::PortManager</name>
     <message>
         <source>Value</source>
