@@ -44,7 +44,7 @@ Actions::Actions()
   connect(reload_script_, &QAction::triggered, &PracticeKit::Instance(),
           &PracticeKit::ReloadScript);
   // change Start/Stop action's icon
-  connect(startstop_script_, &QAction::triggered, this,
+  connect(&PracticeKit::Instance(), &PracticeKit::StartStop, this,
           &Actions::ChangeStartStopActionsIcon);
 }
 QToolBar* Actions::Toolbar() { return toolbar_; }

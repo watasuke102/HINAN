@@ -25,6 +25,7 @@ PracticeKit::PracticeKit() {
   // When called this->LaunchScript(), call Run() on reader and manager
   connect(this, &PracticeKit::Launch, reader, &ProgramReader::Run);
   connect(this, &PracticeKit::Launch, manager, &PortManager::Run);
+  connect(this, &PracticeKit::StartStop, this, &PracticeKit::StartStopScript);
   reader_thread_->start();
   manager_thread_->start();
 }
@@ -50,7 +51,7 @@ void PracticeKit::TerminateScript() { reader->Terminate(); }
 
 // When script is working, terminate
 // When script is not working, launch
-void PracticeKit::StartStop() {
+void PracticeKit::StartStopScript() {
   if (reader->IsActive()) {
     TerminateScript();
   } else {

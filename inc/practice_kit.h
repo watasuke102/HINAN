@@ -35,7 +35,7 @@ class PracticeKit : public QObject {
   void ReloadScript();
   void LaunchScript();
   void TerminateScript();
-  void StartStop();
+  void StartStopScript();
   // Getter
   int          GetPortStat(QString);
   QTreeWidget* PortStatusWidget();
@@ -44,6 +44,7 @@ class PracticeKit : public QObject {
 
  signals:
   void Launch();
+  void StartStop();
 };
 } // namespace hinan
 

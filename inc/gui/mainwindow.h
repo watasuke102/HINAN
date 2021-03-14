@@ -24,8 +24,6 @@ class MainWindow : public QMainWindow {
   void closeEvent(QCloseEvent*);
 
  signals:
-  void StartStop();
-  void Reload();
   void Close();
 };
 } // namespace gui

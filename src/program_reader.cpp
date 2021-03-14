@@ -84,6 +84,7 @@ void ProgramReader::Load() {
   // Create context
   main_context_        = engine_->CreateContext();
   port_getter_context_ = engine_->CreateContext();
+  qDebug("[Reader] Loaded");
 }
 
 void ProgramReader::Terminate() {
@@ -99,14 +100,14 @@ void ProgramReader::Run() {
     qCritical("[Failed] Engine is not yet to initialized");
     return;
   }
-  qDebug("---START Reader::Run()---");
+  qDebug("[Reader] Started");
   isActive_               = true;
   asIScriptModule* module = engine_->GetModule("main");
 
   main_context_->Prepare(module->GetFunctionByDecl("int main()"));
   main_context_->Execute();
   isActive_ = false;
-  qDebug("---FINISH Reader::Run()---");
+  qDebug("[Reader] Finished");
 }
 
 // If call this function, please use hinan::port.

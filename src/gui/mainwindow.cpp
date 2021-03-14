@@ -9,6 +9,7 @@
 
 #include "gui/mainwindow.h"
 #include "actions.h"
+#include "practice_kit.h"
 #include <QDockWidget>
 #include <QLayout>
 #include <QMainWindow>
@@ -42,8 +43,10 @@ MainWindow::MainWindow(QWidget* port_status_widget) {
   Actions* actions = new Actions;
   addToolBar(actions->Toolbar());
   // connect
-  connect(start_stop, &QPushButton::pressed, this, &MainWindow::StartStop);
-  connect(reload, &QPushButton::pressed, this, &MainWindow::Reload);
+  connect(start_stop, &QPushButton::pressed, &PracticeKit::Instance(),
+          &PracticeKit::StartStop);
+  connect(reload, &QPushButton::pressed, &PracticeKit::Instance(),
+          &PracticeKit::ReloadScript);
   connect(quit, &QPushButton::pressed, this, &MainWindow::close);
 }
 void MainWindow::closeEvent(QCloseEvent* event) {

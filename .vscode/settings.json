@@ -11,6 +11,7 @@
 		"typeinfo": "cpp",
 		"qcoreapplication": "cpp",
 		"fstream": "cpp",
-		"qobject": "cpp"
+		"qobject": "cpp",
+		"qcloseevent": "cpp"
 	}
 }
