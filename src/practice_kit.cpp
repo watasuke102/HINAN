@@ -23,9 +23,10 @@ PracticeKit::PracticeKit() {
   reader->moveToThread(reader_thread_);
   manager->moveToThread(manager_thread_);
   // When called this->LaunchScript(), call Run() on reader and manager
-  connect(this, &PracticeKit::Launch, reader, &ProgramReader::Run);
-  connect(this, &PracticeKit::Launch, manager, &PortManager::Run);
-  connect(this, &PracticeKit::StartStop, this, &PracticeKit::StartStopScript);
+  connect(this, &PracticeKit::LaunchSignal, reader, &ProgramReader::Run);
+  connect(this, &PracticeKit::LaunchSignal, manager, &PortManager::Run);
+  connect(this, &PracticeKit::StartStopSignal, this,
+          &PracticeKit::StartStopScript);
   reader_thread_->start();
   manager_thread_->start();
 }
@@ -46,7 +47,7 @@ void PracticeKit::ReloadScript() {
   reader->Load();
 }
 
-void PracticeKit::LaunchScript() { emit Launch(); }
+void PracticeKit::LaunchScript() { emit LaunchSignal(); }
 void PracticeKit::TerminateScript() { reader->Terminate(); }
 
 // When script is working, terminate

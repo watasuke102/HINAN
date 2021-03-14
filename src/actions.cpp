@@ -40,11 +40,11 @@ Actions::Actions()
     PracticeKit::Instance().reader->SetPath(QFileDialog::getOpenFileUrl());
   });
   connect(startstop_script_, &QAction::triggered, &PracticeKit::Instance(),
-          &PracticeKit::StartStop);
+          &PracticeKit::StartStopSignal);
   connect(reload_script_, &QAction::triggered, &PracticeKit::Instance(),
           &PracticeKit::ReloadScript);
   // change Start/Stop action's icon
-  connect(&PracticeKit::Instance(), &PracticeKit::StartStop, this,
+  connect(&PracticeKit::Instance(), &PracticeKit::StartStopSignal, this,
           &Actions::ChangeStartStopActionsIcon);
 }
 QToolBar* Actions::Toolbar() { return toolbar_; }

@@ -39,7 +39,7 @@ Core::Core() {
   auto main_window =
       new gui::MainWindow(PracticeKit::Instance().PortStatusWidget());
   // Connect
-  connect(main_window, &gui::MainWindow::Close, &PracticeKit::Instance(),
+  connect(main_window, &gui::MainWindow::CloseSignal, &PracticeKit::Instance(),
           &PracticeKit::TerminateScript);
   main_window->show();
 }

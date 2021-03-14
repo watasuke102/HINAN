@@ -43,8 +43,8 @@ class PracticeKit : public QObject {
   static PracticeKit& Instance();
 
  signals:
-  void Launch();
-  void StartStop();
+  void LaunchSignal();
+  void StartStopSignal();
 };
 } // namespace hinan
 

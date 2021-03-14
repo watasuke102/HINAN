@@ -44,13 +44,13 @@ MainWindow::MainWindow(QWidget* port_status_widget) {
   addToolBar(actions->Toolbar());
   // connect
   connect(start_stop, &QPushButton::pressed, &PracticeKit::Instance(),
-          &PracticeKit::StartStop);
+          &PracticeKit::StartStopSignal);
   connect(reload, &QPushButton::pressed, &PracticeKit::Instance(),
           &PracticeKit::ReloadScript);
   connect(quit, &QPushButton::pressed, this, &MainWindow::close);
 }
 void MainWindow::closeEvent(QCloseEvent* event) {
-  emit Close();
+  emit CloseSignal();
   QMainWindow::closeEvent(event);
 }
 } // namespace gui

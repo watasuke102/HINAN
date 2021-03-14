@@ -24,7 +24,7 @@ class MainWindow : public QMainWindow {
   void closeEvent(QCloseEvent*);
 
  signals:
-  void Close();
+  void CloseSignal();
 };
 } // namespace gui
 } // namespace hinan
