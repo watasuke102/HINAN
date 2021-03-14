@@ -38,7 +38,8 @@ Core::Core() {
   practice_kit_    = new PracticeKit(path);
   auto main_window = new gui::MainWindow(practice_kit_->PortStatusWidget());
   // Connect
-  connect(main_window, &gui::MainWindow::StartStop, this, &Core::StartStop);
+  connect(main_window, &gui::MainWindow::StartStop, practice_kit_,
+          &PracticeKit::StartStop);
   connect(main_window, &gui::MainWindow::Reload, practice_kit_,
           &PracticeKit::ReloadScript);
   connect(main_window, &gui::MainWindow::Close, practice_kit_,
@@ -47,15 +48,5 @@ Core::Core() {
           &PracticeKit::Opened);
 
   main_window->show();
-}
-
-void Core::StartStop() {
-  if (practice_kit_->IsScriptActive()) {
-    practice_kit_->TerminateScript();
-    qDebug("Script terminated");
-  } else {
-    practice_kit_->LaunchScript();
-    qDebug("Script started");
-  }
 }
 } // namespace hinan

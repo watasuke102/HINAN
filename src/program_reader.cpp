@@ -28,7 +28,12 @@ void FileOpen(QFile& file, QString path) {
 }
 
 namespace hinan {
-ProgramReader::ProgramReader(QString path) { SetPath(path); }
+ProgramReader::ProgramReader(QString path) {
+  engine_ = asCreateScriptEngine();
+  if (engine_ == 0)
+    qFatal("[Failed] Cannot create script engine_");
+  SetPath(path);
+}
 ProgramReader::~ProgramReader() {
   main_context_->Abort();
   main_context_->Release();
@@ -36,8 +41,6 @@ ProgramReader::~ProgramReader() {
   port_getter_context_->Release();
   engine_->ShutDownAndRelease();
 }
-
-bool ProgramReader::IsActive() { return isActive_; }
 
 void ProgramReader::SetPath(QUrl url) {
   path_ = url.toString().remove("file://");
@@ -67,12 +70,6 @@ void ProgramReader::Load() {
   FileOpen(file, "assets/template.txt");
   script += file.readAll();
   file.close();
-  // AngelScript Engine
-  engine_ = asCreateScriptEngine();
-  if (engine_ == 0) {
-    qFatal("[Failed] Cannot create script engine_");
-    return;
-  }
   // Build the script
   CScriptBuilder builder;
   builder.StartNewModule(engine_, "main");

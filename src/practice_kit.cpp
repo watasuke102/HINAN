@@ -43,7 +43,16 @@ void PracticeKit::ReloadScript() {
 
 void PracticeKit::LaunchScript() { emit Launch(); }
 void PracticeKit::TerminateScript() { reader_->Terminate(); }
-bool PracticeKit::IsScriptActive() { return reader_->IsActive(); }
+
+// When script is working, terminate
+// When script is not working, launch
+void PracticeKit::StartStop() {
+  if (reader_->IsActive()) {
+    TerminateScript();
+  } else {
+    LaunchScript();
+  }
+}
 
 int PracticeKit::GetPortStat(QString port) { return manager_->Value(port); }
 QTreeWidget* PracticeKit::PortStatusWidget() {

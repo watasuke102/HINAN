@@ -34,7 +34,7 @@ class PracticeKit : public QObject {
   void ReloadScript();
   void LaunchScript();
   void TerminateScript();
-  bool IsScriptActive();
+  void StartStop();
   // Getter
   int          GetPortStat(QString);
   QTreeWidget* PortStatusWidget();
