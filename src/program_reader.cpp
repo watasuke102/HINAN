@@ -88,7 +88,9 @@ void ProgramReader::Load() {
 }
 
 void ProgramReader::Terminate() {
+  qDebug("[Reader] Terminated");
   isActive_ = false;
+  emit DeactivatedSignal();
   if (!path_.isEmpty()) {
     main_context_->Abort();
     port_getter_context_->Abort();
@@ -102,12 +104,14 @@ void ProgramReader::Run() {
   }
   qDebug("[Reader] Started");
   isActive_               = true;
+  emit ActivatedSignal();
   asIScriptModule* module = engine_->GetModule("main");
 
   main_context_->Prepare(module->GetFunctionByDecl("int main()"));
   main_context_->Execute();
-  isActive_ = false;
   qDebug("[Reader] Finished");
+  isActive_ = false;
+  emit DeactivatedSignal();
 }
 
 // If call this function, please use hinan::port.

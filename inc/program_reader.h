@@ -38,6 +38,10 @@ class ProgramReader : public QObject {
  public slots:
   void Run();
   void Terminate();
+
+ signals:
+  void ActivatedSignal();
+  void DeactivatedSignal();
 };
 } // namespace hinan
 

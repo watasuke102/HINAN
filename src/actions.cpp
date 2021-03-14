@@ -44,16 +44,20 @@ Actions::Actions()
   connect(reload_script_, &QAction::triggered, &PracticeKit::Instance(),
           &PracticeKit::ReloadScript);
   // change Start/Stop action's icon
-  connect(&PracticeKit::Instance(), &PracticeKit::StartStopSignal, this,
-          &Actions::ChangeStartStopActionsIcon);
+  connect(PracticeKit::Instance().reader, &ProgramReader::ActivatedSignal,
+          this, &Actions::ChangeStartStopActionsIcon);
+  connect(PracticeKit::Instance().reader, &ProgramReader::DeactivatedSignal,
+          this, &Actions::ChangeStartStopActionsIcon);
 }
 QToolBar* Actions::Toolbar() { return toolbar_; }
 
 void Actions::ChangeStartStopActionsIcon() {
   if (PracticeKit::Instance().reader->IsActive()) {
     startstop_script_->setIcon(Icon(QStyle::SP_MediaStop));
+    startstop_script_->setText(tr("Terminate script"));
   } else {
     startstop_script_->setIcon(Icon(QStyle::SP_MediaPlay));
+    startstop_script_->setText(tr("Launch script"));
   }
 }
 } // namespace hinan

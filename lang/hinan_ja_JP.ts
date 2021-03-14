@@ -15,6 +15,10 @@
         <source>Launch script</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Terminate script</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>hinan::PortManager</name>
