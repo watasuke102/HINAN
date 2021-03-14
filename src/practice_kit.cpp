@@ -15,17 +15,17 @@
 #include <QTreeWidget>
 
 namespace hinan {
-PracticeKit::PracticeKit(QString path) {
-  reader_         = new ProgramReader(path);
-  manager_        = new PortManager(reader_);
+PracticeKit::PracticeKit() {
+  reader          = new ProgramReader();
+  manager         = new PortManager();
   reader_thread_  = new QThread(this);
   manager_thread_ = new QThread(this);
-  reader_->moveToThread(reader_thread_);
-  manager_->moveToThread(manager_thread_);
+  reader->moveToThread(reader_thread_);
+  manager->moveToThread(manager_thread_);
   // When called this->LaunchScript(), call Run() on reader and manager
-  connect(this, &PracticeKit::Launch, reader_, &ProgramReader::Run);
-  connect(this, &PracticeKit::Launch, manager_, &PortManager::Run);
-  connect(this, &PracticeKit::Opened, reader_, &ProgramReader::SetPath);
+  connect(this, &PracticeKit::Launch, reader, &ProgramReader::Run);
+  connect(this, &PracticeKit::Launch, manager, &PortManager::Run);
+  connect(this, &PracticeKit::Opened, reader, &ProgramReader::SetPath);
   reader_thread_->start();
   manager_thread_->start();
 }
@@ -36,26 +36,31 @@ PracticeKit::~PracticeKit() {
   manager_thread_->wait();
 }
 
+PracticeKit& PracticeKit::Instance() {
+  static PracticeKit kit;
+  return kit;
+}
+
 void PracticeKit::ReloadScript() {
-  reader_->Terminate();
-  reader_->Load();
+  reader->Terminate();
+  reader->Load();
 }
 
 void PracticeKit::LaunchScript() { emit Launch(); }
-void PracticeKit::TerminateScript() { reader_->Terminate(); }
+void PracticeKit::TerminateScript() { reader->Terminate(); }
 
 // When script is working, terminate
 // When script is not working, launch
 void PracticeKit::StartStop() {
-  if (reader_->IsActive()) {
+  if (reader->IsActive()) {
     TerminateScript();
   } else {
     LaunchScript();
   }
 }
 
-int PracticeKit::GetPortStat(QString port) { return manager_->Value(port); }
+int PracticeKit::GetPortStat(QString port) { return manager->Value(port); }
 QTreeWidget* PracticeKit::PortStatusWidget() {
-  return manager_->PortStatusWidget();
+  return manager->PortStatusWidget();
 }
 } // namespace hinan

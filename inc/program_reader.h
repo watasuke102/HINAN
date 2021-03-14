@@ -28,7 +28,7 @@ class ProgramReader : public QObject {
   asIScriptContext* port_getter_context_;
 
  public:
-  ProgramReader(QString);
+  ProgramReader();
   ~ProgramReader();
   bool IsActive();
   int  GetPortStat(QString);

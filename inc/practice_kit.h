@@ -22,13 +22,14 @@ namespace hinan {
 class PracticeKit : public QObject {
   Q_OBJECT
  private:
-  ProgramReader* reader_;
-  PortManager*   manager_;
-  QThread*       reader_thread_;
-  QThread*       manager_thread_;
+  QThread* reader_thread_;
+  QThread* manager_thread_;
+  PracticeKit();
 
  public:
-  PracticeKit(QString);
+  ProgramReader* reader;
+  PortManager*   manager;
+
   ~PracticeKit();
   // Operation script
   void ReloadScript();
@@ -38,6 +39,8 @@ class PracticeKit : public QObject {
   // Getter
   int          GetPortStat(QString);
   QTreeWidget* PortStatusWidget();
+
+  static PracticeKit& Instance();
 
  signals:
   void Launch();

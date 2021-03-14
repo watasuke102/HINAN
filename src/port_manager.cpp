@@ -9,13 +9,14 @@
 
 #include "port_manager.h"
 #include "port/port.h"
+#include "practice_kit.h"
 #include "program_reader.h"
 #include <QDebug>
 #include <QLayout>
 #include <QTreeWidget>
 
 namespace hinan {
-PortManager::PortManager(ProgramReader* reader) : reader_(reader) {
+PortManager::PortManager() {
   widget_ = new QTreeWidget;
   widget_->setColumnCount(4);
   QTreeWidgetItem* header = widget_->headerItem();
@@ -55,19 +56,19 @@ QTreeWidget* PortManager::PortStatusWidget() { return widget_; }
 
 void PortManager::Update() {
   for (auto str : port::port_list) {
-    if (!reader_->IsActive())
+    if (!PracticeKit::Instance().reader->IsActive())
       return;
-    int stat = reader_->GetPortStat(str.toUtf8().data());
+    int stat = PracticeKit::Instance().reader->GetPortStat(str.toUtf8().data());
     if (stat != -1)
       map_[str]->SetValue(stat);
   }
 }
 
 void PortManager::Run() {
-  while (!reader_->IsActive())
+  while (!PracticeKit::Instance().reader->IsActive())
     ;
   qDebug("[Portmgr] Start run");
-  while (reader_->IsActive())
+  while (PracticeKit::Instance().reader->IsActive())
     Update();
   qDebug("[Portmgr] Finish run");
 }

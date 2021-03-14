@@ -24,11 +24,10 @@ class PortManager : public QObject {
   Q_OBJECT
  private:
   QMap<QString, PortStatusItem*> map_;
-  ProgramReader*                 reader_;
   QTreeWidget*                   widget_;
 
  public:
-  PortManager(ProgramReader*);
+  PortManager();
   int          Value(QString);
   void         Update();
   QTreeWidget* PortStatusWidget();

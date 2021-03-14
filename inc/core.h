@@ -16,14 +16,8 @@
 namespace hinan {
 class Core : public QObject {
   Q_OBJECT
- private:
-  hinan::PracticeKit* practice_kit_;
-
  public:
   Core();
-
- public slots:
-  void StartStop();
 };
 } // namespace hinan
 

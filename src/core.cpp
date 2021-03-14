@@ -32,19 +32,20 @@ Core::Core() {
       Help();
       QApplication::exit(0);
       return;
+    } else {
+      PracticeKit::Instance().reader->SetPath(argv[1]);
     }
-    path = argv[1];
   }
-  practice_kit_    = new PracticeKit(path);
-  auto main_window = new gui::MainWindow(practice_kit_->PortStatusWidget());
+  auto main_window =
+      new gui::MainWindow(PracticeKit::Instance().PortStatusWidget());
   // Connect
-  connect(main_window, &gui::MainWindow::StartStop, practice_kit_,
+  connect(main_window, &gui::MainWindow::StartStop, &PracticeKit::Instance(),
           &PracticeKit::StartStop);
-  connect(main_window, &gui::MainWindow::Reload, practice_kit_,
+  connect(main_window, &gui::MainWindow::Reload, &PracticeKit::Instance(),
           &PracticeKit::ReloadScript);
-  connect(main_window, &gui::MainWindow::Close, practice_kit_,
+  connect(main_window, &gui::MainWindow::Close, &PracticeKit::Instance(),
           &PracticeKit::TerminateScript);
-  connect(main_window, &gui::MainWindow::Opened, practice_kit_,
+  connect(main_window, &gui::MainWindow::Opened, &PracticeKit::Instance(),
           &PracticeKit::Opened);
 
   main_window->show();

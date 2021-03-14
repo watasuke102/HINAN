@@ -4,7 +4,7 @@
 全てのクラス等はここに格納される
 
 - hinan::Core (QObject)  
-コンストラクタで引数解析、全体の管理、MainWindowの表示  
+コンストラクタで引数解析、MainWindowとPracticeKitの管理  
 
 - hinan::PracticeKit (QObject)  
 スクリプト解析とポート管理をそれぞれスレッドで実行させる
