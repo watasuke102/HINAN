@@ -13,6 +13,7 @@
 
 int main(int argc, char* argv[]) {
   QApplication app(argc, argv);
+  app.setApplicationVersion("1.0.0");
   hinan::Core* core = new hinan::Core();
   return app.exec();
 }
