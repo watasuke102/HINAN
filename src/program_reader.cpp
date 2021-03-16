@@ -34,10 +34,12 @@ ProgramReader::ProgramReader() {
     qFatal("[Failed] Cannot create script engine_");
 }
 ProgramReader::~ProgramReader() {
-  main_context_->Abort();
-  main_context_->Release();
-  port_getter_context_->Abort();
-  port_getter_context_->Release();
+  if (!path_.isEmpty()) {
+    main_context_->Abort();
+    main_context_->Release();
+    port_getter_context_->Abort();
+    port_getter_context_->Release();
+  }
   engine_->ShutDownAndRelease();
 }
 
@@ -103,8 +105,8 @@ void ProgramReader::Run() {
     return;
   }
   qDebug("[Reader] Started");
-  isActive_               = true;
-  emit ActivatedSignal();
+  isActive_ = true;
+  emit             ActivatedSignal();
   asIScriptModule* module = engine_->GetModule("main");
 
   main_context_->Prepare(module->GetFunctionByDecl("int main()"));

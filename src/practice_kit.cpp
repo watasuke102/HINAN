@@ -35,6 +35,8 @@ PracticeKit::~PracticeKit() {
   reader_thread_->wait();
   manager_thread_->quit();
   manager_thread_->wait();
+  delete reader;
+  delete manager;
 }
 
 PracticeKit& PracticeKit::Instance() {
