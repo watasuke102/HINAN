@@ -12,6 +12,9 @@
 		"qcoreapplication": "cpp",
 		"fstream": "cpp",
 		"qobject": "cpp",
-		"qcloseevent": "cpp"
+		"qcloseevent": "cpp",
+		"qsvgwidget": "cpp",
+		"qsizepolicy": "cpp",
+		"qsvgrenderer": "cpp"
 	}
 }

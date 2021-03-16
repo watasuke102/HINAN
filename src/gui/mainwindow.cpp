@@ -9,11 +9,13 @@
 
 #include "gui/mainwindow.h"
 #include "actions.h"
+#include "gui/kit_main_ui.h"
 #include "practice_kit.h"
 #include <QDockWidget>
 #include <QLayout>
 #include <QMainWindow>
 #include <QPushButton>
+#include <QSizePolicy>
 
 namespace hinan {
 namespace gui {
@@ -23,16 +25,10 @@ MainWindow::MainWindow(QWidget* port_status_widget) {
   port_status->setWindowTitle(tr("Status"));
   port_status->setWidget(port_status_widget);
   // Central Widget
-  QWidget*     central    = new QWidget;
-  QVBoxLayout* layout     = new QVBoxLayout;
-  QPushButton* start_stop = new QPushButton(tr("Start/Stop"));
-  QPushButton* reload     = new QPushButton(tr("Reload"));
-  QPushButton* quit       = new QPushButton(tr("Quit"));
-  layout->addWidget(start_stop);
-  layout->addWidget(reload);
-  layout->addWidget(quit);
-  layout->setAlignment(Qt::AlignBottom);
-  central->setLayout(layout);
+  KitMainUi* central = new KitMainUi;
+  auto policy = QSizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
+  policy.setHeightForWidth(true);
+  central->setSizePolicy(policy);
   // Window
   setDockOptions(QMainWindow::AnimatedDocks | QMainWindow::AllowNestedDocks |
                  QMainWindow::AllowTabbedDocks);
@@ -42,12 +38,6 @@ MainWindow::MainWindow(QWidget* port_status_widget) {
   setCentralWidget(central);
   Actions* actions = new Actions;
   addToolBar(actions->Toolbar());
-  // connect
-  connect(start_stop, &QPushButton::pressed, &PracticeKit::Instance(),
-          &PracticeKit::StartStopSignal);
-  connect(reload, &QPushButton::pressed, &PracticeKit::Instance(),
-          &PracticeKit::ReloadScript);
-  connect(quit, &QPushButton::pressed, this, &MainWindow::close);
 }
 void MainWindow::closeEvent(QCloseEvent* event) {
   emit CloseSignal();

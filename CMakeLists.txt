@@ -12,8 +12,8 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-find_package(QT NAMES Qt6 Qt5 COMPONENTS Widgets LinguistTools REQUIRED)
-find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets LinguistTools REQUIRED)
+find_package(QT NAMES Qt6 Qt5 COMPONENTS Widgets LinguistTools Svg REQUIRED)
+find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets LinguistTools Svg REQUIRED)
 set(AS_ADD_ON /usr/share/angelscript/add_on)
 
 include_directories("./inc" ${AS_ADD_ON})
@@ -28,6 +28,7 @@ qt_wrap_cpp(HEADERS
   inc/program_reader.h
   inc/port_status_item.h
   inc/gui/mainwindow.h
+  inc/gui/kit_main_ui.h
 )
 set(PROJECT_SOURCES ${HEADERS} ${TS_FILES}
   src/main.cpp
@@ -38,6 +39,7 @@ set(PROJECT_SOURCES ${HEADERS} ${TS_FILES}
   src/program_reader.cpp
   src/port_status_item.cpp
   src/gui/mainwindow.cpp
+  src/gui/kit_main_ui.cpp
   ${AS_ADD_ON}/scriptbuilder/scriptbuilder.cpp
   ${AS_ADD_ON}/scriptstdstring/scriptstdstring.cpp
 )
@@ -54,5 +56,6 @@ target_link_libraries(
   ${PROJECT_NAME}
   PRIVATE
   Qt${QT_VERSION_MAJOR}::Widgets
+  Qt${QT_VERSION_MAJOR}::Svg
   -langelscript
 )

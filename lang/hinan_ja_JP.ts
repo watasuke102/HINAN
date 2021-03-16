@@ -53,17 +53,5 @@
         <source>Status</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <source>Start/Stop</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Reload</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Quit</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 </TS>
