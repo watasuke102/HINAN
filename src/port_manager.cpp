@@ -19,11 +19,10 @@ namespace hinan {
 PortManager::PortManager() {
   widget_ = new QTreeWidget;
   widget_->setColumnCount(4);
-  QTreeWidgetItem* header = widget_->headerItem();
-  header->setText(0, tr("Value"));
-  header->setText(1, tr("HEX"));
-  header->setText(2, tr("BIN"));
-  header->setText(3, tr("DEC"));
+  widget_->setColumnWidth(0, 100);
+  widget_->setColumnWidth(1, 50);
+  widget_->setColumnWidth(2, 80);
+  widget_->setHeaderLabels({tr("Value"), tr("HEX"), tr("BIN"), tr("DEC")});
   QTreeWidgetItem* direction = new QTreeWidgetItem(widget_);
   QTreeWidgetItem* data      = new QTreeWidgetItem(widget_);
   direction->setText(0, tr("Direction"));

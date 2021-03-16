@@ -38,7 +38,7 @@ MainWindow::MainWindow(QWidget* port_status_widget) {
                  QMainWindow::AllowTabbedDocks);
   addDockWidget(Qt::RightDockWidgetArea, port_status);
   resize(800, 600);
-  resizeDocks({port_status}, {400}, Qt::Horizontal);
+  resizeDocks({port_status}, {280}, Qt::Horizontal);
   setCentralWidget(central);
   Actions* actions = new Actions;
   addToolBar(actions->Toolbar());
