@@ -34,6 +34,7 @@ ProgramReader::ProgramReader() {
     qFatal("[Failed] Cannot create script engine_");
 }
 ProgramReader::~ProgramReader() {
+  qDebug("Deleted PracticeKit");
   if (!path_.isEmpty()) {
     main_context_->Abort();
     main_context_->Release();
@@ -46,6 +47,7 @@ ProgramReader::~ProgramReader() {
 bool ProgramReader::IsActive() { return isActive_; }
 
 void ProgramReader::SetPath(QUrl url) {
+  Terminate();
   path_ = url.toString().remove("file://");
   Load();
 }
@@ -124,7 +126,7 @@ int ProgramReader::GetPortStat(QString port) {
   }
   asIScriptModule* module = engine_->GetModule("main");
 
-  const QString function_name = QString("int16 Get%1()").arg(port);
+  const QString function_name = QString("int8 Get%1()").arg(port);
   port_getter_context_->Prepare(
       module->GetFunctionByDecl(function_name.toUtf8().data()));
   if (port_getter_context_->Execute() != asEXECUTION_FINISHED) {
