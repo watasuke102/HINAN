@@ -34,7 +34,6 @@ ProgramReader::ProgramReader() {
     qFatal("[Failed] Cannot create script engine_");
 }
 ProgramReader::~ProgramReader() {
-  qDebug("Deleted PracticeKit");
   if (!path_.isEmpty()) {
     main_context_->Abort();
     main_context_->Release();
@@ -42,6 +41,7 @@ ProgramReader::~ProgramReader() {
     port_getter_context_->Release();
   }
   engine_->ShutDownAndRelease();
+  qDebug("Deleted ProgramReader");
 }
 
 bool ProgramReader::IsActive() { return isActive_; }

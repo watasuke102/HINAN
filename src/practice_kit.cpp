@@ -31,13 +31,13 @@ PracticeKit::PracticeKit() {
   manager_thread_->start();
 }
 PracticeKit::~PracticeKit() {
-  qDebug("Deleted PracticeKit");
   reader_thread_->quit();
   reader_thread_->wait();
   manager_thread_->quit();
   manager_thread_->wait();
   delete reader;
   delete manager;
+  qDebug("Deleted PracticeKit");
 }
 
 PracticeKit& PracticeKit::Instance() {
