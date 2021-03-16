@@ -20,18 +20,14 @@ namespace hinan {
 namespace gui {
 class SvgWidget : public QSvgWidget {
   Q_OBJECT
- private:
-  QSize* parent_size_;
-
  public:
-  SvgWidget(QString, QSize*);
-  void resizeEvent(QResizeEvent*);
+  SvgWidget(QWidget*, QString);
+  void changeSize(QSize);
 };
 class KitMainUi : public QWidget {
   Q_OBJECT
  private:
-  QSize* window_size_;
-  int*   margin_;
+  SvgWidget* widget_;
 
  public:
   KitMainUi();

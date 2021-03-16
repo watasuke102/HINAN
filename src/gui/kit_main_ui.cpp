@@ -10,41 +10,39 @@
 #include "gui/kit_main_ui.h"
 #include <QDebug>
 #include <QLayout>
+#include <QPalette>
 #include <QSize>
 #include <QtSvg/QSvgWidget>
 
+constexpr int MARGIN = 10;
+
 namespace hinan {
 namespace gui {
-SvgWidget::SvgWidget(QString path, QSize* size)
-    : QSvgWidget(path), parent_size_(size) {}
+SvgWidget::SvgWidget(QWidget* parent, QString path)
+    : QSvgWidget(path, parent) {}
 
-void SvgWidget::resizeEvent(QResizeEvent* event) {
-  QWidget::resizeEvent(event);
-  QSize s = event->size();
+void SvgWidget::changeSize(QSize parent_size) {
+  QSize target = parent_size;
   // svg size is 1000*700 (10:7)
-  s.setHeight(s.width() / 10 * 7);
+  target.setHeight(parent_size.width() / 10 * 7);
+  target.setWidth(parent_size.width() - (MARGIN * 2));
+
   // when image is larger than widget's height + margin
-  if (s.height() > (parent_size_->height() - 20)) {
-    qDebug("LARGE");
-    s.setHeight(parent_size_->height() - 20);
-    s.setWidth(s.height() / 7 * 10);
+  if (target.height() > (parent_size.height() - (MARGIN * 2))) {
+    target.setHeight(parent_size.height() - (MARGIN * 2));
+    target.setWidth((target.height() / 7 * 10) - (MARGIN * 2));
   }
-  resize(s);
+
+  setGeometry(MARGIN, MARGIN, target.width(), target.height());
 }
 
 KitMainUi::KitMainUi() {
-  window_size_ = new QSize;
-  window_size_->setWidth(this->size().width());
-  window_size_->setHeight(this->size().height());
-  QVBoxLayout* layout = new QVBoxLayout;
-  layout->setAlignment(Qt::AlignVCenter);
-  layout->addWidget(new SvgWidget("assets/canvas.svg", window_size_));
-  setLayout(layout);
+  widget_ = new SvgWidget(this, "assets/canvas.svg");
+  widget_->setGeometry(MARGIN, MARGIN, this->size().width() - MARGIN * 2, 0);
 }
 void KitMainUi::resizeEvent(QResizeEvent* event) {
   QWidget::resizeEvent(event);
-  window_size_->setWidth(event->size().width());
-  window_size_->setHeight(event->size().height());
+  widget_->changeSize(event->size());
 }
 } // namespace gui
 } // namespace hinan
