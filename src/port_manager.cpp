@@ -22,6 +22,7 @@ PortManager::PortManager() {
   widget_->setColumnWidth(0, 100);
   widget_->setColumnWidth(1, 50);
   widget_->setColumnWidth(2, 80);
+  widget_->setColumnWidth(3, 45);
   widget_->setHeaderLabels({tr("Value"), tr("HEX"), tr("BIN"), tr("DEC")});
   QTreeWidgetItem* direction = new QTreeWidgetItem(widget_);
   QTreeWidgetItem* data      = new QTreeWidgetItem(widget_);
