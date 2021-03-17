@@ -10,6 +10,7 @@
 #include "program_reader.h"
 #include "actions.h"
 #include "port/port.h"
+#include <QApplication>
 #include <QDebug>
 #include <QDir>
 #include <QFile>
@@ -72,7 +73,7 @@ void ProgramReader::Load() {
   file.close();
   // Open template file and read all
   // if read this first, the error occurs line will be shifted
-  FileOpen(file, "assets/template.txt");
+  FileOpen(file, QApplication::applicationDirPath() + "/assets/template.txt");
   script += file.readAll();
   file.close();
   // Build the script

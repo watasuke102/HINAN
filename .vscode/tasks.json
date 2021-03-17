@@ -6,7 +6,7 @@
 		{
 			"type": "shell",
 			"label": "build",
-			"command": "cd build && cmake -GNinja .. && clear && ninja",
+			"command": "./.vscode/build.sh",
 			"args": [],
 			"options": {},
 			"problemMatcher": [
