@@ -1,5 +1,5 @@
 // HINAN - simulate H8 microcomputer practice kit
-// program-reader.cpp
+// program_reader.cpp
 //
 // CopyRight (c) 2021 Watasuke
 // Email  : <watasuke102@gmail.com>
@@ -32,7 +32,7 @@ namespace hinan {
 ProgramReader::ProgramReader() {
   engine_ = asCreateScriptEngine();
   if (engine_ == 0)
-    qFatal("[Failed] Cannot create script engine_");
+    qFatal("[Failed] Cannot create script engine");
 }
 ProgramReader::~ProgramReader() {
   if (!path_.isEmpty()) {

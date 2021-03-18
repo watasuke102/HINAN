@@ -13,7 +13,8 @@
 C言語のプログラムをAngelScriptとして読み込み、実行する
 
 - hinan::PortManager (QObject)  
-PracticeKitが持つProgramReaderのポインタを格納、ポートの状況を管理する
+全ポートの状況を管理する  
+ポート状態の一覧を表示できるウィジェット (QTreeWidget) を持つ
 
 - hinan::Actions  
 様々なコマンドの集合、MainWindow用ToolBar/MenuBarの管理
@@ -23,6 +24,9 @@ QWidget系のクラスを継承したものを入れる
 
 - hinan::gui::MainWindow (QMainWindow)  
 メインウィンドウ
+
+- hinan::gui::KitMainUi (QSvgWidget)
+SVGによる実習キット全体像の表示
 
 ## hinan::port (namespace)  
 ポートと、それに対応する文字列

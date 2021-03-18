@@ -1,5 +1,5 @@
 // HINAN - simulate H8 microcomputer practice kit
-// program-reader.h
+// program_reader.h
 //
 // CopyRight (c) 2021 Watasuke
 // Email  : <watasuke102@gmail.com>
