@@ -25,15 +25,17 @@ class PortManager : public QObject {
  private:
   QMap<QString, PortStatusItem*> map_;
   QTreeWidget*                   widget_;
+  bool                           isTerminated_;
 
  public:
   PortManager();
-  int          Value(QString);
   void         Update();
+  int          Value(QString);
   QTreeWidget* PortStatusWidget();
 
  public slots:
   void Run();
+  void Terminate();
 };
 } // namespace hinan
 

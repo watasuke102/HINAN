@@ -10,7 +10,6 @@
 #include "practice_kit.h"
 #include "port_manager.h"
 #include "program_reader.h"
-#include <QDebug>
 #include <QThread>
 #include <QTreeWidget>
 
@@ -22,9 +21,10 @@ PracticeKit::PracticeKit() {
   manager_thread_ = new QThread(this);
   reader->moveToThread(reader_thread_);
   manager->moveToThread(manager_thread_);
-  // When called this->LaunchScript(), call Run() on reader and manager
+  // connect
   connect(this, &PracticeKit::LaunchSignal, reader, &ProgramReader::Run);
-  connect(this, &PracticeKit::LaunchSignal, manager, &PortManager::Run);
+  connect(reader, &ProgramReader::ActivatedSignal, manager, &PortManager::Run);
+  connect(reader, &ProgramReader::DeactivatedSignal, manager, &PortManager::Terminate);
   connect(this, &PracticeKit::StartStopSignal, this,
           &PracticeKit::StartStopScript);
   reader_thread_->start();

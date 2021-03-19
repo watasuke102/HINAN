@@ -16,7 +16,7 @@
 #include <QTreeWidget>
 
 namespace hinan {
-PortManager::PortManager() {
+PortManager::PortManager(): isTerminated_(false) {
   widget_ = new QTreeWidget;
   widget_->setColumnCount(4);
   widget_->setColumnWidth(0, 100);
@@ -52,8 +52,6 @@ PortManager::PortManager() {
   }
 }
 
-QTreeWidget* PortManager::PortStatusWidget() { return widget_; }
-
 void PortManager::Update() {
   for (auto str : port::port_list) {
     if (!PracticeKit::Instance().reader->IsActive())
@@ -64,20 +62,28 @@ void PortManager::Update() {
   }
 }
 
-void PortManager::Run() {
-  while (!PracticeKit::Instance().reader->IsActive())
-    ;
-  qDebug("[Portmgr] Start run");
-  while (PracticeKit::Instance().reader->IsActive())
-    Update();
-  qDebug("[Portmgr] Finish run");
-}
-
 int PortManager::Value(QString port) {
   for (auto str : hinan::port::port_list) {
     if (port == str)
       return map_[port]->Value();
   }
   return -1;
+}
+
+QTreeWidget* PortManager::PortStatusWidget() { return widget_; }
+
+void PortManager::Run() {
+  isTerminated_ = false;
+  qDebug("[Portmgr] Start run");
+  while (PracticeKit::Instance().reader->IsActive() && !isTerminated_) {
+    Update();
+  }
+  isTerminated_ = false;
+  qDebug("[Portmgr] Finish run");
+}
+
+void PortManager::Terminate() {
+  qDebug("[Portmgr] Terminated");
+  isTerminated_ = true;
 }
 } // namespace hinan
