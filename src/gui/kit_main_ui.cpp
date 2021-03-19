@@ -8,6 +8,7 @@
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 #include "gui/kit_main_ui.h"
+#include "gui/led.h"
 #include <QApplication>
 #include <QDebug>
 #include <QLayout>
@@ -33,7 +34,6 @@ void SvgWidget::changeSize(QSize parent_size) {
     target.setHeight(parent_size.height() - (MARGIN * 2));
     target.setWidth((target.height() / 7 * 10) - (MARGIN * 2));
   }
-
   setGeometry(MARGIN, MARGIN, target.width(), target.height());
 }
 
@@ -41,6 +41,8 @@ KitMainUi::KitMainUi() {
   widget_ = new SvgWidget(this, QApplication::applicationDirPath() +
                                     "/assets/canvas.svg");
   widget_->setGeometry(MARGIN, MARGIN, this->size().width() - MARGIN * 2, 0);
+  led_ = new LED(this);
+  led_->setGeometry(60, 120, 120, 50);
 }
 void KitMainUi::resizeEvent(QResizeEvent* event) {
   QWidget::resizeEvent(event);

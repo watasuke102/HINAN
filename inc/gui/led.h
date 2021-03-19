@@ -1,5 +1,5 @@
 // HINAN - simulate H8 microcomputer practice kit
-// kit_main_ui.h
+// led.h
 //
 // CopyRight (c) 2021 Watasuke
 // Email  : <watasuke102@gmail.com>
@@ -7,35 +7,26 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
-#ifndef HINAN_KIT_MAIN_UI_H_
-#define HINAN_KIT_MAIN_UI_H_
+#ifndef HINAN_LED_H_
+#define HINAN_LED_H_
 
-#include "led.h"
+#include <QVector>
 #include <QObject>
-#include <QResizeEvent>
-#include <QString>
+#include <QPushButton>
 #include <QWidget>
-#include <QtSvg/QSvgWidget>
 
 namespace hinan {
 namespace gui {
-class SvgWidget : public QSvgWidget {
-  Q_OBJECT
- public:
-  SvgWidget(QWidget*, QString);
-  void changeSize(QSize);
-};
-class KitMainUi : public QWidget {
+class LED : public QWidget {
   Q_OBJECT
  private:
-  SvgWidget* widget_;
-  LED*       led_;
+  QVector<QPushButton*> leds_;
 
  public:
-  KitMainUi();
-  void resizeEvent(QResizeEvent*);
+  LED(QWidget*);
+  void Update();
 };
 } // namespace gui
 } // namespace hinan
 
-#endif // HINAN_KIT_MAIN_UI_H_
+#endif // HINAN_LED_H_

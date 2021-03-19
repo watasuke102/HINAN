@@ -27,6 +27,7 @@ qt_wrap_cpp(HEADERS
   inc/practice_kit.h
   inc/program_reader.h
   inc/port_status_item.h
+  inc/gui/led.h
   inc/gui/mainwindow.h
   inc/gui/kit_main_ui.h
 )
@@ -38,6 +39,7 @@ set(PROJECT_SOURCES ${HEADERS} ${TS_FILES}
   src/practice_kit.cpp
   src/program_reader.cpp
   src/port_status_item.cpp
+  src/gui/led.cpp
   src/gui/mainwindow.cpp
   src/gui/kit_main_ui.cpp
   ${AS_ADD_ON}/scriptbuilder/scriptbuilder.cpp
