@@ -10,14 +10,19 @@
 #ifndef HINAN_CORE_H_
 #define HINAN_CORE_H_
 
+#include "gui/mainwindow.h"
 #include "practice_kit.h"
 #include <QObject>
 
 namespace hinan {
 class Core : public QObject {
   Q_OBJECT
+ private:
+  gui::MainWindow* main_window_;
+
  public:
   Core();
+  void Error(const QMetaObject*, QString);
 };
 } // namespace hinan
 

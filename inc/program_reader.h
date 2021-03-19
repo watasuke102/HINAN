@@ -44,6 +44,7 @@ class ProgramReader : public QObject {
   void ActivatedSignal();
   void DeactivatedSignal();
   void PathChangedSignal(QString);
+  void ErrorSignal(const QMetaObject*, QString);
 };
 } // namespace hinan
 

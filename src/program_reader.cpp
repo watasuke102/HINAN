@@ -47,7 +47,7 @@ ProgramReader::~ProgramReader() {
 
 bool ProgramReader::IsActive() { return isActive_; }
 
-void    ProgramReader::SetPath(QUrl url) {
+void ProgramReader::SetPath(QUrl url) {
   Terminate();
   path_ = url.toString().remove("file://");
   emit PathChangedSignal(path_);
@@ -83,7 +83,7 @@ void ProgramReader::Load() {
   builder.AddSectionFromMemory("main", script.toUtf8().data());
   engine_->SetMessageCallback(asFUNCTION(ScriptLog), 0, asCALL_CDECL);
   if (builder.BuildModule() < 0) {
-    qCritical("[Failed] Cannot build the script");
+    emit ErrorSignal(&staticMetaObject, tr("Cannot build the script"));
     path_ = "";
     return;
   }
@@ -105,7 +105,7 @@ void ProgramReader::Terminate() {
 
 void ProgramReader::Run() {
   if (engine_ == 0 || path_.isEmpty()) {
-    qCritical("[Failed] Engine is not yet to initialized");
+    emit ErrorSignal(&staticMetaObject, tr("Engine is not yet to initialized"));
     return;
   }
   qDebug("[Reader] Started");
@@ -132,7 +132,8 @@ int ProgramReader::GetPortStat(QString port) {
   port_getter_context_->Prepare(
       module->GetFunctionByDecl(function_name.toUtf8().data()));
   if (port_getter_context_->Execute() != asEXECUTION_FINISHED) {
-    qCritical("[Failed] cannot launch port status get function");
+    emit ErrorSignal(&staticMetaObject,
+                     tr("cannot launch port status get function"));
     return -1;
   }
   int result = port_getter_context_->GetReturnDWord();

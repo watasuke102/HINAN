@@ -15,6 +15,7 @@
 #include <QDebug>
 #include <QDockWidget>
 #include <QMainWindow>
+#include <QMessageBox>
 #include <QObject>
 #include <QPushButton>
 
@@ -36,11 +37,18 @@ Core::Core() {
       PracticeKit::Instance().reader->SetPath(argv[1]);
     }
   }
-  auto main_window =
+  main_window_ =
       new gui::MainWindow(PracticeKit::Instance().PortStatusWidget());
   // Connect
-  connect(main_window, &gui::MainWindow::CloseSignal, &PracticeKit::Instance(),
+  connect(main_window_, &gui::MainWindow::CloseSignal, &PracticeKit::Instance(),
           &PracticeKit::TerminateScript);
-  main_window->show();
+  connect(PracticeKit::Instance().reader, &ProgramReader::ErrorSignal, this,
+          &Core::Error);
+  main_window_->show();
+}
+
+void Core::Error(const QMetaObject* obj, QString body) {
+  qCritical("[%s] Error: %s", obj->className(), body.toUtf8().data());
+  QMessageBox::critical(main_window_, tr("Error"), body);
 }
 } // namespace hinan

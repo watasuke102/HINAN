@@ -44,8 +44,8 @@ MainWindow::MainWindow(QWidget* port_status_widget) {
           this, &MainWindow::UpdateTitle);
 }
 void MainWindow::UpdateTitle(QString path) {
-  setWindowTitle("HINAN - " + path);
-}
+    setWindowTitle("HINAN - " + path);
+  }
 void MainWindow::closeEvent(QCloseEvent* event) {
   emit CloseSignal();
   QMainWindow::closeEvent(event);

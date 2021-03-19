@@ -21,6 +21,13 @@
     </message>
 </context>
 <context>
+    <name>hinan::Core</name>
+    <message>
+        <source>Error</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>hinan::PortManager</name>
     <message>
         <source>Value</source>
@@ -44,6 +51,21 @@
     </message>
     <message>
         <source>Data</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>hinan::ProgramReader</name>
+    <message>
+        <source>Cannot build the script</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Engine is not yet to initialized</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>cannot launch port status get function</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

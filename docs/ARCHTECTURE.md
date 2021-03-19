@@ -5,6 +5,7 @@
 
 - hinan::Core (QObject)  
 コンストラクタで引数解析、MainWindowとPracticeKitの管理  
+エラー時用のダイアログ表示関数を持つ
 
 - hinan::PracticeKit (QObject)  
 スクリプト解析とポート管理をそれぞれスレッドで実行させる
