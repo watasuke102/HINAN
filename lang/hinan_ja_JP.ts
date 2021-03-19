@@ -65,7 +65,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>cannot launch port status get function</source>
+        <source>Cannot launch port status get function</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

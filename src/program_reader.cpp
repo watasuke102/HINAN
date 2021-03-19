@@ -101,6 +101,8 @@ void ProgramReader::Terminate() {
   if (!path_.isEmpty()) {
     main_context_->Abort();
     port_getter_context_->Abort();
+    port_getter_context_->Release();
+    port_getter_context_ = engine_->CreateContext();
   }
 }
 
@@ -132,9 +134,10 @@ int ProgramReader::GetPortStat(QString port) {
   const QString function_name = QString("int8 Get%1()").arg(port);
   port_getter_context_->Prepare(
       module->GetFunctionByDecl(function_name.toUtf8().data()));
-  if (port_getter_context_->Execute() != asEXECUTION_FINISHED) {
+  int r = port_getter_context_->Execute();
+  if (r != asEXECUTION_FINISHED) {
     emit ErrorSignal(&staticMetaObject,
-                     tr("cannot launch port status get function"));
+                     tr("Cannot launch port status get function"));
     return -1;
   }
   int result = port_getter_context_->GetReturnDWord();

@@ -16,7 +16,7 @@
 #include <QTreeWidget>
 
 namespace hinan {
-PortManager::PortManager(): isTerminated_(false) {
+PortManager::PortManager() : isTerminated_(false) {
   widget_ = new QTreeWidget;
   widget_->setColumnCount(4);
   widget_->setColumnWidth(0, 100);
@@ -33,7 +33,7 @@ PortManager::PortManager(): isTerminated_(false) {
   widget_->addTopLevelItem(direction);
   widget_->addTopLevelItem(data);
 
-  // Initialize direction data register
+  // Initialize data direction register
   int              i = 0;
   QTreeWidgetItem* item;
   for (auto str : port::port_ddr) {
@@ -54,8 +54,10 @@ PortManager::PortManager(): isTerminated_(false) {
 
 void PortManager::Update() {
   for (auto str : port::port_list) {
-    if (!PracticeKit::Instance().reader->IsActive())
+    if (!PracticeKit::Instance().reader->IsActive()) {
+      qDebug("[Portmgr] Failed: Reader is not active");
       return;
+    }
     int stat = PracticeKit::Instance().reader->GetPortStat(str.toUtf8().data());
     if (stat != -1)
       map_[str]->SetValue(stat);
