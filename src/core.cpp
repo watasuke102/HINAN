@@ -28,13 +28,13 @@ namespace hinan {
 Core::Core() {
   QString           path;
   const QStringList argv = QApplication::arguments();
-  if (QApplication::arguments().size() > 2) {
+  if (QApplication::arguments().size() >= 2) {
     if (argv[1] == QString("--help") || argv[1] == QString("-h")) {
       Help();
       QApplication::exit(0);
       return;
     } else {
-      PracticeKit::Instance().reader->SetPath(argv[1]);
+      path = argv[1];
     }
   }
   main_window_ =
@@ -44,6 +44,9 @@ Core::Core() {
           &PracticeKit::TerminateScript);
   connect(PracticeKit::Instance().reader, &ProgramReader::ErrorSignal, this,
           &Core::Error);
+
+  PracticeKit::Instance().reader->SetPath(path);
+
   main_window_->show();
 }
 
