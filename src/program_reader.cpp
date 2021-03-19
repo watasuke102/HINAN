@@ -85,6 +85,7 @@ void ProgramReader::Load() {
   if (builder.BuildModule() < 0) {
     emit ErrorSignal(&staticMetaObject, tr("Cannot build the script"));
     path_ = "";
+    emit PathChangedSignal(path_);
     return;
   }
   // Create context
