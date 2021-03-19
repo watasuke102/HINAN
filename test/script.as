@@ -1,6 +1,6 @@
 int main(void) {
-  P2DR=0xff;
   while(true) {
+    P1DR+=1;
   }
   return 0;
 }

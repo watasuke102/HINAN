@@ -51,6 +51,7 @@ PortManager::PortManager() : isTerminated_(false) {
     ++i;
   }
 }
+PortManager::~PortManager() { qDebug("Deleted PortManager"); }
 
 void PortManager::Update() {
   for (auto str : port::port_list) {

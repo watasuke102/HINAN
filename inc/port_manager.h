@@ -29,6 +29,7 @@ class PortManager : public QObject {
 
  public:
   PortManager();
+  ~PortManager();
   void         Update();
   int          Value(QString);
   QTreeWidget* PortStatusWidget();
