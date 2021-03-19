@@ -22,6 +22,7 @@ class MainWindow : public QMainWindow {
  public:
   MainWindow(QWidget*);
   void closeEvent(QCloseEvent*);
+  void UpdateTitle(QString);
 
  signals:
   void CloseSignal();

@@ -34,6 +34,7 @@ class ProgramReader : public QObject {
   int  GetPortStat(QString);
   void SetPath(QUrl);
   void Load();
+  QString GetPath();
 
  public slots:
   void Run();
@@ -42,6 +43,7 @@ class ProgramReader : public QObject {
  signals:
   void ActivatedSignal();
   void DeactivatedSignal();
+  void PathChangedSignal(QString);
 };
 } // namespace hinan
 

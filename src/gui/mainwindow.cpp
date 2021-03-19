@@ -20,6 +20,7 @@
 namespace hinan {
 namespace gui {
 MainWindow::MainWindow(QWidget* port_status_widget) {
+  setWindowTitle("HINAN");
   // Dock
   QDockWidget* port_status = new QDockWidget;
   port_status->setWindowTitle(tr("Status"));
@@ -38,6 +39,12 @@ MainWindow::MainWindow(QWidget* port_status_widget) {
   setCentralWidget(central);
   Actions* actions = new Actions;
   addToolBar(actions->Toolbar());
+
+  connect(PracticeKit::Instance().reader, &ProgramReader::PathChangedSignal,
+          this, &MainWindow::UpdateTitle);
+}
+void MainWindow::UpdateTitle(QString path) {
+  setWindowTitle("HINAN - " + path);
 }
 void MainWindow::closeEvent(QCloseEvent* event) {
   emit CloseSignal();

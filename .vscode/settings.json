@@ -15,6 +15,7 @@
 		"qcloseevent": "cpp",
 		"qsvgwidget": "cpp",
 		"qsizepolicy": "cpp",
-		"qsvgrenderer": "cpp"
+		"qsvgrenderer": "cpp",
+		"qabstractbutton": "cpp"
 	}
 }

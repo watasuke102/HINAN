@@ -47,9 +47,10 @@ ProgramReader::~ProgramReader() {
 
 bool ProgramReader::IsActive() { return isActive_; }
 
-void ProgramReader::SetPath(QUrl url) {
+void    ProgramReader::SetPath(QUrl url) {
   Terminate();
   path_ = url.toString().remove("file://");
+  emit PathChangedSignal(path_);
   Load();
 }
 void ProgramReader::Load() {
