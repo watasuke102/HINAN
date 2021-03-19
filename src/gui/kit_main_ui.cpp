@@ -42,7 +42,7 @@ KitMainUi::KitMainUi() {
                                     "/assets/canvas.svg");
   widget_->setGeometry(MARGIN, MARGIN, this->size().width() - MARGIN * 2, 0);
   led_ = new LED(this);
-  led_->setGeometry(60, 120, 120, 50);
+  led_->setGeometry(led_->OriginalSize());
 }
 void KitMainUi::resizeEvent(QResizeEvent* event) {
   QWidget::resizeEvent(event);

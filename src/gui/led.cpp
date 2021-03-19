@@ -13,22 +13,28 @@
 #include <QList>
 #include <QObject>
 #include <QPushButton>
+#include <QRect>
 #include <QWidget>
 
 namespace hinan {
 namespace gui {
-LED::LED(QWidget* parent) : QWidget(parent) {
+LED::LED(QWidget* parent) : QWidget(parent), original_size_(68, 150, 100, 30) {
+  setStyleSheet(
+      "QPushButton{ background-color: #220123; }"
+      "QPushButton:checked{ background-color: #ff0123; }");
   QHBoxLayout* layout = new QHBoxLayout();
-  //layout->setContentsMargins(-1, 0, 1, 0);
+  layout->setSpacing(2);
   leds_.resize(8);
   for (int i = 7; i >= 0; i--) {
-    leds_[i] = new QPushButton(QString::number(i), this);
+    leds_[i] = new QPushButton(this);
     // leds_[i]->setFlat(true);
     // leds_[i]->setEnabled(false);
+    leds_[i]->setCheckable(true);
     layout->addWidget(leds_[i]);
   }
   setLayout(layout);
   // set background color
 }
+QRect LED::OriginalSize() { return original_size_; }
 } // namespace gui
 } // namespace hinan
