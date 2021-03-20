@@ -15,13 +15,16 @@ void myWait() {
 int main(void) {
   P4DDR = 0xff; // P4を出力用に
   P1DR  = 0xf0;
-  PBDDR = 0xff;
+  PBDDR = 0x93;
   PBDR  = 0xff;
 
   P2DR = 0x99;
+  for (int i = 0; i < 4; i++) {
+    P4DR = 0x8A;
+    myWait();
+  }
 
   while (true) {
-    // for (int i = 0; i < 1000; i++) {
     P4DR = 0x11;
     myWait();
     P4DR = 0x22;

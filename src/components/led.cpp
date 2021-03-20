@@ -27,7 +27,7 @@ LED::LED(QWidget* parent) : ComponentInterface(parent, 63, 155, 95, 30) {
   QHBoxLayout* layout = new QHBoxLayout();
   layout->setSpacing(2);
   leds_.resize(8);
-  for (int i = 7; i >= 0; i--) {
+  for (int i = leds_.size() - 1; i >= 0; i--) {
     leds_[i] = new QPushButton(this);
     leds_[i]->setEnabled(false);
     leds_[i]->setCheckable(true);
@@ -38,12 +38,11 @@ LED::LED(QWidget* parent) : ComponentInterface(parent, 63, 155, 95, 30) {
 void LED::Update() {
   const int PBDR  = PracticeKit::Instance().port_manager->Value(port::PBDR);
   const int PBDDR = PracticeKit::Instance().port_manager->Value(port::PBDDR);
-  for (int i = 7; i >= 0; i--) {
+  for (int i = leds_.size() - 1; i >= 0; i--) {
     int pos = 1 << i;
     // when Data is 0 and Direction is Output(1),
     // Turn on the LED
     leds_[i]->setChecked(!(PBDR & pos) && (PBDDR & pos));
-    // leds_[i]->setChecked(true);
   }
 }
 } // namespace components

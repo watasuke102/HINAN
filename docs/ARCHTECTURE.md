@@ -38,7 +38,7 @@ SVGによる実習キット全体像の表示
 - hinan::components::LED (ComponentInterface)  
 ポートBを読み取り、LEDを表示
 
-- （実装予定）hinan::components::Segment (ComponentInterface)  
+- hinan::components::Segment (ComponentInterface)  
 ポート4を読み取り、7セグメントLEDを表示
 
 - （実装予定）hinan::components::ToggleSwitches (ComponentInterface)  

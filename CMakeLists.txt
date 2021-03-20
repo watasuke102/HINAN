@@ -44,6 +44,7 @@ set(PROJECT_SOURCES ${HEADERS} ${TS_FILES}
   src/gui/mainwindow.cpp
   src/gui/kit_main_ui.cpp
   src/components/led.cpp
+  src/components/segment.cpp
   ${AS_ADD_ON}/scriptbuilder/scriptbuilder.cpp
   ${AS_ADD_ON}/scriptstdstring/scriptstdstring.cpp
 )

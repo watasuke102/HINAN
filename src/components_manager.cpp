@@ -10,11 +10,12 @@
 #include "components_manager.h"
 #include "components/component_interface.h"
 #include "components/led.h"
+#include "components/segment.h"
 #include "practice_kit.h"
+#include <QApplication>
 #include <QRect>
 #include <QVector>
 #include <QWidget>
-#include <QApplication>
 
 QRect Expantion(QRect base, double rate) {
   auto o = base;
@@ -28,6 +29,7 @@ namespace hinan {
 ComponentsManager::ComponentsManager()
     : widget_(new QWidget), isTerminated_(false) {
   components_.append(new components::LED(widget_));
+  components_.append(new components::Segment(widget_));
   for (auto obj : components_) {
     obj->setGeometry(obj->OriginalSize());
   }
