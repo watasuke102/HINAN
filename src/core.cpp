@@ -41,7 +41,7 @@ Core::Core() {
       new gui::MainWindow(PracticeKit::Instance().manager->PortStatusWidget());
   // Connect
   connect(main_window_, &gui::MainWindow::CloseSignal,
-          PracticeKit::Instance().reader, &ProgramReader::Terminate);
+          &PracticeKit::Instance(), &PracticeKit::TerminateScript);
   connect(PracticeKit::Instance().reader, &ProgramReader::ErrorSignal, this,
           &Core::Error);
 
