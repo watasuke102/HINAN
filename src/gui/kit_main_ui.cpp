@@ -18,6 +18,14 @@
 
 constexpr int MARGIN = 10;
 
+QRect Expantion(QRect base, double rate) {
+  auto o = base;
+  base.moveTo(base.x() * rate, base.y() * rate);
+  base.setWidth(base.width() * rate);
+  base.setHeight(base.height() * rate);
+  return base;
+}
+
 namespace hinan {
 namespace gui {
 SvgWidget::SvgWidget(QWidget* parent, QString path)
@@ -37,7 +45,7 @@ void SvgWidget::changeSize(QSize parent_size) {
   setGeometry(MARGIN, MARGIN, target.width(), target.height());
 }
 
-KitMainUi::KitMainUi() {
+KitMainUi::KitMainUi() : original_width_(494) {
   widget_ = new SvgWidget(this, QApplication::applicationDirPath() +
                                     "/assets/canvas.svg");
   widget_->setGeometry(MARGIN, MARGIN, this->size().width() - MARGIN * 2, 0);
@@ -50,6 +58,11 @@ KitMainUi::KitMainUi() {
 void KitMainUi::resizeEvent(QResizeEvent* event) {
   QWidget::resizeEvent(event);
   widget_->changeSize(event->size());
+  const double expantion_rate =
+      (double)widget_->size().width() / (double)original_width_;
+  for (auto obj : components_) {
+    obj->setGeometry(Expantion(obj->OriginalSize(), expantion_rate));
+  }
 }
 } // namespace gui
 } // namespace hinan

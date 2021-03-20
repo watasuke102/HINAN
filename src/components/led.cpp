@@ -18,7 +18,7 @@
 
 namespace hinan {
 namespace components {
-LED::LED(QWidget* parent) : ComponentInterface(parent, 68, 150, 100, 30) {
+LED::LED(QWidget* parent) : ComponentInterface(parent, 63, 155, 95, 30) {
   setStyleSheet(
       "QPushButton{ background-color: #220123; }"
       "QPushButton:checked{ background-color: #ff0123; }");
@@ -27,8 +27,7 @@ LED::LED(QWidget* parent) : ComponentInterface(parent, 68, 150, 100, 30) {
   leds_.resize(8);
   for (int i = 7; i >= 0; i--) {
     leds_[i] = new QPushButton(this);
-    // leds_[i]->setFlat(true);
-    // leds_[i]->setEnabled(false);
+    leds_[i]->setEnabled(false);
     leds_[i]->setCheckable(true);
     layout->addWidget(leds_[i]);
   }

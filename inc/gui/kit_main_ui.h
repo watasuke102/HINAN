@@ -30,8 +30,10 @@ class SvgWidget : public QSvgWidget {
 class KitMainUi : public QWidget {
   Q_OBJECT
  private:
-  SvgWidget*       widget_;
   QVector<components::ComponentInterface*> components_;
+
+  int        original_width_;
+  SvgWidget* widget_;
 
  public:
   KitMainUi();
