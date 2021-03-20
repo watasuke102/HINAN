@@ -55,7 +55,7 @@ P[1-9AB]D(D?)R
 hinan::port::P1DR => "P1DR"  
 hinan::port::PBDDR => "PBDDR"  
 
-ポート状態の取得は `PracticeKit::Instance().manager->Value(hinan::port)` で行う
+ポート状態の取得は `PracticeKit::Instance().manager->GetPortValue(hinan::port)` で行う
 
 - hinan::port::port_list (QStringList)  
 ポート全部格納  

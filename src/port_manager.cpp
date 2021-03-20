@@ -66,12 +66,19 @@ void PortManager::Update() {
   }
 }
 
-int PortManager::Value(QString port) {
+int PortManager::GetPortValue(QString port) {
   for (auto str : hinan::port::port_list) {
     if (port == str)
       return map_[port]->Value();
   }
   return -1;
+}
+
+void PortManager::SetPortValue(QString port, char value) {
+  for (auto str : hinan::port::port_list) {
+    if (port == str)
+      PracticeKit::Instance().reader->SetPortValue(port, value);
+  }
 }
 
 QTreeWidget* PortManager::PortStatusWidget() { return widget_; }
