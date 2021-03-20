@@ -36,6 +36,7 @@ class PracticeKit : public QObject {
   ~PracticeKit();
   void StartStopScript();
   void TerminateScript();
+  void ReloadScript();
 
   static PracticeKit& Instance();
 

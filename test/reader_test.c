@@ -16,6 +16,7 @@ int main(void) {
   P4DDR = 0xff; // P4を出力用に
   P1DR  = 0xf0;
   PBDDR = 0xff;
+  PBDR  = 0xff;
 
   P2DR = 0x99;
 
@@ -30,7 +31,7 @@ int main(void) {
     P4DR = 0x48;
     myWait();
     P2DR = 2 | 4;
-    PBDR = (PBDR << 1) + 1;
+    PBDR = PBDR << 1;
   }
 
   return 0;

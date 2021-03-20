@@ -43,8 +43,8 @@ Actions::Actions()
   });
   connect(startstop_script_, &QAction::triggered, &PracticeKit::Instance(),
           &PracticeKit::StartStopSignal);
-  connect(reload_script_, &QAction::triggered, PracticeKit::Instance().reader,
-          &ProgramReader::Reload);
+  connect(reload_script_, &QAction::triggered, &PracticeKit::Instance(),
+          &PracticeKit::ReloadScript);
   // change Start/Stop action's icon
   connect(PracticeKit::Instance().reader, &ProgramReader::ActivatedSignal,
           this, &Actions::ChangeStartStopActionsIcon);

@@ -64,6 +64,8 @@ PracticeKit& PracticeKit::Instance() {
 }
 
 void PracticeKit::TerminateScript() { reader->Terminate(); }
+void PracticeKit::ReloadScript() { reader->Reload(); }
+
 // When script is working, terminate
 // When script is not working, launch
 void PracticeKit::StartStopScript() {

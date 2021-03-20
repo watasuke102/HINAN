@@ -58,7 +58,7 @@ void ComponentsManager::Run() {
 }
 
 void ComponentsManager::Terminate() {
-  qDebug("[Componentsmgr] Terminated");
+  qDebug("[ComponentsMgr] Terminated");
   isTerminated_ = true;
 }
 
