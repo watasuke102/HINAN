@@ -149,14 +149,12 @@ int ProgramReader::GetPortValue(QString port) {
   const QString function_name = QString("int8 Get%1()").arg(port);
   port_getter_context_->Prepare(
       module->GetFunctionByDecl(function_name.toUtf8().data()));
-  int r = port_getter_context_->Execute();
-  if (r != asEXECUTION_FINISHED) {
+  if (port_getter_context_->Execute() != asEXECUTION_FINISHED) {
     emit ErrorSignal(&staticMetaObject,
                      tr("Cannot launch port status get function"));
     return -1;
   }
-  int result = port_getter_context_->GetReturnByte();
-  return result;
+  return port_getter_context_->GetReturnByte();
 }
 
 void ProgramReader::SetPortValue(QString port, char value) {
@@ -166,14 +164,12 @@ void ProgramReader::SetPortValue(QString port, char value) {
   asIScriptModule* module = engine_->GetModule("main");
 
   const QString function_name = QString("void Set%1(int8)").arg(port);
-  port_setter_context_->SetArgByte(0, value);
+  port_setter_context_->SetArgByte(1, value);
   port_setter_context_->Prepare(
       module->GetFunctionByDecl(function_name.toUtf8().data()));
-  int r = port_setter_context_->Execute();
-  if (r != asEXECUTION_FINISHED) {
+  if (port_setter_context_->Execute() != asEXECUTION_FINISHED) {
     emit ErrorSignal(&staticMetaObject,
                      tr("Cannot launch port status set function"));
-    return;
   }
 }
 } // namespace hinan
