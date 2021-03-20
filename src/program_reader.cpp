@@ -166,7 +166,6 @@ void ProgramReader::SetPortValue(QString port, char value) {
   asIScriptModule* module = engine_->GetModule("main");
 
   const QString function_name = QString("void Set%1(int8)").arg(port);
-  qDebug() << function_name;
   port_setter_context_->SetArgByte(0, value);
   port_setter_context_->Prepare(
       module->GetFunctionByDecl(function_name.toUtf8().data()));

@@ -11,6 +11,7 @@
 #include "components/component_interface.h"
 #include "components/led.h"
 #include "components/segment.h"
+#include "components/tact_switches.h"
 #include "practice_kit.h"
 #include <QApplication>
 #include <QRect>
@@ -30,6 +31,7 @@ ComponentsManager::ComponentsManager()
     : widget_(new QWidget), isTerminated_(false) {
   components_.append(new components::LED(widget_));
   components_.append(new components::Segment(widget_));
+  components_.append(new components::TactSwitches(widget_));
   for (auto obj : components_) {
     obj->setGeometry(obj->OriginalSize());
   }
@@ -47,6 +49,7 @@ void ComponentsManager::Update() {
       return;
     }
     obj->Update();
+    QApplication::processEvents();
   }
 }
 
@@ -55,7 +58,6 @@ void ComponentsManager::Run() {
   qDebug("[ComponentMgr] Start run");
   while (PracticeKit::Instance().reader->IsActive() && !isTerminated_) {
     Update();
-    QApplication::processEvents();
   }
   isTerminated_ = false;
   qDebug("[ComponentMgr] Finish run");
