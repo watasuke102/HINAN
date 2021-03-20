@@ -59,7 +59,8 @@ void PortManager::Update() {
       qDebug("[Portmgr] Failed: Reader is not active");
       return;
     }
-    int stat = PracticeKit::Instance().reader->GetPortStat(str.toUtf8().data());
+    int stat =
+        PracticeKit::Instance().reader->GetPortValue(str.toUtf8().data());
     if (stat != -1)
       map_[str]->SetValue(stat);
   }

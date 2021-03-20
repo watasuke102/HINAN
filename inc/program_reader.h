@@ -26,15 +26,18 @@ class ProgramReader : public QObject {
   asIScriptEngine*  engine_;
   asIScriptContext* main_context_;
   asIScriptContext* port_getter_context_;
+  asIScriptContext* port_setter_context_;
 
  public:
   ProgramReader();
   ~ProgramReader();
   bool    IsActive();
-  int     GetPortStat(QString);
   void    SetPath(QUrl);
   void    Load();
   QString GetPath();
+
+  int  GetPortValue(QString);
+  void SetPortValue(QString, char);
 
  public slots:
   void Run();

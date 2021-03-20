@@ -40,6 +40,8 @@ ProgramReader::~ProgramReader() {
     main_context_->Release();
     port_getter_context_->Abort();
     port_getter_context_->Release();
+    port_setter_context_->Abort();
+    port_setter_context_->Release();
   }
   engine_->ShutDownAndRelease();
   qDebug("Deleted ProgramReader");
@@ -99,6 +101,7 @@ void ProgramReader::Load() {
   // Create context
   main_context_        = engine_->CreateContext();
   port_getter_context_ = engine_->CreateContext();
+  port_setter_context_ = engine_->CreateContext();
   qDebug("[Reader] Loaded");
 }
 
@@ -111,6 +114,9 @@ void ProgramReader::Terminate() {
     port_getter_context_->Abort();
     port_getter_context_->Release();
     port_getter_context_ = engine_->CreateContext();
+    port_setter_context_->Abort();
+    port_setter_context_->Release();
+    port_setter_context_ = engine_->CreateContext();
   }
 }
 
@@ -131,9 +137,10 @@ void ProgramReader::Run() {
   emit DeactivatedSignal();
 }
 
-// If call this function, please use hinan::port.
-// Ex. GetPortStat(hinan::port::P1DDR);
-int ProgramReader::GetPortStat(QString port) {
+// If call these function, please use hinan::port.
+// Ex. GetPortValue(hinan::port::P1DDR);
+//     SetPortValue(hinan::port::P2DR, 0x0f);
+int ProgramReader::GetPortValue(QString port) {
   if (engine_ == 0) {
     qFatal("[Failed] Engine is not yet to initialized");
   }
@@ -148,7 +155,26 @@ int ProgramReader::GetPortStat(QString port) {
                      tr("Cannot launch port status get function"));
     return -1;
   }
-  int result = port_getter_context_->GetReturnDWord();
+  int result = port_getter_context_->GetReturnByte();
   return result;
+}
+
+void ProgramReader::SetPortValue(QString port, char value) {
+  if (engine_ == 0) {
+    qFatal("[Failed] Engine is not yet to initialized");
+  }
+  asIScriptModule* module = engine_->GetModule("main");
+
+  const QString function_name = QString("void Set%1(int8)").arg(port);
+  qDebug() << function_name;
+  port_setter_context_->SetArgByte(0, value);
+  port_setter_context_->Prepare(
+      module->GetFunctionByDecl(function_name.toUtf8().data()));
+  int r = port_setter_context_->Execute();
+  if (r != asEXECUTION_FINISHED) {
+    emit ErrorSignal(&staticMetaObject,
+                     tr("Cannot launch port status set function"));
+    return;
+  }
 }
 } // namespace hinan

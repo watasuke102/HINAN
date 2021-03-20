@@ -43,3 +43,26 @@ int8 GetP8DR() { return P8DR; }
 int8 GetP9DR() { return P9DR; }
 int8 GetPADR() { return PADR; }
 int8 GetPBDR() { return PBDR; }
+
+void SetP1DDR(int8 a) { P1DDR=a; }
+void SetP2DDR(int8 a) { P2DDR=a; }
+void SetP3DDR(int8 a) { P3DDR=a; }
+void SetP4DDR(int8 a) { P4DDR=a; }
+void SetP5DDR(int8 a) { P5DDR=a; }
+void SetP6DDR(int8 a) { P6DDR=a; }
+void SetP7DDR(int8 a) { P7DDR=a; }
+void SetP8DDR(int8 a) { P8DDR=a; }
+void SetP9DDR(int8 a) { P9DDR=a; }
+void SetPADDR(int8 a) { PADDR=a; }
+void SetPBDDR(int8 a) { PBDDR=a; }
+void SetP1DR(int8 a) { P1DR=a; }
+void SetP2DR(int8 a) { P2DR=a; }
+void SetP3DR(int8 a) { P3DR=a; }
+void SetP4DR(int8 a) { P4DR=a; }
+void SetP5DR(int8 a) { P5DR=a; }
+void SetP6DR(int8 a) { P6DR=a; }
+void SetP7DR(int8 a) { P7DR=a; }
+void SetP8DR(int8 a) { P8DR=a; }
+void SetP9DR(int8 a) { P9DR=a; }
+void SetPADR(int8 a) { PADR=a; }
+void SetPBDR(int8 a) { PBDR=a; }
