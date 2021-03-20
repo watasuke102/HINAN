@@ -20,10 +20,10 @@
 namespace hinan {
 namespace components {
 TactSwitches::TactSwitches(QWidget* parent)
-    : ComponentInterface(parent, 350, 250, 100, 35) {
+    : ComponentInterface(parent, 350, 250, 90, 35) {
   QHBoxLayout* layout = new QHBoxLayout();
   layout->setSpacing(3);
-  switches_.resize(5);
+  switches_.resize(4);
   for (int i = 0; i < switches_.size(); i++) {
     switches_[i] = new QPushButton(this);
     layout->addWidget(switches_[i]);
@@ -42,7 +42,6 @@ void TactSwitches::Update() {
       ++result;
     }
   }
-  qDebug() << result;
   PracticeKit::Instance().port_manager->SetPortValue(port::P2DR, result);
 }
 } // namespace components
