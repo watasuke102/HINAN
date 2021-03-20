@@ -20,7 +20,7 @@ C言語のプログラムをAngelScriptとして読み込み、実行する
 - hinan::Actions  
 様々なコマンドの集合、MainWindow用ToolBar/MenuBarの管理
 
-## hinan::gui
+## hinan::gui (namespace)
 QWidget系のクラスを継承したものを入れる
 
 - hinan::gui::MainWindow (QMainWindow)  
@@ -29,7 +29,7 @@ QWidget系のクラスを継承したものを入れる
 - hinan::gui::KitMainUi (QSvgWidget)  
 SVGによる実習キット全体像の表示
 
-## hinan::components
+## hinan::components (namespace)
 実習キット上のLEDやボタンのまとまり
 
 - hinan::components::ComponentInterface (QWidget)  
@@ -54,6 +54,8 @@ P[1-9AB]D(D?)R
 例:  
 hinan::port::P1DR => "P1DR"  
 hinan::port::PBDDR => "PBDDR"  
+
+ポート状態の取得は `PracticeKit::Instance().manager->Value(hinan::port)` で行う
 
 - hinan::port::port_list (QStringList)  
 ポート全部格納  
