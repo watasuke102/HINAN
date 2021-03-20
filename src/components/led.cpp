@@ -8,6 +8,8 @@
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 #include "components/led.h"
+#include "port/port.h"
+#include "port_manager.h"
 #include "practice_kit.h"
 #include <QLayout>
 #include <QList>
@@ -33,6 +35,15 @@ LED::LED(QWidget* parent) : ComponentInterface(parent, 63, 155, 95, 30) {
   }
   setLayout(layout);
 }
-void LED::Update() {}
+void LED::Update() {
+  const int PBDR  = PracticeKit::Instance().port_manager->Value(port::PBDR);
+  const int PBDDR = PracticeKit::Instance().port_manager->Value(port::PBDDR);
+  for (int i = 7; i >= 0; i--) {
+    int pos = 1 << i;
+    // when Data is 0 and Direction is Output(1),
+    // Turn on the LED
+    leds_[i]->setChecked(!(PBDR & pos) && (PBDDR & pos));
+  }
+}
 } // namespace components
 } // namespace hinan
