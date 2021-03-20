@@ -26,7 +26,7 @@ QWidget系のクラスを継承したものを入れる
 - hinan::gui::MainWindow (QMainWindow)  
 メインウィンドウ
 
-- hinan::gui::KitMainUi (QSvgWidget)
+- hinan::gui::KitMainUi (QSvgWidget)  
 SVGによる実習キット全体像の表示
 
 ## hinan::components
@@ -35,16 +35,16 @@ SVGによる実習キット全体像の表示
 - hinan::components::ComponentInterface (QWidget)  
 全コンポーネントの基底クラス
 
-- hinan::components::LED
+- hinan::components::LED (ComponentInterface)  
 ポートBを読み取り、LEDを表示
 
-- （実装予定）hinan::components::Segment
+- （実装予定）hinan::components::Segment (ComponentInterface)  
 ポート4を読み取り、7セグメントLEDを表示
 
-- （実装予定）hinan::components::ToggleSwitches
+- （実装予定）hinan::components::ToggleSwitches (ComponentInterface)  
 トグルスイッチの状態をポート2に格納
 
-- （実装予定）hinan::components::TactSwitches
+- （実装予定）hinan::components::TactSwitches  
 タクトスイッチの状態をポート5に格納
 
 ## hinan::port (namespace)  
