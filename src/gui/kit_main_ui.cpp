@@ -8,7 +8,7 @@
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 #include "gui/kit_main_ui.h"
-#include "gui/led.h"
+#include "components/led.h"
 #include <QApplication>
 #include <QDebug>
 #include <QLayout>
@@ -41,8 +41,11 @@ KitMainUi::KitMainUi() {
   widget_ = new SvgWidget(this, QApplication::applicationDirPath() +
                                     "/assets/canvas.svg");
   widget_->setGeometry(MARGIN, MARGIN, this->size().width() - MARGIN * 2, 0);
-  led_ = new LED(this);
-  led_->setGeometry(led_->OriginalSize());
+  // components
+  components_.append(new components::LED(this));
+  for (auto obj : components_) {
+    obj->setGeometry(obj->OriginalSize());
+  }
 }
 void KitMainUi::resizeEvent(QResizeEvent* event) {
   QWidget::resizeEvent(event);

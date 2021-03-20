@@ -10,10 +10,12 @@
 #ifndef HINAN_KIT_MAIN_UI_H_
 #define HINAN_KIT_MAIN_UI_H_
 
-#include "led.h"
+#include "components/component_interface.h"
+#include "components/led.h"
 #include <QObject>
 #include <QResizeEvent>
 #include <QString>
+#include <QVector>
 #include <QWidget>
 #include <QtSvg/QSvgWidget>
 
@@ -28,8 +30,8 @@ class SvgWidget : public QSvgWidget {
 class KitMainUi : public QWidget {
   Q_OBJECT
  private:
-  SvgWidget* widget_;
-  LED*       led_;
+  SvgWidget*       widget_;
+  QVector<components::ComponentInterface*> components_;
 
  public:
   KitMainUi();

@@ -7,7 +7,7 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
-#include "gui/led.h"
+#include "components/led.h"
 #include "practice_kit.h"
 #include <QLayout>
 #include <QList>
@@ -17,8 +17,8 @@
 #include <QWidget>
 
 namespace hinan {
-namespace gui {
-LED::LED(QWidget* parent) : QWidget(parent), original_size_(68, 150, 100, 30) {
+namespace components {
+LED::LED(QWidget* parent) : ComponentInterface(parent, 68, 150, 100, 30) {
   setStyleSheet(
       "QPushButton{ background-color: #220123; }"
       "QPushButton:checked{ background-color: #ff0123; }");
@@ -35,6 +35,6 @@ LED::LED(QWidget* parent) : QWidget(parent), original_size_(68, 150, 100, 30) {
   setLayout(layout);
   // set background color
 }
-QRect LED::OriginalSize() { return original_size_; }
-} // namespace gui
+void LED::Update() {}
+} // namespace components
 } // namespace hinan

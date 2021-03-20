@@ -10,26 +10,23 @@
 #ifndef HINAN_LED_H_
 #define HINAN_LED_H_
 
+#include "component_interface.h"
 #include <QObject>
 #include <QPushButton>
-#include <QRect>
 #include <QVector>
 #include <QWidget>
 
 namespace hinan {
-namespace gui {
-class LED : public QWidget {
-  Q_OBJECT
+namespace components {
+class LED : public ComponentInterface {
  private:
   QVector<QPushButton*> leds_;
-  QRect                 original_size_;
 
  public:
   LED(QWidget*);
-  void  Update();
-  QRect OriginalSize();
+  void Update() override;
 };
-} // namespace gui
+} // namespace components
 } // namespace hinan
 
 #endif // HINAN_LED_H_
