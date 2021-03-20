@@ -1,5 +1,5 @@
 // HINAN - simulate H8 microcomputer practice kit
-// kit_main_ui.h
+// components_manager.h
 //
 // CopyRight (c) 2021 Watasuke
 // Email  : <watasuke102@gmail.com>
@@ -7,42 +7,34 @@
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
-#ifndef HINAN_KIT_MAIN_UI_H_
-#define HINAN_KIT_MAIN_UI_H_
+#ifndef HINAN_COMPONENTs_MANAGER_H_
+#define HINAN_COMPONENTs_MANAGER_H_
 
 #include "components/component_interface.h"
-#include "components/led.h"
 #include <QObject>
-#include <QResizeEvent>
-#include <QString>
 #include <QVector>
 #include <QWidget>
-#include <QtSvg/QSvgWidget>
 
 namespace hinan {
-namespace gui {
-class SvgWidget : public QSvgWidget {
-  Q_OBJECT
- public:
-  SvgWidget(QWidget*, QString);
-  void changeSize(QSize);
-};
-class KitMainUi : public QWidget {
+class ComponentsManager : public QObject {
   Q_OBJECT
  private:
   QVector<components::ComponentInterface*> components_;
 
-  int        original_width_;
-  SvgWidget* widget_;
+  QWidget* widget_;
+  bool     isTerminated_;
 
  public:
-  KitMainUi();
-  void resizeEvent(QResizeEvent*);
+  ComponentsManager();
+  ~ComponentsManager();
+  void Update();
+  void SetWidgetsParent(QWidget*);
 
- signals:
-  void ResizeComponentsSignal(QSize, double);
+ public slots:
+  void Run();
+  void Terminate();
+  void Resize(QSize, double);
 };
-} // namespace gui
 } // namespace hinan
 
-#endif // HINAN_KIT_MAIN_UI_H_
+#endif // HINAN_COMPONENT_MANAGER_H_

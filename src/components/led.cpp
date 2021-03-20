@@ -43,6 +43,7 @@ void LED::Update() {
     // when Data is 0 and Direction is Output(1),
     // Turn on the LED
     leds_[i]->setChecked(!(PBDR & pos) && (PBDDR & pos));
+    // leds_[i]->setChecked(true);
   }
 }
 } // namespace components

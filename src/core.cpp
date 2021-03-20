@@ -37,11 +37,11 @@ Core::Core() {
       path = argv[1];
     }
   }
-  main_window_ =
-      new gui::MainWindow(PracticeKit::Instance().manager->PortStatusWidget());
+  main_window_ = new gui::MainWindow(
+      PracticeKit::Instance().port_manager->PortStatusWidget());
   // Connect
-  connect(main_window_, &gui::MainWindow::CloseSignal,
-          &PracticeKit::Instance(), &PracticeKit::TerminateScript);
+  connect(main_window_, &gui::MainWindow::CloseSignal, &PracticeKit::Instance(),
+          &PracticeKit::TerminateScript);
   connect(PracticeKit::Instance().reader, &ProgramReader::ErrorSignal, this,
           &Core::Error);
 

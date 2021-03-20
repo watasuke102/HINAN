@@ -15,29 +15,46 @@
 
 namespace hinan {
 PracticeKit::PracticeKit() {
-  reader          = new ProgramReader();
-  manager         = new PortManager();
-  reader_thread_  = new QThread(this);
-  manager_thread_ = new QThread(this);
+  reader                     = new ProgramReader;
+  port_manager               = new PortManager;
+  components_manager         = new ComponentsManager;
+  reader_thread_             = new QThread(this);
+  port_manager_thread_       = new QThread(this);
+  components_manager_thread_ = new QThread(this);
   reader->moveToThread(reader_thread_);
-  manager->moveToThread(manager_thread_);
+  port_manager->moveToThread(port_manager_thread_);
+  components_manager->moveToThread(components_manager_thread_);
+
   // connect
-  connect(this, &PracticeKit::LaunchSignal, reader, &ProgramReader::Run);
-  connect(reader, &ProgramReader::ActivatedSignal, manager, &PortManager::Run);
-  connect(reader, &ProgramReader::DeactivatedSignal, manager,
-          &PortManager::Terminate);
   connect(this, &PracticeKit::StartStopSignal, this,
           &PracticeKit::StartStopScript);
+  connect(this, &PracticeKit::LaunchSignal, reader, &ProgramReader::Run);
+  // Port manager
+  connect(reader, &ProgramReader::ActivatedSignal, port_manager,
+          &PortManager::Run);
+  connect(reader, &ProgramReader::DeactivatedSignal, port_manager,
+          &PortManager::Terminate);
+  // Components manager
+  connect(reader, &ProgramReader::ActivatedSignal, components_manager,
+          &ComponentsManager::Run);
+  connect(reader, &ProgramReader::DeactivatedSignal, components_manager,
+          &ComponentsManager::Terminate);
+
+  // Start the threads
   reader_thread_->start();
-  manager_thread_->start();
+  port_manager_thread_->start();
+  components_manager_thread_->start();
 }
 PracticeKit::~PracticeKit() {
   reader_thread_->quit();
   reader_thread_->wait();
-  manager_thread_->quit();
-  manager_thread_->wait();
+  port_manager_thread_->quit();
+  port_manager_thread_->wait();
+  components_manager_thread_->quit();
+  components_manager_thread_->wait();
   delete reader;
-  delete manager;
+  delete port_manager;
+  delete components_manager;
   qDebug("Deleted PracticeKit");
 }
 
