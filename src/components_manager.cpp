@@ -19,10 +19,8 @@
 #include <QWidget>
 
 QRect Expantion(QRect base, double rate) {
-  auto o = base;
-  base.moveTo(base.x() * rate, base.y() * rate);
-  base.setWidth(base.width() * rate);
-  base.setHeight(base.height() * rate);
+  base.setRect(base.x() * rate, base.y() * rate, base.width() * rate,
+               base.height() * rate);
   return base;
 }
 
