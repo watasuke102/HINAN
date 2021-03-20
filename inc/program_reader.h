@@ -30,14 +30,15 @@ class ProgramReader : public QObject {
  public:
   ProgramReader();
   ~ProgramReader();
-  bool IsActive();
-  int  GetPortStat(QString);
-  void SetPath(QUrl);
-  void Load();
+  bool    IsActive();
+  int     GetPortStat(QString);
+  void    SetPath(QUrl);
+  void    Load();
   QString GetPath();
 
  public slots:
   void Run();
+  void Reload();
   void Terminate();
 
  signals:

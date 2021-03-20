@@ -53,6 +53,14 @@ void ProgramReader::SetPath(QUrl url) {
   emit PathChangedSignal(path_);
   Load();
 }
+
+void ProgramReader::Reload() {
+  if (path_.isEmpty())
+    return;
+  Terminate();
+  Load();
+}
+
 void ProgramReader::Load() {
   if (path_.isEmpty())
     return;

@@ -24,7 +24,8 @@ PracticeKit::PracticeKit() {
   // connect
   connect(this, &PracticeKit::LaunchSignal, reader, &ProgramReader::Run);
   connect(reader, &ProgramReader::ActivatedSignal, manager, &PortManager::Run);
-  connect(reader, &ProgramReader::DeactivatedSignal, manager, &PortManager::Terminate);
+  connect(reader, &ProgramReader::DeactivatedSignal, manager,
+          &PortManager::Terminate);
   connect(this, &PracticeKit::StartStopSignal, this,
           &PracticeKit::StartStopScript);
   reader_thread_->start();
@@ -45,26 +46,13 @@ PracticeKit& PracticeKit::Instance() {
   return kit;
 }
 
-void PracticeKit::ReloadScript() {
-  reader->Terminate();
-  reader->Load();
-}
-
-void PracticeKit::LaunchScript() { emit LaunchSignal(); }
-void PracticeKit::TerminateScript() { reader->Terminate(); }
-
 // When script is working, terminate
 // When script is not working, launch
 void PracticeKit::StartStopScript() {
   if (reader->IsActive()) {
-    TerminateScript();
+    reader->Terminate();
   } else {
-    LaunchScript();
+    emit LaunchSignal();
   }
-}
-
-int PracticeKit::GetPortStat(QString port) { return manager->Value(port); }
-QTreeWidget* PracticeKit::PortStatusWidget() {
-  return manager->PortStatusWidget();
 }
 } // namespace hinan

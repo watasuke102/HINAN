@@ -38,10 +38,10 @@ Core::Core() {
     }
   }
   main_window_ =
-      new gui::MainWindow(PracticeKit::Instance().PortStatusWidget());
+      new gui::MainWindow(PracticeKit::Instance().manager->PortStatusWidget());
   // Connect
-  connect(main_window_, &gui::MainWindow::CloseSignal, &PracticeKit::Instance(),
-          &PracticeKit::TerminateScript);
+  connect(main_window_, &gui::MainWindow::CloseSignal,
+          PracticeKit::Instance().reader, &ProgramReader::Terminate);
   connect(PracticeKit::Instance().reader, &ProgramReader::ErrorSignal, this,
           &Core::Error);
 

@@ -32,7 +32,6 @@ LED::LED(QWidget* parent) : ComponentInterface(parent, 63, 155, 95, 30) {
     layout->addWidget(leds_[i]);
   }
   setLayout(layout);
-  // set background color
 }
 void LED::Update() {}
 } // namespace components

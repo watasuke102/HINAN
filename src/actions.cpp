@@ -37,12 +37,14 @@ Actions::Actions()
   toolbar_->addActions({open_, startstop_script_, reload_script_});
   // connect
   connect(open_, &QAction::triggered, [=] {
-    PracticeKit::Instance().reader->SetPath(QFileDialog::getOpenFileUrl());
+    QUrl url = QFileDialog::getOpenFileUrl();
+    if (!url.isEmpty())
+      PracticeKit::Instance().reader->SetPath(url);
   });
   connect(startstop_script_, &QAction::triggered, &PracticeKit::Instance(),
           &PracticeKit::StartStopSignal);
-  connect(reload_script_, &QAction::triggered, &PracticeKit::Instance(),
-          &PracticeKit::ReloadScript);
+  connect(reload_script_, &QAction::triggered, PracticeKit::Instance().reader,
+          &ProgramReader::Reload);
   // change Start/Stop action's icon
   connect(PracticeKit::Instance().reader, &ProgramReader::ActivatedSignal,
           this, &Actions::ChangeStartStopActionsIcon);

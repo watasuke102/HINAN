@@ -31,14 +31,7 @@ class PracticeKit : public QObject {
   PortManager*   manager;
 
   ~PracticeKit();
-  // Operation script
-  void ReloadScript();
-  void LaunchScript();
-  void TerminateScript();
   void StartStopScript();
-  // Getter
-  int          GetPortStat(QString);
-  QTreeWidget* PortStatusWidget();
 
   static PracticeKit& Instance();
 
