@@ -17,7 +17,7 @@ C言語のプログラムをAngelScriptとして読み込み、実行する
 全ポートの状況を管理する  
 ポート状態の一覧を表示できるウィジェット (QTreeWidget) を持つ
 
-- hinan::Actions  
+- hinan::Actions (QObject)  
 様々なコマンドの集合、MainWindow用ToolBar/MenuBarの管理
 
 ## hinan::gui (namespace)
@@ -44,7 +44,7 @@ SVGによる実習キット全体像の表示
 - （実装予定）hinan::components::ToggleSwitches (ComponentInterface)  
 トグルスイッチの状態をポート2に格納
 
-- （実装予定）hinan::components::TactSwitches  
+- （実装予定）hinan::components::TactSwitches (ComponentInterface)  
 タクトスイッチの状態をポート5に格納
 
 ## hinan::port (namespace)  
