@@ -45,8 +45,8 @@ KitMainUi::KitMainUi() : original_width_(494) {
   PracticeKit::Instance().components_manager->SetWidgetsParent(this);
 
   connect(this, &KitMainUi::ResizeComponentsSignal,
-          PracticeKit::Instance().components_manager,
-          &ComponentsManager::Resize);
+          &PracticeKit::Instance(),
+          &PracticeKit::ResizeComponentsSignal);
 }
 void KitMainUi::resizeEvent(QResizeEvent* event) {
   QWidget::resizeEvent(event);

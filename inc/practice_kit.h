@@ -43,6 +43,7 @@ class PracticeKit : public QObject {
  signals:
   void LaunchSignal();
   void StartStopSignal();
+  void ResizeComponentsSignal(QSize, double);
 };
 } // namespace hinan
 

@@ -14,6 +14,7 @@
 #include <QRect>
 #include <QVector>
 #include <QWidget>
+#include <QApplication>
 
 QRect Expantion(QRect base, double rate) {
   auto o = base;
@@ -52,6 +53,7 @@ void ComponentsManager::Run() {
   qDebug("[ComponentMgr] Start run");
   while (PracticeKit::Instance().reader->IsActive() && !isTerminated_) {
     Update();
+    QApplication::processEvents();
   }
   isTerminated_ = false;
   qDebug("[ComponentMgr] Finish run");

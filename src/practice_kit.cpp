@@ -39,6 +39,8 @@ PracticeKit::PracticeKit() {
           &ComponentsManager::Run);
   connect(reader, &ProgramReader::DeactivatedSignal, components_manager,
           &ComponentsManager::Terminate);
+  connect(this, &PracticeKit::ResizeComponentsSignal, components_manager,
+          &ComponentsManager::Resize);
 
   // Start the threads
   reader_thread_->start();
