@@ -37,7 +37,7 @@ class ProgramReader : public QObject {
   QString GetPath();
 
   int  GetPortValue(QString);
-  void SetPortValue(QString, char);
+  void SetPortValue(QString, unsigned char);
 
  public slots:
   void Run();

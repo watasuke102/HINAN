@@ -6,10 +6,10 @@
 // This Source Code Form is subject to the terms of the Mozilla Public
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
-
 #include "program_reader.h"
 #include "actions.h"
 #include "port/port.h"
+#include "practice_kit.h"
 #include <QApplication>
 #include <QDebug>
 #include <QDir>
@@ -157,14 +157,14 @@ int ProgramReader::GetPortValue(QString port) {
   return port_getter_context_->GetReturnByte();
 }
 
-void ProgramReader::SetPortValue(QString port, char value) {
+void ProgramReader::SetPortValue(QString port, unsigned char value) {
   if (engine_ == 0) {
     qFatal("[Failed] Engine is not yet to initialized");
   }
   asIScriptModule* module = engine_->GetModule("main");
 
   const QString function_name = QString("void Set%1(int8)").arg(port);
-  port_setter_context_->SetArgByte(1, value);
+  port_setter_context_->SetArgByte(0, value);
   port_setter_context_->Prepare(
       module->GetFunctionByDecl(function_name.toUtf8().data()));
   if (port_setter_context_->Execute() != asEXECUTION_FINISHED) {

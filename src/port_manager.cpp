@@ -74,7 +74,7 @@ int PortManager::GetPortValue(QString port) {
   return -1;
 }
 
-void PortManager::SetPortValue(QString port, char value) {
+void PortManager::SetPortValue(QString port, unsigned char value) {
   for (auto str : hinan::port::port_list) {
     if (port == str)
       PracticeKit::Instance().reader->SetPortValue(port, value);

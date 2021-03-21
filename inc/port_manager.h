@@ -32,7 +32,7 @@ class PortManager : public QObject {
   ~PortManager();
   void         Update();
   int          GetPortValue(QString);
-  void         SetPortValue(QString, char);
+  void         SetPortValue(QString, unsigned char);
   QTreeWidget* PortStatusWidget();
 
  public slots:
