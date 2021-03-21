@@ -15,7 +15,7 @@ void myWait() {
 int main(void) {
   P4DDR = 0xff; // Segment direction
   P5DDR = 0xf0; // Tact direction
-  PBDDR = 0x93; // LED direction
+  PBDDR = 0xff; // LED direction
   PBDR  = 0xff; // all LED turn off
 
   for (int i = 0; i < 4; i++) {

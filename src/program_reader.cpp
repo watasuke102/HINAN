@@ -164,9 +164,9 @@ void ProgramReader::SetPortValue(QString port, unsigned char value) {
   asIScriptModule* module = engine_->GetModule("main");
 
   const QString function_name = QString("void Set%1(int8)").arg(port);
-  port_setter_context_->SetArgByte(0, value);
   port_setter_context_->Prepare(
       module->GetFunctionByDecl(function_name.toUtf8().data()));
+  port_setter_context_->SetArgByte(0, value);
   if (port_setter_context_->Execute() != asEXECUTION_FINISHED) {
     emit ErrorSignal(&staticMetaObject,
                      tr("Cannot launch port status set function"));

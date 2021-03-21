@@ -35,11 +35,12 @@ TactSwitches::TactSwitches(QWidget* parent)
 void TactSwitches::Update() {
   const int P5DDR =
       PracticeKit::Instance().port_manager->GetPortValue(port::P5DDR);
-  int result = 0;
+  // Upper 4 bit of P5DR is fixed 1 (reserve)
+  int result = 0b1111;
   for (int i = switches_.size() - 1; i >= 0; i--) {
     result  = result << 1;
     int pos = 1 << i;
-    if (!switches_[i]->isDown() && !(P5DDR & pos)) {
+    if (!switches_[i]->isChecked() && !(P5DDR & pos)) {
       ++result;
     }
   }
