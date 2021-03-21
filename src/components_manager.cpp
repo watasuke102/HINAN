@@ -12,6 +12,7 @@
 #include "components/led.h"
 #include "components/segment.h"
 #include "components/tact_switches.h"
+#include "components/toggle_switches.h"
 #include "practice_kit.h"
 #include <QApplication>
 #include <QRect>
@@ -30,6 +31,7 @@ ComponentsManager::ComponentsManager()
   components_.append(new components::LED(widget_));
   components_.append(new components::Segment(widget_));
   components_.append(new components::TactSwitches(widget_));
+  components_.append(new components::ToggleSwitches(widget_));
   for (auto obj : components_) {
     obj->setGeometry(obj->OriginalSize());
   }
