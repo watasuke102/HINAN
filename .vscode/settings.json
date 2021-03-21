@@ -16,6 +16,7 @@
 		"qsvgwidget": "cpp",
 		"qsizepolicy": "cpp",
 		"qsvgrenderer": "cpp",
-		"qabstractbutton": "cpp"
+		"qabstractbutton": "cpp",
+		"qwidget": "cpp"
 	}
 }
