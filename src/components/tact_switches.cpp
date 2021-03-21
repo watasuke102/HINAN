@@ -20,13 +20,15 @@
 namespace hinan {
 namespace components {
 TactSwitches::TactSwitches(QWidget* parent)
-    : ComponentInterface(parent, 350, 250, 90, 35) {
+    : ComponentInterface(parent, 345, 280, 90, 35) {
   QHBoxLayout* layout = new QHBoxLayout();
   layout->setSpacing(3);
   switches_.resize(4);
   for (int i = 0; i < switches_.size(); i++) {
     switches_[i] = new QPushButton(this);
     switches_[i]->setCheckable(true);
+    switches_[i]->setSizePolicy(
+        QSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding));
     layout->addWidget(switches_[i]);
   }
   setLayout(layout);

@@ -44,8 +44,7 @@ KitMainUi::KitMainUi() : original_width_(494) {
   widget_->setGeometry(MARGIN, MARGIN, this->size().width() - MARGIN * 2, 0);
   PracticeKit::Instance().components_manager->SetWidgetsParent(this);
 
-  connect(this, &KitMainUi::ResizeComponentsSignal,
-          &PracticeKit::Instance(),
+  connect(this, &KitMainUi::ResizeComponentsSignal, &PracticeKit::Instance(),
           &PracticeKit::ResizeComponentsSignal);
 }
 void KitMainUi::resizeEvent(QResizeEvent* event) {
