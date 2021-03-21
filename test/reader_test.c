@@ -13,12 +13,11 @@ void myWait() {
 }
 
 int main(void) {
-  P4DDR = 0xff; // P4を出力用に
-  P1DR  = 0xf0;
-  PBDDR = 0x93;
-  PBDR  = 0xff;
+  P4DDR = 0xff; // Segment direction
+  P5DDR = 0xf0; // Tact direction
+  PBDDR = 0x93; // LED direction
+  PBDR  = 0xff; // all LED turn off
 
-  P2DR = 0x99;
   for (int i = 0; i < 4; i++) {
     P4DR = 0x8A;
     myWait();
@@ -33,7 +32,6 @@ int main(void) {
     myWait();
     P4DR = 0x48;
     myWait();
-    P2DR = 2 | 4;
     PBDR = PBDR << 1;
   }
 
