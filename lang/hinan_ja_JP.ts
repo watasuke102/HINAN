@@ -96,14 +96,6 @@
         <source>Engine is not yet to initialized</source>
         <translation type="unfinished"></translation>
     </message>
-    <message>
-        <source>Cannot launch port status get function</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Cannot launch port status set function</source>
-        <translation type="unfinished"></translation>
-    </message>
 </context>
 <context>
     <name>hinan::gui::MainWindow</name>

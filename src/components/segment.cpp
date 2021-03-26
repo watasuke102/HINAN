@@ -37,10 +37,8 @@ Segment::Segment(QWidget* parent)
   setLayout(layout);
 }
 void Segment::Update() {
-  const int P4DR =
-      PracticeKit::Instance().port_manager->GetPortValue(port::P4DR);
-  const int P4DDR =
-      PracticeKit::Instance().port_manager->GetPortValue(port::P4DDR);
+  const int P4DR  = PracticeKit::Instance().reader->GetPortValue(port::P4DR);
+  const int P4DDR = PracticeKit::Instance().reader->GetPortValue(port::P4DDR);
   for (int i = 0; i < segments_.size(); i++) {
     int pos = 1 << i;
     // when Data is 1 and Direction is Output(1),

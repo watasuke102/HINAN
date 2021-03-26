@@ -35,8 +35,7 @@ TactSwitches::TactSwitches(QWidget* parent)
 }
 
 void TactSwitches::Update() {
-  const int P5DDR =
-      PracticeKit::Instance().port_manager->GetPortValue(port::P5DDR);
+  const int P5DDR = PracticeKit::Instance().reader->GetPortValue(port::P5DDR);
   // Upper 4 bit of P5DR is fixed 1 (reserve)
   int result = 0b1111;
   for (int i = switches_.size() - 1; i >= 0; i--) {

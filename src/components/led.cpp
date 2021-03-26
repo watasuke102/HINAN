@@ -36,10 +36,8 @@ LED::LED(QWidget* parent) : ComponentInterface(parent, 63, 155, 95, 30) {
   setLayout(layout);
 }
 void LED::Update() {
-  const int PBDR =
-      PracticeKit::Instance().port_manager->GetPortValue(port::PBDR);
-  const int PBDDR =
-      PracticeKit::Instance().port_manager->GetPortValue(port::PBDDR);
+  const int PBDR  = PracticeKit::Instance().reader->GetPortValue(port::PBDR);
+  const int PBDDR = PracticeKit::Instance().reader->GetPortValue(port::PBDDR);
   for (int i = leds_.size() - 1; i >= 0; i--) {
     int pos = 1 << i;
     // when Data is 0 and Direction is Output(1),

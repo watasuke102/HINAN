@@ -23,17 +23,21 @@ void ScriptLog(const asSMessageInfo* msg) {
   qInfo("[Script:%d] %s", msg->row, msg->message);
 }
 
-void FileOpen(QFile& file, QString path) {
-  file.setFileName(path);
-  if (!file.open(QIODevice::ReadOnly))
-    qFatal("File cannot open (%s)", path.toUtf8().data());
-}
-
 namespace hinan {
 ProgramReader::ProgramReader() {
   engine_ = asCreateScriptEngine();
   if (engine_ == 0)
     qFatal("[Failed] Cannot create script engine");
+  QString function_name("int %1");
+  int     r;
+  for (auto str : port::port_list) {
+    map_.insert(str, 0);
+    r = engine_->RegisterGlobalProperty(function_name.arg(str).toUtf8().data(),
+                                        &map_[str]);
+    if (r < 0) {
+      qFatal("Failed to register property: %s", str);
+    }
+  }
 }
 ProgramReader::~ProgramReader() {
   if (!path_.isEmpty()) {
@@ -70,7 +74,9 @@ void ProgramReader::Load() {
   QString script = "";
   QFile   file;
   // Open program file and read without include
-  FileOpen(file, path_);
+  file.setFileName(path_);
+  if (!file.open(QIODevice::ReadOnly))
+    qFatal("File cannot open (%s)", path_.toUtf8().data());
   QString read;
   while (!file.atEnd()) {
     read = file.readLine();
@@ -85,11 +91,6 @@ void ProgramReader::Load() {
       continue;
     script += read;
   }
-  file.close();
-  // Open template file and read all
-  // if read this first, the error occurs line will be shifted
-  FileOpen(file, QApplication::applicationDirPath() + "/assets/template.txt");
-  script += file.readAll();
   file.close();
   // Build the script
   CScriptBuilder builder;
@@ -145,35 +146,10 @@ void ProgramReader::Run() {
 // Ex. GetPortValue(hinan::port::P1DDR);
 //     SetPortValue(hinan::port::P2DR, 0x0f);
 int ProgramReader::GetPortValue(QString port) {
-  if (engine_ == 0) {
-    qFatal("[Failed] Engine is not yet to initialized");
-  }
-  asIScriptModule* module = engine_->GetModule("main");
-
-  const QString function_name = QString("int8 Get%1()").arg(port);
-  port_getter_context_->Prepare(
-      module->GetFunctionByDecl(function_name.toUtf8().data()));
-  if (port_getter_context_->Execute() != asEXECUTION_FINISHED) {
-    emit ErrorSignal(&staticMetaObject,
-                     tr("Cannot launch port status get function"));
-    return -1;
-  }
-  return port_getter_context_->GetReturnByte();
+  return map_[port];
 }
 
 void ProgramReader::SetPortValue(QString port, unsigned char value) {
-  if (engine_ == 0) {
-    qFatal("[Failed] Engine is not yet to initialized");
-  }
-  asIScriptModule* module = engine_->GetModule("main");
-
-  const QString function_name = QString("void Set%1(int8)").arg(port);
-  port_setter_context_->Prepare(
-      module->GetFunctionByDecl(function_name.toUtf8().data()));
-  port_setter_context_->SetArgByte(0, value);
-  if (port_setter_context_->Execute() != asEXECUTION_FINISHED) {
-    emit ErrorSignal(&staticMetaObject,
-                     tr("Cannot launch port status set function"));
-  }
+  map_[port] = value;
 }
 } // namespace hinan

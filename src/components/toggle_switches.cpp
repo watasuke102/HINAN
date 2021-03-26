@@ -52,9 +52,8 @@ ToggleSwitches::ToggleSwitches(QWidget* parent)
 }
 
 void ToggleSwitches::Update() {
-  const int P2DDR =
-      PracticeKit::Instance().port_manager->GetPortValue(port::P2DDR);
-  int result = 0;
+  const int P2DDR  = PracticeKit::Instance().reader->GetPortValue(port::P2DDR);
+  int       result = 0;
   for (int i = switches_.size() - 1; i >= 0; i--) {
     result  = result << 1;
     int pos = 1 << i;
