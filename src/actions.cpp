@@ -106,7 +106,7 @@ void Actions::ShowVersion() {
          "An 'exploit' as is defined here is not only using software, but also "
          "modification, distributing, or include to your production. </p>"
          "<p> HINAN's source code is diclosed "
-         "<a href='https://github.com/watasuke102/HINAN'> here </a>. "
+         "<a href='https://github.com/watasuke102/HINAN'>here</a>. "
          "If you find any bug or dissatisfaction, please report.</p>")
           .arg(QApplication::applicationVersion());
   QMessageBox::information(nullptr, tr("Version"), body);

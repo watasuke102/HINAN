@@ -14,6 +14,7 @@
 #include <QDockWidget>
 #include <QLayout>
 #include <QMainWindow>
+#include <QMimeData>
 #include <QPushButton>
 #include <QSizePolicy>
 
@@ -21,6 +22,7 @@ namespace hinan {
 namespace gui {
 MainWindow::MainWindow(QWidget* port_status_widget) {
   setWindowTitle("HINAN");
+  setAcceptDrops(true);
   // Dock
   QDockWidget* port_status = new QDockWidget;
   port_status->setWindowTitle(tr("Status"));
@@ -51,9 +53,16 @@ void MainWindow::UpdateTitle(QString path) {
     setWindowTitle("HINAN - " + path);
   }
 }
+
 void MainWindow::closeEvent(QCloseEvent* event) {
   emit CloseSignal();
   QMainWindow::closeEvent(event);
+}
+void MainWindow::dropEvent(QDropEvent* event) {
+  if (event->mimeData()->hasUrls()) {
+    PracticeKit::Instance().reader->SetPath(event->mimeData()->urls()[0]);
+  }
+  QMainWindow::dropEvent(event);
 }
 } // namespace gui
 } // namespace hinan

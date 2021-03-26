@@ -11,6 +11,7 @@
 #define HINAN_MAINWINDOW_H_
 
 #include <QCloseEvent>
+#include <QDropEvent>
 #include <QMainWindow>
 #include <QObject>
 #include <QString>
@@ -21,8 +22,9 @@ class MainWindow : public QMainWindow {
   Q_OBJECT
  public:
   MainWindow(QWidget*);
-  void closeEvent(QCloseEvent*);
   void UpdateTitle(QString);
+  void closeEvent(QCloseEvent*);
+  void dropEvent(QDropEvent*);
 
  signals:
   void CloseSignal();
