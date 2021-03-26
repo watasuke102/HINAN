@@ -1,5 +1,10 @@
-# HINAN - HINAN Is Not AN h8 emulator
-H8 practice kit simulator
+# HINAN
+<table align="center">
+<tr>
+<td width="30%"><img src="assets/logo.svg" alt="logo"></td>
+<td>HINAN - HINAN Is Not AN h8 emulator</td>
+</tr>
+</table>
 
 ## What's this
 This software simulate H8 microcomputer practice kit.  
