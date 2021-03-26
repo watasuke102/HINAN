@@ -11,6 +11,7 @@
 #include "actions.h"
 #include "gui/kit_main_ui.h"
 #include "practice_kit.h"
+#include <QApplication>
 #include <QDockWidget>
 #include <QLayout>
 #include <QMainWindow>
@@ -21,8 +22,9 @@
 namespace hinan {
 namespace gui {
 MainWindow::MainWindow(QWidget* port_status_widget) {
-  setWindowTitle("HINAN");
   setAcceptDrops(true);
+  setWindowTitle("HINAN");
+  setWindowIcon(QIcon(QApplication::applicationDirPath() + "/assets/logo.svg"));
   // Dock
   QDockWidget* port_status = new QDockWidget;
   port_status->setWindowTitle(tr("Status"));
