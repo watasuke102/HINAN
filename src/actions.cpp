@@ -17,6 +17,7 @@
 #include <QMenuBar>
 #include <QMessageBox>
 #include <QObject>
+#include <QSize>
 #include <QStyle>
 #include <QToolBar>
 
@@ -109,7 +110,12 @@ void Actions::ShowVersion() {
          "<a href='https://github.com/watasuke102/HINAN'>here</a>. "
          "If you find any bug or dissatisfaction, please report.</p>")
           .arg(QApplication::applicationVersion());
-  QMessageBox::information(nullptr, tr("Version"), body);
+  QMessageBox* box = new QMessageBox;
+  box->setWindowTitle(tr("Version"));
+  box->setText(body);
+  QIcon icon(QApplication::applicationDirPath() + "/assets/logo.svg");
+  box->setIconPixmap(icon.pixmap(100, 100));
+  box->show();
 }
 
 } // namespace hinan
