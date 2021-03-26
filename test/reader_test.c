@@ -6,6 +6,7 @@
 #include <mes2.h>
 
 void myWait() {
+  return;
   int i, j;
   for (i = 0; i < 700000; i++)
   // for (i = 0; i < 35000; i++)

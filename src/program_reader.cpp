@@ -78,6 +78,9 @@ void ProgramReader::Load() {
     if (QRegExp("#include.*").indexIn(read) != -1) {
       continue;
     }
+    // Replace while(1) => while(true)
+    // AngelScript only allows boolean type expression
+    read.replace(QRegExp("while *\\(1\\)"), "while(true)");
     if (read.isEmpty())
       continue;
     script += read;
