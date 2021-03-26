@@ -93,7 +93,23 @@ void Actions::ChangeStartStopActionsIcon() {
 }
 
 void Actions::ShowVersion() {
-  return;
+  QString body =
+      tr("<h1>HINAN - v%1</h1>"
+         "<h3>HINAN Is Not AN emulator</h3>"
+         "<hr>"
+         "<p>This software is released under the Mozilla Public "
+         "License Version 2.0. <br>"
+         "This license permissions modification, distribution, "
+         "patent/commercial/private use. <br>"
+         "When you exploit this software, you must notice about License "
+         "and Copyright, disclose source, and include original. <br>"
+         "An 'exploit' as is defined here is not only using software, but also "
+         "modification, distributing, or include to your production. </p>"
+         "<p> HINAN's source code is diclosed "
+         "<a href='https://github.com/watasuke102/HINAN'> here </a>. "
+         "If you find any bug or dissatisfaction, please report.</p>")
+          .arg(QApplication::applicationVersion());
+  QMessageBox::information(nullptr, tr("Version"), body);
 }
 
 } // namespace hinan

@@ -19,6 +19,38 @@
         <source>Terminate script</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>File</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Run</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Help</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Exit</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View Source code (GitHub)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Version</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>About Qt</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>&lt;h1&gt;HINAN - v%1&lt;/h1&gt;&lt;h3&gt;HINAN Is Not AN emulator&lt;/h3&gt;&lt;hr&gt;&lt;p&gt;This software is released under the Mozilla Public License Version 2.0. &lt;br&gt;This license permissions modification, distribution, patent/commercial/private use. &lt;br&gt;When you exploit this software, you must notice about License and Copyright, disclose source, and include original. &lt;br&gt;An &apos;exploit&apos; as is defined here is not only using software, but also modification, distributing, or include to your production. &lt;/p&gt;&lt;p&gt; HINAN&apos;s source code is diclosed &lt;a href=&apos;https://github.com/watasuke102/HINAN&apos;&gt; here &lt;/a&gt;. If you find any bug or dissatisfaction, please report.&lt;/p&gt;</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>hinan::Core</name>
