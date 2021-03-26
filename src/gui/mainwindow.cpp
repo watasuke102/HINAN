@@ -39,6 +39,7 @@ MainWindow::MainWindow(QWidget* port_status_widget) {
   setCentralWidget(central);
   Actions* actions = new Actions;
   addToolBar(actions->Toolbar());
+  setMenuBar(actions->Menubar());
 
   connect(PracticeKit::Instance().reader, &ProgramReader::PathChangedSignal,
           this, &MainWindow::UpdateTitle);

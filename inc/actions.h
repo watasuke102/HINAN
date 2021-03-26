@@ -11,6 +11,7 @@
 #define HINAN_ACTIONS_H_
 
 #include <QAction>
+#include <QMenuBar>
 #include <QObject>
 #include <QToolBar>
 #include <QUrl>
@@ -19,16 +20,29 @@ namespace hinan {
 class Actions : public QObject {
   Q_OBJECT
  private:
+  QAction* open_;
+  QAction* exit_;
+  QAction* startstop_script_;
+  QAction* reload_script_;
+  QAction* version_;
+  QAction* about_qt_;
+  QAction* view_source_;
+
+  QMenuBar* menubar_;
+  QMenu*    file_menu_;
+  QMenu*    run_menu_;
+  QMenu*    help_menu_;
+
   QToolBar* toolbar_;
-  QAction*  open_;
-  QAction*  startstop_script_;
-  QAction*  reload_script_;
+  void      CreateActions();
   void      OpenFileDialog();
   void      ChangeStartStopActionsIcon();
 
  public:
   Actions();
   QToolBar* Toolbar();
+  QMenuBar* Menubar();
+  void      ShowVersion();
 };
 } // namespace hinan
 
