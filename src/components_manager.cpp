@@ -16,6 +16,7 @@
 #include "practice_kit.h"
 #include <QApplication>
 #include <QRect>
+#include <QThread>
 #include <QVector>
 #include <QWidget>
 
@@ -58,6 +59,7 @@ void ComponentsManager::Run() {
   qDebug("[ComponentMgr] Start run");
   while (PracticeKit::Instance().reader->IsActive() && !isTerminated_) {
     Update();
+    QThread::msleep(10);
   }
   isTerminated_ = false;
   qDebug("[ComponentMgr] Finish run");

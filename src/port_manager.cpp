@@ -13,6 +13,7 @@
 #include "program_reader.h"
 #include <QDebug>
 #include <QLayout>
+#include <QThread>
 #include <QTreeWidget>
 
 namespace hinan {
@@ -88,6 +89,7 @@ void PortManager::Run() {
   qDebug("[Portmgr] Start run");
   while (PracticeKit::Instance().reader->IsActive() && !isTerminated_) {
     Update();
+    QThread::msleep(10);
   }
   isTerminated_ = false;
   qDebug("[Portmgr] Finish run");

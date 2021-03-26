@@ -5,4 +5,4 @@ if [[ ! -d build ]]; then
 fi
 
 cd build
-cmake -G Ninja .. && clear && ninja && cp hinan ..
+cmake -G Ninja -D CMAKE_BUILD_TYPE=Debug .. && clear && ninja && cp hinan ..

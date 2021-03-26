@@ -6,10 +6,10 @@
 #include <mes2.h>
 
 void myWait() {
-  return;
   int i, j;
-  for (i = 0; i < 35000; i++)
-    for (j = 0; j < 1000; j++)
+  for (i = 0; i < 700000; i++)
+  // for (i = 0; i < 35000; i++)
+  //  for (j = 0; j < 1000; j++)
       ;
 }
 
@@ -25,8 +25,6 @@ int main(void) {
   }
 
   while (true) {
-    for (int i = 0; i < 500000; i++)
-      ;
     P4DR = 0x11;
     myWait();
     P4DR = 0x22;
