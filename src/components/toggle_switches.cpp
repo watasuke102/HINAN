@@ -30,16 +30,18 @@ ToggleSwitches::ToggleSwitches(QWidget* parent)
   icon_[1] = QIcon(
       QPixmap(QApplication::applicationDirPath() + "/assets/toggle-high.png"));
 
-  setStyleSheet("QPushButton:checked{ background-color: rgba(0,0,0,100%) }");
+  setStyleSheet(
+      "QPushButton:checked{ background-color:rgba(255,255,255,0); border:0px; }"
+      "QPushButton:pressed{ background-color:rgba(255,255,255,0); border:0px; "
+      "}");
   QHBoxLayout* layout = new QHBoxLayout();
   switches_.resize(5);
   for (int i = 0; i < switches_.size(); i++) {
     switches_[i] = new QPushButton(this);
     switches_[i]->setCheckable(true);
-    switches_[i]->setFlat(true);
-    switches_[i]->setAutoFillBackground(false);
     switches_[i]->setSizePolicy(
         QSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding));
+    switches_[i]->setFlat(true);
     switches_[i]->setIcon(icon_[0]);
     switches_[i]->setIconSize(switches_[i]->size());
     layout->addWidget(switches_[i]);
