@@ -13,16 +13,8 @@
 #include "practice_kit.h"
 #include <QApplication>
 #include <QDebug>
-#include <QDockWidget>
-#include <QMainWindow>
 #include <QMessageBox>
 #include <QObject>
-#include <QPushButton>
-
-void Help() {
-  qInfo("usage: ./hinan <option> file_path");
-  qInfo(" Options: -h | --help   Show this help message.\n");
-}
 
 namespace hinan {
 Core::Core() {
@@ -30,8 +22,9 @@ Core::Core() {
   const QStringList argv = QApplication::arguments();
   if (QApplication::arguments().size() >= 2) {
     if (argv[1] == QString("--help") || argv[1] == QString("-h")) {
-      Help();
-      QApplication::exit(0);
+      qInfo("usage: ./hinan <option> file_path");
+      qInfo(" Options: -h | --help   Show this help message.\n");
+      exit(0);
       return;
     } else {
       path = argv[1];
