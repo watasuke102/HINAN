@@ -9,7 +9,6 @@
 
 #include "components/segment.h"
 #include "port/port.h"
-#include "port_manager.h"
 #include "practice_kit.h"
 #include <QLCDNumber>
 #include <QLayout>

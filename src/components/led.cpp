@@ -9,7 +9,6 @@
 
 #include "components/led.h"
 #include "port/port.h"
-#include "port_manager.h"
 #include "practice_kit.h"
 #include <QLayout>
 #include <QList>

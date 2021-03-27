@@ -53,14 +53,7 @@
     </message>
 </context>
 <context>
-    <name>hinan::Core</name>
-    <message>
-        <source>Error</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>hinan::PortManager</name>
+    <name>hinan::ComponentsManager</name>
     <message>
         <source>Value</source>
         <translation type="unfinished"></translation>
@@ -83,6 +76,13 @@
     </message>
     <message>
         <source>Data</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>hinan::Core</name>
+    <message>
+        <source>Error</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

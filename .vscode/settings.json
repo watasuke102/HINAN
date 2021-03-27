@@ -17,6 +17,11 @@
 		"qsizepolicy": "cpp",
 		"qsvgrenderer": "cpp",
 		"qabstractbutton": "cpp",
-		"qwidget": "cpp"
+		"qwidget": "cpp",
+		"deque": "cpp",
+		"list": "cpp",
+		"string": "cpp",
+		"unordered_map": "cpp",
+		"vector": "cpp"
 	}
 }

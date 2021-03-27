@@ -11,7 +11,6 @@
 #define HINAN_PRACTICE_KIT_H_
 
 #include "components_manager.h"
-#include "port_manager.h"
 #include "program_reader.h"
 #include <QDebug>
 #include <QObject>
@@ -24,13 +23,11 @@ class PracticeKit : public QObject {
   Q_OBJECT
  private:
   QThread* reader_thread_;
-  QThread* port_manager_thread_;
   QThread* components_manager_thread_;
   PracticeKit();
 
  public:
   ProgramReader*     reader;
-  PortManager*       port_manager;
   ComponentsManager* components_manager;
 
   ~PracticeKit();

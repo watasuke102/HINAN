@@ -9,7 +9,6 @@
 
 #include "components/tact_switches.h"
 #include "port/port.h"
-#include "port_manager.h"
 #include "practice_kit.h"
 #include <QLayout>
 #include <QObject>
@@ -45,7 +44,7 @@ void TactSwitches::Update() {
       ++result;
     }
   }
-  PracticeKit::Instance().port_manager->SetPortValue(port::P5DR, result);
+  PracticeKit::Instance().reader->SetPortValue(port::P5DR, result);
 }
 } // namespace components
 } // namespace hinan

@@ -9,7 +9,6 @@
 
 #include "components/toggle_switches.h"
 #include "port/port.h"
-#include "port_manager.h"
 #include "practice_kit.h"
 #include <QApplication>
 #include <QIcon>
@@ -63,7 +62,7 @@ void ToggleSwitches::Update() {
   }
   // Lower 3 bit of P2DR is fixed 1 (reserve)
   result = (result << 3) + 0b111;
-  PracticeKit::Instance().port_manager->SetPortValue(port::P2DR, result);
+  PracticeKit::Instance().reader->SetPortValue(port::P2DR, result);
   QApplication::processEvents();
 }
 

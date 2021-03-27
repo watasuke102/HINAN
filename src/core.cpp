@@ -31,13 +31,12 @@ Core::Core() {
     }
   }
   main_window_ = new gui::MainWindow(
-      PracticeKit::Instance().port_manager->PortStatusWidget());
+      PracticeKit::Instance().components_manager->PortStatusWidget());
   // Connect
   connect(main_window_, &gui::MainWindow::CloseSignal, &PracticeKit::Instance(),
           &PracticeKit::TerminateScript);
   connect(PracticeKit::Instance().reader, &ProgramReader::ErrorSignal, this,
           &Core::Error);
-
   PracticeKit::Instance().reader->SetPath(path);
 
   main_window_->show();

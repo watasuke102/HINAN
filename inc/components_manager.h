@@ -11,7 +11,9 @@
 #define HINAN_COMPONENTs_MANAGER_H_
 
 #include "components/component_interface.h"
+#include <QMap>
 #include <QObject>
+#include <QTreeWidget>
 #include <QVector>
 #include <QWidget>
 
@@ -20,15 +22,20 @@ class ComponentsManager : public QObject {
   Q_OBJECT
  private:
   QVector<components::ComponentInterface*> components_;
+  QMap<QString, QTreeWidgetItem*>          port_status_;
 
-  QWidget* widget_;
-  bool     isTerminated_;
+  bool         isTerminated_;
+  QWidget*     widget_;
+  QTreeWidget* port_status_widget_;
+  void         InitPortStatus();
+  void         UpdatePortStatus();
 
  public:
   ComponentsManager();
   ~ComponentsManager();
-  void Update();
-  void SetWidgetsParent(QWidget*);
+  void         Update();
+  void         SetWidgetsParent(QWidget*);
+  QTreeWidget* PortStatusWidget();
 
  public slots:
   void Run();

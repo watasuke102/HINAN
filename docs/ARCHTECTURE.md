@@ -13,9 +13,9 @@
 - hinan::ProgramReader (QObject)  
 C言語のプログラムをAngelScriptとして読み込み、実行する
 
-- hinan::PortManager (QObject)  
-全ポートの状況を管理する  
-ポート状態の一覧を表示できるウィジェット (QTreeWidget) を持つ
+- hinan::ComponentManager (QObject)  
+hinan::componentsで定義されているLEDやボタンを管理、更新  
+MainWindow上のDockWidgetとして表示される、ポート状態の一覧を表示できるウィジェット (QTreeWidget) を持つ
 
 - hinan::Actions (QObject)  
 様々なコマンドの集合、MainWindow用ToolBar/MenuBarの管理
@@ -55,7 +55,7 @@ P[1-9AB]D(D?)R
 hinan::port::P1DR => "P1DR"  
 hinan::port::PBDDR => "PBDDR"  
 
-ポート状態の取得は `PracticeKit::Instance().manager->GetPortValue(hinan::port)` で行う
+ポート状態の取得は `PracticeKit::Instance().reader->GetPortValue(hinan::port)` で行う
 
 - hinan::port::port_list (QStringList)  
 ポート全部格納  

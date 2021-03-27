@@ -28,7 +28,8 @@ MainWindow::MainWindow(QWidget* port_status_widget) {
   // Dock
   QDockWidget* port_status = new QDockWidget;
   port_status->setWindowTitle(tr("Status"));
-  port_status->setWidget(port_status_widget);
+  port_status->setWidget(
+      PracticeKit::Instance().components_manager->PortStatusWidget());
   // Central Widget
   KitMainUi* central = new KitMainUi;
   auto policy = QSizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
