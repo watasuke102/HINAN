@@ -22,25 +22,12 @@
 
 namespace hinan {
 Core::Core() {
-  QString           path;
-  const QStringList argv = QApplication::arguments();
-  if (QApplication::arguments().size() >= 2) {
-    if (argv[1] == QString("--help") || argv[1] == QString("-h")) {
-      qInfo("usage: ./hinan <option> file_path");
-      qInfo(" Options: -h | --help   Show this help message.\n");
-      exit(0);
-      return;
-    } else {
-      path = argv[1];
-    }
-  }
   main_window_ = new gui::MainWindow();
   // Connect
   connect(main_window_, &gui::MainWindow::CloseSignal, &PracticeKit::Instance(),
           &PracticeKit::TerminateScript);
   connect(PracticeKit::Instance().reader, &ProgramReader::ErrorSignal, this,
           &Core::Error);
-  PracticeKit::Instance().reader->SetPath(path);
 
   // Splash screen
   QPixmap pixmap =
