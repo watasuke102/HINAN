@@ -51,6 +51,10 @@
         <source>&lt;h1&gt;HINAN - v%1&lt;/h1&gt;&lt;h3&gt;HINAN Is Not AN emulator&lt;/h3&gt;&lt;hr&gt;&lt;p&gt;This software is released under the Mozilla Public License Version 2.0. &lt;br&gt;This license permissions modification, distribution, patent/commercial/private use. &lt;br&gt;When you exploit this software, you must notice about License and Copyright, disclose source, and include original. &lt;br&gt;An &apos;exploit&apos; as is defined here is not only using software, but also modification, distributing, or include to your production. &lt;/p&gt;&lt;p&gt; HINAN&apos;s source code is diclosed &lt;a href=&apos;https://github.com/watasuke102/HINAN&apos;&gt;here&lt;/a&gt;. If you find any bug or dissatisfaction, please report.&lt;/p&gt;</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Check for update</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>hinan::ComponentsManager</name>
@@ -94,6 +98,29 @@
     </message>
     <message>
         <source>Engine is not yet to initialized</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>hinan::UpdateChecker</name>
+    <message>
+        <source>Error occurred</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Check for update</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This software is up to date.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Do you want to download the latest version?</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Current version: %1&lt;br&gt;Latest version: %2&lt;hr&gt;</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

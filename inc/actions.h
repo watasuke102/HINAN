@@ -10,6 +10,7 @@
 #ifndef HINAN_ACTIONS_H_
 #define HINAN_ACTIONS_H_
 
+#include "update_checker.h"
 #include <QAction>
 #include <QMenuBar>
 #include <QObject>
@@ -26,6 +27,7 @@ class Actions : public QObject {
   QAction* reload_script_;
   QAction* version_;
   QAction* about_qt_;
+  QAction* check_update_;
   QAction* view_source_;
 
   QMenuBar* menubar_;
@@ -37,6 +39,7 @@ class Actions : public QObject {
   void      CreateActions();
   void      OpenFileDialog();
   void      ChangeStartStopActionsIcon();
+  UpdateChecker checker_;
 
  public:
   Actions();

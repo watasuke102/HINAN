@@ -9,6 +9,7 @@
 
 #include "actions.h"
 #include "practice_kit.h"
+#include "update_checker.h"
 #include <QAction>
 #include <QApplication>
 #include <QDesktopServices>
@@ -40,7 +41,7 @@ Actions::Actions()
   // Create Menubar
   file_menu_->addActions({open_, exit_});
   run_menu_->addActions({startstop_script_, reload_script_});
-  help_menu_->addActions({version_, about_qt_, view_source_});
+  help_menu_->addActions({version_, about_qt_, check_update_, view_source_});
   menubar_->addMenu(file_menu_);
   menubar_->addMenu(run_menu_);
   menubar_->addMenu(help_menu_);
@@ -58,6 +59,7 @@ Actions::Actions()
           &PracticeKit::ReloadScript);
   connect(version_, &QAction::triggered, this, &Actions::ShowVersion);
   connect(about_qt_, &QAction::triggered, &QApplication::aboutQt);
+  connect(check_update_, &QAction::triggered, [=] { checker_.Check(); });
   connect(view_source_, &QAction::triggered, [] {
     QDesktopServices::openUrl(QUrl("https://github.com/watasuke102/HINAN"));
   });
@@ -80,7 +82,8 @@ void Actions::CreateActions() {
       new QAction(Icon(QStyle::SP_BrowserReload), tr("Reload script"));
   version_  = new QAction(Icon(QStyle::SP_FileDialogInfoView), tr("Version"));
   about_qt_ = new QAction(Icon(QStyle::SP_TitleBarMenuButton), tr("About Qt"));
-  view_source_ = new QAction(tr("View Source code (GitHub)"));
+  check_update_ = new QAction(tr("Check for update"));
+  view_source_  = new QAction(tr("View Source code (GitHub)"));
 }
 
 void Actions::ChangeStartStopActionsIcon() {
