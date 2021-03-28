@@ -9,6 +9,8 @@
 
 #include "update_checker.h"
 #include <QApplication>
+#include <QDesktopServices>
+#include <QJsonArray>
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QMessageBox>
@@ -40,6 +42,11 @@ void UpdateChecker::RequestFinished(QNetworkReply* reply) {
   }
 
   QJsonObject json(QJsonDocument::fromJson(reply->readAll()).object());
+  if (!json.contains("tag_name") || !json.contains("assets")) {
+    QMessageBox::critical(nullptr, tr("Check for update"),
+                          tr("Irregular json format"));
+    return;
+  }
   message = tr("Current version: %1<br>Latest version: %2"
                "<hr>")
                 .arg(QApplication::applicationVersion())
@@ -51,8 +58,39 @@ void UpdateChecker::RequestFinished(QNetworkReply* reply) {
     message += tr("This software is up to date.");
     QMessageBox::information(nullptr, tr("Check for update"), message);
   } else {
-    message += tr("Do you want to download the latest version?<br>(The browser will open)");
+    message +=
+        tr("Do you want to download the latest version?<br>(The browser will "
+           "open)");
     int r = QMessageBox::question(nullptr, tr("Check for update"), message);
+    if (r == QMessageBox::Yes) {
+      const QString asset_name =
+#if defined(_WIN64)
+          "windows-x64"
+#elif defined(__linux)
+          "linux-x64"
+#endif
+          ".zip";
+      QJsonArray array    = json["assets"].toArray();
+      bool       isOpened = false;
+      for (int i = 0; i < array.size(); i++) {
+        if (array[i].toObject()["name"].toString() == asset_name) {
+          isOpened = true;
+          const QUrl url =
+              array[i].toObject()["browser_download_url"].toString();
+          QDesktopServices::openUrl(url);
+        }
+      }
+      if (isOpened) {
+        QMessageBox::information(
+            nullptr, tr("Info"),
+            tr("Open the download page in browser.\n"
+               "Please unzip downloaded file, and copy to %1 and overwrite.")
+                .arg(QApplication::applicationDirPath()));
+      } else {
+        QMessageBox::critical(nullptr, tr("Error"),
+                              tr("Cannot find downloadable file."));
+      }
+    }
   }
 }
 } // namespace hinan

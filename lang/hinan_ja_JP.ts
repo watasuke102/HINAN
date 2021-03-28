@@ -89,6 +89,10 @@
         <source>Error</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Loading...</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>hinan::ProgramReader</name>
@@ -121,6 +125,27 @@
     </message>
     <message>
         <source>Do you want to download the latest version?&lt;br&gt;(The browser will open)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Irregular json format</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Open the download page in browser.
+Please unzip downloaded file, and copy to %1 and overwrite.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Info</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Error</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Cannot find downloadable file.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
