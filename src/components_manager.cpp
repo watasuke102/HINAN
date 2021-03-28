@@ -62,7 +62,6 @@ QTreeWidget* ComponentsManager::PortStatusWidget() {
   return port_status_widget_;
 }
 void ComponentsManager::InitPortStatus() {
-  qDebug("init");
   port_status_widget_ = new QTreeWidget;
   port_status_widget_->setColumnCount(4);
   port_status_widget_->setColumnWidth(0, 100);
