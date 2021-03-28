@@ -36,10 +36,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>View Source code (GitHub)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Version</source>
         <translation type="unfinished"></translation>
     </message>
@@ -53,6 +49,10 @@
     </message>
     <message>
         <source>Check for update</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>View source code</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -116,11 +116,11 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Do you want to download the latest version?</source>
+        <source>Current version: %1&lt;br&gt;Latest version: %2&lt;hr&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Current version: %1&lt;br&gt;Latest version: %2&lt;hr&gt;</source>
+        <source>Do you want to download the latest version?&lt;br&gt;(The browser will open)</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

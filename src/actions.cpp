@@ -8,6 +8,7 @@
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 #include "actions.h"
+#include "icon/icon.h"
 #include "practice_kit.h"
 #include "update_checker.h"
 #include <QAction>
@@ -74,24 +75,22 @@ QToolBar* Actions::Toolbar() { return toolbar_; }
 QMenuBar* Actions::Menubar() { return menubar_; }
 
 void Actions::CreateActions() {
-  open_ = new QAction(Icon(QStyle::SP_DialogOpenButton), tr("Open"));
-  exit_ = new QAction(Icon(QStyle::SP_DialogCloseButton), tr("Exit"));
-  startstop_script_ =
-      new QAction(Icon(QStyle::SP_MediaPlay), tr("Launch script"));
-  reload_script_ =
-      new QAction(Icon(QStyle::SP_BrowserReload), tr("Reload script"));
-  version_  = new QAction(Icon(QStyle::SP_FileDialogInfoView), tr("Version"));
-  about_qt_ = new QAction(Icon(QStyle::SP_TitleBarMenuButton), tr("About Qt"));
-  check_update_ = new QAction(tr("Check for update"));
-  view_source_  = new QAction(tr("View Source code (GitHub)"));
+  open_             = new QAction(icon::open, tr("Open"));
+  exit_             = new QAction(icon::exit, tr("Exit"));
+  startstop_script_ = new QAction(icon::start, tr("Launch script"));
+  reload_script_    = new QAction(icon::reload, tr("Reload script"));
+  version_          = new QAction(icon::info, tr("Version"));
+  about_qt_         = new QAction(icon::qt, tr("About Qt"));
+  check_update_     = new QAction(icon::update, tr("Check for update"));
+  view_source_      = new QAction(icon::view_source, tr("View source code"));
 }
 
 void Actions::ChangeStartStopActionsIcon() {
   if (PracticeKit::Instance().reader->IsActive()) {
-    startstop_script_->setIcon(Icon(QStyle::SP_MediaStop));
+    startstop_script_->setIcon(icon::stop);
     startstop_script_->setText(tr("Terminate script"));
   } else {
-    startstop_script_->setIcon(Icon(QStyle::SP_MediaPlay));
+    startstop_script_->setIcon(icon::start);
     startstop_script_->setText(tr("Launch script"));
   }
 }
