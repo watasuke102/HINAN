@@ -30,16 +30,18 @@ Core::Core() {
           &Core::Error);
 
   // Splash screen
+  // svg size is 600x250, but it will be displayed in a smaller size
   QPixmap pixmap =
-      QIcon(QApplication::applicationDirPath() + "/assets/logo.svg")
-          .pixmap(QSize(250, 250));
+      QIcon(QApplication::applicationDirPath() + "/assets/splash.svg")
+          .pixmap(QSize(700, 300));
   QSplashScreen splash(pixmap);
+  int           pos = Qt::AlignRight | Qt::AlignBottom;
   splash.setWindowFlag(Qt::WindowStaysOnTopHint, false);
   splash.show();
   QApplication::processEvents();
 
   // Check for update
-  splash.showMessage(tr("Checking for update..."));
+  splash.showMessage(tr("Checking for update..."), pos);
   UpdateChecker checker(false);
   QTimer        timer;
   timer.setSingleShot(true);
@@ -53,7 +55,7 @@ Core::Core() {
   loop.exec();
 
   // Wait to show splash screen
-  splash.showMessage(tr("Loading..."));
+  splash.showMessage(tr("Loading..."), pos);
   QThread::msleep(1500);
   QApplication::processEvents();
 

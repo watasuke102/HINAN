@@ -2,6 +2,13 @@
 <!DOCTYPE TS>
 <TS version="2.1" language="ja_JP">
 <context>
+    <name>QApplication</name>
+    <message>
+        <source>File path that open on starting</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>hinan::Actions</name>
     <message>
         <source>Open</source>
