@@ -21,7 +21,7 @@ namespace gui {
 class MainWindow : public QMainWindow {
   Q_OBJECT
  public:
-  MainWindow(QWidget*);
+  MainWindow();
   void UpdateTitle(QString);
   void closeEvent(QCloseEvent*);
   void dropEvent(QDropEvent*);

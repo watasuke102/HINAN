@@ -21,7 +21,7 @@
 
 namespace hinan {
 namespace gui {
-MainWindow::MainWindow(QWidget* port_status_widget) {
+MainWindow::MainWindow() {
   setAcceptDrops(true);
   setWindowTitle("HINAN");
   setWindowIcon(QIcon(QApplication::applicationDirPath() + "/assets/logo.svg"));
