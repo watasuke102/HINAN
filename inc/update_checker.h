@@ -12,6 +12,7 @@
 
 #include <QJsonObject>
 #include <QObject>
+#include <QString>
 #include <QtNetwork/QNetworkAccessManager>
 #include <QtNetwork/QNetworkReply>
 
@@ -19,14 +20,21 @@ namespace hinan {
 class UpdateChecker : public QObject {
   Q_OBJECT
  private:
+  enum class DialogKind { info, critical };
+
   QNetworkAccessManager* manager_;
+  bool                   isShowDialog_;
+  int                    ShowDialog(DialogKind, QString, QString);
 
  public:
-  UpdateChecker();
+  UpdateChecker(bool);
   void Check();
 
- private slots:
-  void RequestFinished(QNetworkReply*);
+  signals:
+   void FinishedSignal();
+
+  private slots:
+   void RequestFinished(QNetworkReply*);
 };
 } // namespace hinan
 

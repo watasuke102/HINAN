@@ -11,10 +11,14 @@
 #include "gui/mainwindow.h"
 #include "port/port.h"
 #include "practice_kit.h"
+#include "update_checker.h"
 #include <QApplication>
 #include <QDebug>
+#include <QEventLoop>
 #include <QMessageBox>
 #include <QObject>
+#include <QSplashScreen>
+#include <QTimer>
 
 namespace hinan {
 Core::Core() {
@@ -30,8 +34,7 @@ Core::Core() {
       path = argv[1];
     }
   }
-  main_window_ = new gui::MainWindow(
-      PracticeKit::Instance().components_manager->PortStatusWidget());
+  main_window_ = new gui::MainWindow();
   // Connect
   connect(main_window_, &gui::MainWindow::CloseSignal, &PracticeKit::Instance(),
           &PracticeKit::TerminateScript);
@@ -39,7 +42,37 @@ Core::Core() {
           &Core::Error);
   PracticeKit::Instance().reader->SetPath(path);
 
+  // Splash screen
+  QPixmap pixmap =
+      QIcon(QApplication::applicationDirPath() + "/assets/logo.svg")
+          .pixmap(QSize(250, 250));
+  QSplashScreen splash(pixmap);
+  splash.setWindowFlag(Qt::WindowStaysOnTopHint, false);
+  splash.show();
+  QApplication::processEvents();
+
+  // Check for update
+  splash.showMessage(tr("Checking for update..."));
+  UpdateChecker checker(false);
+  QTimer        timer;
+  timer.setSingleShot(true);
+  QEventLoop loop;
+  connect(&checker, &UpdateChecker::FinishedSignal, &loop, &QEventLoop::quit);
+  connect(&timer, &QTimer::timeout, &loop, &QEventLoop::quit);
+  // 10 sec for timeout
+  timer.start(10000);
+
+  checker.Check();
+  loop.exec();
+
+  // Wait to show splash screen
+  splash.showMessage(tr("Loading..."));
+  QThread::msleep(1500);
+  QApplication::processEvents();
+
+  // End of splash screen
   main_window_->show();
+  splash.finish(main_window_);
 }
 
 void Core::Error(const QMetaObject* obj, QString body) {

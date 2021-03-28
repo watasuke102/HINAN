@@ -31,7 +31,7 @@ namespace hinan {
 Actions::Actions()
     : toolbar_(new QToolBar), menubar_(new QMenuBar),
       file_menu_(new QMenu(tr("File"))), run_menu_(new QMenu(tr("Run"))),
-      help_menu_(new QMenu(tr("Help"))) {
+      help_menu_(new QMenu(tr("Help"))), checker_(true) {
   CreateActions();
   // Add shortcut
   open_->setShortcut(QKeySequence::Open);

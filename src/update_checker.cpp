@@ -22,10 +22,37 @@
 int VersionToInt(QString version) { return version.remove(".").toInt(); }
 
 namespace hinan {
-UpdateChecker::UpdateChecker() {
+// If set isShowDialog false, message will print to stdout.
+// When there is newer version, show the dialog regardress of isShowDialog.
+UpdateChecker::UpdateChecker(bool isShowDialog = true)
+    : isShowDialog_(isShowDialog) {
   manager_ = new QNetworkAccessManager;
-  connect(manager_, &QNetworkAccessManager::finished, this,
-          &UpdateChecker::RequestFinished);
+  connect(manager_, &QNetworkAccessManager::finished, [=](QNetworkReply* reply) {
+    RequestFinished(reply);
+    emit FinishedSignal();
+  });
+}
+
+int UpdateChecker::ShowDialog(DialogKind dialog_kind, QString title,
+                              QString body) {
+  if (!isShowDialog_) {
+    qInfo("%s", body.toUtf8().data());
+    return 0;
+  }
+  QMessageBox* box = new QMessageBox;
+  box->setWindowTitle(title);
+  box->setText(body);
+  switch (dialog_kind) {
+    case DialogKind::info:
+      box->setIcon(QMessageBox::Information);
+      box->setStandardButtons(QMessageBox::Ok);
+      break;
+    case DialogKind::critical:
+      box->setIcon(QMessageBox::Critical);
+      box->setStandardButtons(QMessageBox::Ok);
+      break;
+  }
+  return box->exec();
 }
 
 void UpdateChecker::Check() {
@@ -36,15 +63,15 @@ void UpdateChecker::Check() {
 void UpdateChecker::RequestFinished(QNetworkReply* reply) {
   QString message;
   if (reply->error()) {
-    QMessageBox::critical(nullptr, tr("Check for update"),
-                          tr("Error occurred"));
+    ShowDialog(DialogKind::critical, tr("Check for update"),
+               tr("Error occurred"));
     return;
   }
 
   QJsonObject json(QJsonDocument::fromJson(reply->readAll()).object());
   if (!json.contains("tag_name") || !json.contains("assets")) {
-    QMessageBox::critical(nullptr, tr("Check for update"),
-                          tr("Irregular json format"));
+    ShowDialog(DialogKind::critical, tr("Check for update"),
+               tr("Irregular json format"));
     return;
   }
   message = tr("Current version: %1<br>Latest version: %2"
@@ -54,9 +81,9 @@ void UpdateChecker::RequestFinished(QNetworkReply* reply) {
 
   const int current_version = VersionToInt(QApplication::applicationVersion());
   const int latest_version  = VersionToInt(json["tag_name"].toString());
-  if (current_version == latest_version) {
+  if (current_version >= latest_version) {
     message += tr("This software is up to date.");
-    QMessageBox::information(nullptr, tr("Check for update"), message);
+    ShowDialog(DialogKind::info, tr("Check for update"), message);
   } else {
     message +=
         tr("Do you want to download the latest version?<br>(The browser will "

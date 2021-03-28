@@ -93,6 +93,10 @@
         <source>Loading...</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Checking for update...</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>hinan::ProgramReader</name>
@@ -113,10 +117,6 @@
     </message>
     <message>
         <source>Check for update</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>This software is up to date.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -146,6 +146,10 @@ Please unzip downloaded file, and copy to %1 and overwrite.</source>
     </message>
     <message>
         <source>Cannot find downloadable file.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>This software is up to date.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
