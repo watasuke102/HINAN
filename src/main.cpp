@@ -25,8 +25,11 @@ int main(int argc, char* argv[]) {
   parser.addPositionalArgument(
       "file_path", QApplication::tr("File path that open on starting"));
   parser.process(QApplication::arguments());
-  hinan::PracticeKit::Instance().reader->SetPath(
-      parser.positionalArguments()[0]);
+
+  const QStringList args = parser.positionalArguments();
+  if (!args.isEmpty()) {
+    hinan::PracticeKit::Instance().reader->SetPath(args[0]);
+  }
 
   hinan::Core* core = new hinan::Core();
   return app.exec();
