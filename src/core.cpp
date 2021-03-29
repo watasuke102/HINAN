@@ -30,8 +30,8 @@ Core::Core() {
           &Core::Error);
 
   // Splash screen
-  // svg size is 600x250, but it will be displayed in a smaller size
-  QPixmap       pixmap = QIcon(":/assets/splash.svg").pixmap(QSize(700, 300));
+  // svg size is 450x200, but it will be displayed in a smaller size
+  QPixmap       pixmap = QIcon(":/assets/splash.svg").pixmap(QSize(500, 250));
   QSplashScreen splash(pixmap);
   int           pos = Qt::AlignRight | Qt::AlignBottom;
   splash.setWindowFlag(Qt::WindowStaysOnTopHint, false);
