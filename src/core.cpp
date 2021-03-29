@@ -72,4 +72,15 @@ void Core::ErrorDialog(QString body) {
   qCritical("Error: %s", body.toUtf8().data());
   box->show();
 }
+
+void Core::InfoDialog(QString body) {
+  QMessageBox* box = new QMessageBox;
+  box->setWindowIcon(QIcon(":/assets/logo.svg"));
+  box->setIconPixmap(QIcon(":/assets/icon/info.svg").pixmap(50, 50));
+  box->setWindowTitle(tr("Info"));
+  box->setText(body);
+  qCritical("Info: %s", body.toUtf8().data());
+  box->show();
+}
+
 } // namespace hinan

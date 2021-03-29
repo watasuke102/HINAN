@@ -24,17 +24,17 @@ class UpdateChecker : public QObject {
 
   QNetworkAccessManager* manager_;
   bool                   isShowDialog_;
-  int                    ShowDialog(DialogKind, QString, QString);
+  void                   ShowDialog(DialogKind, QString);
 
  public:
   UpdateChecker(bool);
   void Check();
 
-  signals:
-   void FinishedSignal();
+ signals:
+  void FinishedSignal();
 
-  private slots:
-   void RequestFinished(QNetworkReply*);
+ private slots:
+  void RequestFinished(QNetworkReply*);
 };
 } // namespace hinan
 

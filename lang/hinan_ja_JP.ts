@@ -104,6 +104,10 @@
         <source>Checking for update...</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Info</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>hinan::ProgramReader</name>
@@ -141,14 +145,6 @@
     <message>
         <source>Open the download page in browser.
 Please unzip downloaded file, and copy to %1 and overwrite.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Info</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

@@ -8,6 +8,7 @@
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 #include "update_checker.h"
+#include "core.h"
 #include <QApplication>
 #include <QDesktopServices>
 #include <QJsonArray>
@@ -27,32 +28,22 @@ namespace hinan {
 UpdateChecker::UpdateChecker(bool isShowDialog = true)
     : isShowDialog_(isShowDialog) {
   manager_ = new QNetworkAccessManager;
-  connect(manager_, &QNetworkAccessManager::finished, [=](QNetworkReply* reply) {
-    RequestFinished(reply);
-    emit FinishedSignal();
-  });
+  connect(manager_, &QNetworkAccessManager::finished,
+          [=](QNetworkReply* reply) {
+            RequestFinished(reply);
+            emit FinishedSignal();
+          });
 }
 
-int UpdateChecker::ShowDialog(DialogKind dialog_kind, QString title,
-                              QString body) {
+void UpdateChecker::ShowDialog(DialogKind dialog_kind, QString body) {
   if (!isShowDialog_) {
     qInfo("%s", body.toUtf8().data());
-    return 0;
+    return;
   }
-  QMessageBox* box = new QMessageBox;
-  box->setWindowTitle(title);
-  box->setText(body);
   switch (dialog_kind) {
-    case DialogKind::info:
-      box->setIcon(QMessageBox::Information);
-      box->setStandardButtons(QMessageBox::Ok);
-      break;
-    case DialogKind::critical:
-      box->setIcon(QMessageBox::Critical);
-      box->setStandardButtons(QMessageBox::Ok);
-      break;
+    case DialogKind::info: Core::InfoDialog(body); break;
+    case DialogKind::critical: Core::ErrorDialog(body); break;
   }
-  return box->exec();
 }
 
 void UpdateChecker::Check() {
@@ -63,15 +54,13 @@ void UpdateChecker::Check() {
 void UpdateChecker::RequestFinished(QNetworkReply* reply) {
   QString message;
   if (reply->error()) {
-    ShowDialog(DialogKind::critical, tr("Check for update"),
-               tr("Error occurred"));
+    ShowDialog(DialogKind::critical, tr("Error occurred"));
     return;
   }
 
   QJsonObject json(QJsonDocument::fromJson(reply->readAll()).object());
   if (!json.contains("tag_name") || !json.contains("assets")) {
-    ShowDialog(DialogKind::critical, tr("Check for update"),
-               tr("Irregular json format"));
+    ShowDialog(DialogKind::critical, tr("Irregular json format"));
     return;
   }
   message = tr("Current version: %1<br>Latest version: %2"
@@ -83,7 +72,7 @@ void UpdateChecker::RequestFinished(QNetworkReply* reply) {
   const int latest_version  = VersionToInt(json["tag_name"].toString());
   if (current_version >= latest_version) {
     message += tr("This software is up to date.");
-    ShowDialog(DialogKind::info, tr("Check for update"), message);
+    ShowDialog(DialogKind::info, message);
   } else {
     message +=
         tr("Do you want to download the latest version?<br>(The browser will "
@@ -108,14 +97,12 @@ void UpdateChecker::RequestFinished(QNetworkReply* reply) {
         }
       }
       if (isOpened) {
-        QMessageBox::information(
-            nullptr, tr("Info"),
+        Core::InfoDialog(
             tr("Open the download page in browser.\n"
                "Please unzip downloaded file, and copy to %1 and overwrite.")
                 .arg(QApplication::applicationDirPath()));
       } else {
-        QMessageBox::critical(nullptr, tr("Error"),
-                              tr("Cannot find downloadable file."));
+        Core::ErrorDialog(tr("Cannot find downloadable file."));
       }
     }
   }
