@@ -23,7 +23,7 @@ namespace hinan {
 namespace gui {
 MainWindow::MainWindow() {
   setAcceptDrops(true);
-  setWindowTitle("HINAN");
+  UpdateTitle(PracticeKit::Instance().reader->GetPath());
   setWindowIcon(QIcon(QApplication::applicationDirPath() + "/assets/logo.svg"));
   // Dock
   QDockWidget* port_status = new QDockWidget;

@@ -54,6 +54,8 @@ ProgramReader::~ProgramReader() {
 
 bool ProgramReader::IsActive() { return isActive_; }
 
+QString ProgramReader::GetPath() { return path_; }
+
 void ProgramReader::SetPath(QUrl url) {
   Terminate();
   path_ = url.toString().remove("file://");
@@ -145,9 +147,7 @@ void ProgramReader::Run() {
 // If call these function, please use hinan::port.
 // Ex. GetPortValue(hinan::port::P1DDR);
 //     SetPortValue(hinan::port::P2DR, 0x0f);
-int ProgramReader::GetPortValue(QString port) {
-  return map_[port];
-}
+int ProgramReader::GetPortValue(QString port) { return map_[port]; }
 
 void ProgramReader::SetPortValue(QString port, unsigned char value) {
   map_[port] = value;
