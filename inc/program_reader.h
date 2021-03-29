@@ -22,12 +22,13 @@ class ProgramReader : public QObject {
   Q_OBJECT
  private:
   QMap<QString, unsigned char> map_;
-  bool               isActive_ = false;
-  QString            path_;
-  asIScriptEngine*   engine_;
-  asIScriptContext*  main_context_;
-  asIScriptContext*  port_getter_context_;
-  asIScriptContext*  port_setter_context_;
+
+  bool              isActive_ = false;
+  QString           path_;
+  asIScriptEngine*  engine_;
+  asIScriptContext* main_context_;
+  asIScriptContext* port_getter_context_;
+  asIScriptContext* port_setter_context_;
 
  public:
   ProgramReader();
@@ -49,7 +50,7 @@ class ProgramReader : public QObject {
   void ActivatedSignal();
   void DeactivatedSignal();
   void PathChangedSignal(QString);
-  void ErrorSignal(const QMetaObject*, QString);
+  void ErrorSignal(QString);
 };
 } // namespace hinan
 

@@ -31,6 +31,7 @@ int main(int argc, char* argv[]) {
     hinan::PracticeKit::Instance().reader->SetPath(args[0]);
   }
 
-  hinan::Core* core = new hinan::Core();
+  hinan::Core core;
+  core.SetupMainWindow();
   return app.exec();
 }

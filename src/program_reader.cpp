@@ -100,7 +100,7 @@ void ProgramReader::Load() {
   builder.AddSectionFromMemory("main", script.toUtf8().data());
   engine_->SetMessageCallback(asFUNCTION(ScriptLog), 0, asCALL_CDECL);
   if (builder.BuildModule() < 0) {
-    emit ErrorSignal(&staticMetaObject, tr("Cannot build the script"));
+    emit ErrorSignal(tr("Cannot build the script"));
     path_ = "";
     emit PathChangedSignal(path_);
     return;
@@ -129,7 +129,7 @@ void ProgramReader::Terminate() {
 
 void ProgramReader::Run() {
   if (engine_ == 0 || path_.isEmpty()) {
-    emit ErrorSignal(&staticMetaObject, tr("Engine is not yet to initialized"));
+    emit ErrorSignal(tr("Engine is not yet to initialized"));
     return;
   }
   qDebug("[Reader] Started");

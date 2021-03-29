@@ -21,14 +21,15 @@
 #include <QTimer>
 
 namespace hinan {
-Core::Core() {
-  main_window_ = new gui::MainWindow();
+Core::Core() : main_window_(new gui::MainWindow) {
   // Connect
   connect(main_window_, &gui::MainWindow::CloseSignal, &PracticeKit::Instance(),
           &PracticeKit::TerminateScript);
   connect(PracticeKit::Instance().reader, &ProgramReader::ErrorSignal, this,
-          &Core::Error);
+          &Core::ErrorDialog);
+}
 
+void Core::SetupMainWindow() {
   // Splash screen
   // svg size is 450x200, but it will be displayed in a smaller size
   QPixmap       pixmap = QIcon(":/assets/splash.svg").pixmap(QSize(500, 250));
@@ -62,8 +63,13 @@ Core::Core() {
   splash.finish(main_window_);
 }
 
-void Core::Error(const QMetaObject* obj, QString body) {
-  qCritical("[%s] Error: %s", obj->className(), body.toUtf8().data());
-  QMessageBox::critical(main_window_, tr("Error"), body);
+void Core::ErrorDialog(QString body) {
+  QMessageBox* box = new QMessageBox;
+  box->setWindowIcon(QIcon(":/assets/logo.svg"));
+  box->setIconPixmap(QIcon(":/assets/icon/error.svg").pixmap(50, 50));
+  box->setWindowTitle(tr("Error"));
+  box->setText(body);
+  qCritical("Error: %s", body.toUtf8().data());
+  box->show();
 }
 } // namespace hinan

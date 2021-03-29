@@ -11,7 +11,6 @@
 #define HINAN_CORE_H_
 
 #include "gui/mainwindow.h"
-#include "practice_kit.h"
 #include <QObject>
 
 namespace hinan {
@@ -22,6 +21,9 @@ class Core : public QObject {
 
  public:
   Core();
+  void SetupMainWindow();
+
+  static void ErrorDialog(QString);
   void Error(const QMetaObject*, QString);
 };
 } // namespace hinan

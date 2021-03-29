@@ -1,6 +1,5 @@
 int main(void) {
-  while(1) {
-    P4DR=0x00;
+  while {
   }
   return 0;
 }
