@@ -8,7 +8,6 @@
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 #include "actions.h"
-#include "icon/icon.h"
 #include "practice_kit.h"
 #include "update_checker.h"
 #include <QAction>
@@ -75,22 +74,26 @@ QToolBar* Actions::Toolbar() { return toolbar_; }
 QMenuBar* Actions::Menubar() { return menubar_; }
 
 void Actions::CreateActions() {
-  open_             = new QAction(icon::open, tr("Open"));
-  exit_             = new QAction(icon::exit, tr("Exit"));
-  startstop_script_ = new QAction(icon::start, tr("Launch script"));
-  reload_script_    = new QAction(icon::reload, tr("Reload script"));
-  version_          = new QAction(icon::info, tr("Version"));
-  about_qt_         = new QAction(icon::qt, tr("About Qt"));
-  check_update_     = new QAction(icon::update, tr("Check for update"));
-  view_source_      = new QAction(icon::view_source, tr("View source code"));
+  open_ = new QAction(QIcon(":/assets/icon/open.svg"), tr("Open"));
+  exit_ = new QAction(QIcon(":/assets/icon/exit.svg"), tr("Exit"));
+  startstop_script_ =
+      new QAction(QIcon(":/assets/icon/start.svg"), tr("Launch script"));
+  reload_script_ =
+      new QAction(QIcon(":/assets/icon/reload.svg"), tr("Reload script"));
+  version_  = new QAction(QIcon(":/assets/icon/info.svg"), tr("Version"));
+  about_qt_ = new QAction(QIcon(":/assets/icon/qt.svg"), tr("About Qt"));
+  check_update_ =
+      new QAction(QIcon(":/assets/icon/update.svg"), tr("Check for update"));
+  view_source_ =
+      new QAction(QIcon(":/assets/icon/source.svg"), tr("View source code"));
 }
 
 void Actions::ChangeStartStopActionsIcon() {
   if (PracticeKit::Instance().reader->IsActive()) {
-    startstop_script_->setIcon(icon::stop);
+    startstop_script_->setIcon(QIcon(":/assets/icon/stop.svg"));
     startstop_script_->setText(tr("Terminate script"));
   } else {
-    startstop_script_->setIcon(icon::start);
+    startstop_script_->setIcon(QIcon(":/assets/icon/start.svg"));
     startstop_script_->setText(tr("Launch script"));
   }
 }
@@ -115,7 +118,7 @@ void Actions::ShowVersion() {
   QMessageBox* box = new QMessageBox;
   box->setWindowTitle(tr("Version"));
   box->setText(body);
-  QIcon icon(QApplication::applicationDirPath() + "/assets/logo.svg");
+  QIcon icon(":/assets/logo.svg");
   box->setIconPixmap(icon.pixmap(100, 100));
   box->show();
 }

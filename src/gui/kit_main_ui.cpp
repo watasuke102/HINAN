@@ -39,8 +39,7 @@ void SvgWidget::changeSize(QSize parent_size) {
 }
 
 KitMainUi::KitMainUi() : original_width_(494) {
-  widget_ = new SvgWidget(this, QApplication::applicationDirPath() +
-                                    "/assets/canvas.svg");
+  widget_ = new SvgWidget(this, ":/assets/canvas.svg");
   widget_->setGeometry(MARGIN, MARGIN, this->size().width() - MARGIN * 2, 0);
   PracticeKit::Instance().components_manager->SetWidgetsParent(this);
 

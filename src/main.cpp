@@ -14,6 +14,7 @@
 
 int main(int argc, char* argv[]) {
   QApplication app(argc, argv);
+  Q_INIT_RESOURCE(resources);
   app.setApplicationName("HINAN");
   app.setApplicationVersion("0.1.0");
 

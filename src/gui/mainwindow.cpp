@@ -24,7 +24,7 @@ namespace gui {
 MainWindow::MainWindow() {
   setAcceptDrops(true);
   UpdateTitle(PracticeKit::Instance().reader->GetPath());
-  setWindowIcon(QIcon(QApplication::applicationDirPath() + "/assets/logo.svg"));
+  setWindowIcon(QIcon(":/assets/logo.svg"));
   // Dock
   QDockWidget* port_status = new QDockWidget;
   port_status->setWindowTitle(tr("Status"));

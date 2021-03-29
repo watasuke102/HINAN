@@ -23,6 +23,7 @@
 		"string": "cpp",
 		"unordered_map": "cpp",
 		"vector": "cpp",
-		"qnetworkrequest": "cpp"
+		"qnetworkrequest": "cpp",
+		"qkeysequence": "cpp"
 	}
 }

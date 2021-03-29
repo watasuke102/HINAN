@@ -18,6 +18,7 @@ set(AS_ADD_ON /usr/share/angelscript/add_on)
 
 include_directories("./inc" ${AS_ADD_ON})
 set(TS_FILES lang/${PROJECT_NAME}_ja_JP.ts)
+qt5_add_resources(RESOURCES resources.qrc)
 
 # Add headers what written "Q_OBJECT"
 qt_wrap_cpp(HEADERS
@@ -50,10 +51,10 @@ set(PROJECT_SOURCES ${HEADERS} ${TS_FILES}
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
-    qt_add_executable( ${PROJECT_NAME} ${PROJECT_SOURCES} )
+    qt_add_executable( ${PROJECT_NAME} ${PROJECT_SOURCES} ${RESOURCES} )
     qt_create_translation(QM_FILES ${PROJECT_SOURCES} ${TS_FILES})
 else()
-    add_executable(${PROJECT_NAME} ${PROJECT_SOURCES} )
+    add_executable(${PROJECT_NAME} ${PROJECT_SOURCES} ${RESOURCES} )
     qt5_create_translation(QM_FILES ${PROJECT_SOURCES} ${TS_FILES})
 endif()
 

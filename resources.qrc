@@ -1,0 +1,20 @@
+<!DOCTYPE RCC><RCC version="1.0">
+<qresource>
+    <file>assets/logo.svg</file>
+    <file>assets/splash.svg</file>
+    <file>assets/canvas.svg</file>
+
+    <file>assets/toggle-high.png</file>
+    <file>assets/toggle-low.png</file>
+
+    <file>assets/icon/open.svg</file>
+    <file>assets/icon/exit.svg</file>
+    <file>assets/icon/start.svg</file>
+    <file>assets/icon/stop.svg</file>
+    <file>assets/icon/reload.svg</file>
+    <file>assets/icon/info.svg</file>
+    <file>assets/icon/qt.svg</file>
+    <file>assets/icon/update.svg</file>
+    <file>assets/icon/source.svg</file>
+</qresource>
+</RCC>

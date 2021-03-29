@@ -24,10 +24,8 @@ namespace components {
 ToggleSwitches::ToggleSwitches(QWidget* parent)
     : ComponentInterface(parent, 345, 230, 120, 50) {
   // Load pictures
-  icon_[0] = QIcon(
-      QPixmap(QApplication::applicationDirPath() + "/assets/toggle-low.png"));
-  icon_[1] = QIcon(
-      QPixmap(QApplication::applicationDirPath() + "/assets/toggle-high.png"));
+  icon_[0] = QIcon(QPixmap(":/assets/toggle-low.png"));
+  icon_[1] = QIcon(QPixmap(":/assets/toggle-high.png"));
 
   setStyleSheet(
       "QPushButton:checked{ background-color:rgba(255,255,255,0); border:0px; }"

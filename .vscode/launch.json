@@ -8,7 +8,7 @@
 			"name": "(gdb) 起動",
 			"type": "cppdbg",
 			"request": "launch",
-			"program": "${workspaceFolder}/hinan",
+			"program": "${workspaceFolder}/build/hinan",
 			"args": [
 				/** "${workspaceFolder}/test/reader_test.c" /*/
 				"${workspaceFolder}/test/tact_test.c" /**/
