@@ -7,7 +7,7 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   inkscape:version="1.0 (4035a4fb49, 2020-05-01)"
+   inkscape:version="1.0.2 (e86c870879, 2021-01-15)"
    sodipodi:docname="question.svg"
    id="svg3794"
    version="1.1"
@@ -23,7 +23,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -31,16 +31,16 @@
      id="defs3798" />
   <sodipodi:namedview
      inkscape:current-layer="svg3794"
-     inkscape:window-maximized="0"
+     inkscape:window-maximized="1"
      inkscape:window-y="0"
-     inkscape:window-x="62"
-     inkscape:cy="10.927699"
-     inkscape:cx="9.2969075"
+     inkscape:window-x="24"
+     inkscape:cy="13.312548"
+     inkscape:cx="9.8341507"
      inkscape:zoom="26.221876"
      showgrid="false"
      id="namedview3796"
-     inkscape:window-height="681"
-     inkscape:window-width="1493"
+     inkscape:window-height="744"
+     inkscape:window-width="1342"
      inkscape:pageshadow="2"
      inkscape:pageopacity="0"
      guidetolerance="10"
@@ -48,7 +48,8 @@
      objecttolerance="10"
      borderopacity="1"
      bordercolor="#666666"
-     pagecolor="#ffffff" />
+     pagecolor="#ffffff"
+     inkscape:document-rotation="0" />
   <path
      id="path3790"
      fill="none"
@@ -56,5 +57,11 @@
   <path
      style="stroke:#fafafa;stroke-opacity:1;paint-order:markers stroke fill"
      id="path3792"
-     d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17h-2v-2h2v2zm2.07-7.75l-.9.92C13.45 12.9 13 13.5 13 15h-2v-.5c0-1.1.45-2.1 1.17-2.83l1.24-1.26c.37-.36.59-.86.59-1.41 0-1.1-.9-2-2-2s-2 .9-2 2H8c0-2.21 1.79-4 4-4s4 1.79 4 4c0 .88-.36 1.68-.93 2.25z" />
+     d="M 12,2 C 6.48,2 2,6.48 2,12 2,17.52 6.48,22 12,22 17.52,22 22,17.52 22,12 22,6.48 17.52,2 12,2 Z"
+     sodipodi:nodetypes="sssss" />
+  <path
+     style="stroke:none;stroke-opacity:1;paint-order:markers stroke fill;fill:#ffffff;fill-opacity:1"
+     id="path3792-3"
+     d="m 13,19 h -2 v -2 h 2 z m 2.07,-7.75 -0.9,0.92 C 13.45,12.9 13,13.5 13,15 h -2 v -0.5 c 0,-1.1 0.45,-2.1 1.17,-2.83 l 1.24,-1.26 C 13.78,10.05 14,9.55 14,9 14,7.9 13.1,7 12,7 10.9,7 10.000001,7.9 10.000001,9 H 8.0000005 c 0,-2.21 1.79,-4 3.9999995,-4 2.21,0 4,1.79 4,4 0,0.88 -0.36,1.68 -0.93,2.25 z"
+     sodipodi:nodetypes="cccccccccsccssccssc" />
 </svg>

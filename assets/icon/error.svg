@@ -14,7 +14,7 @@
    version="1.1"
    id="svg845"
    sodipodi:docname="error.svg"
-   inkscape:version="1.0 (4035a4fb49, 2020-05-01)">
+   inkscape:version="1.0.2 (e86c870879, 2021-01-15)">
   <metadata
      id="metadata851">
     <rdf:RDF>
@@ -23,7 +23,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -40,19 +40,34 @@
      guidetolerance="10"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:window-width="1419"
-     inkscape:window-height="764"
+     inkscape:window-width="1342"
+     inkscape:window-height="744"
      id="namedview847"
      showgrid="false"
-     inkscape:zoom="5.6568542"
-     inkscape:cx="28.956317"
-     inkscape:cy="-1.2452752"
-     inkscape:window-x="378"
-     inkscape:window-y="63"
-     inkscape:window-maximized="0"
+     inkscape:zoom="10.589122"
+     inkscape:cx="7.0896032"
+     inkscape:cy="8.0653394"
+     inkscape:window-x="24"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
      inkscape:current-layer="svg845" />
   <path
-     d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"
+     d="M 1,21 H 23 L 12,2 Z"
      id="path843"
-     style="stroke:#ffffff;stroke-opacity:1;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;paint-order:markers stroke fill" />
+     style="stroke:#ffffff;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:markers stroke fill"
+     sodipodi:nodetypes="cccc" />
+  <rect
+     style="fill:#ffffff;fill-rule:evenodd"
+     id="rect104"
+     width="2"
+     height="4"
+     x="11"
+     y="10" />
+  <rect
+     style="fill:#ffffff"
+     id="rect106"
+     width="2"
+     height="2"
+     x="11"
+     y="16" />
 </svg>
