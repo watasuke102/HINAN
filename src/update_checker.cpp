@@ -37,6 +37,7 @@ UpdateChecker::UpdateChecker(bool isShowDialog = true)
 
 void UpdateChecker::ShowDialog(DialogKind dialog_kind, QString body) {
   if (!isShowDialog_) {
+    body.replace(QRegExp("<[bh]r>"), "\n");
     qInfo("%s", body.toUtf8().data());
     return;
   }
