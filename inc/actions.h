@@ -45,7 +45,6 @@ class Actions : public QObject {
   Actions();
   QToolBar* Toolbar();
   QMenuBar* Menubar();
-  void      ShowVersion();
 };
 } // namespace hinan
 

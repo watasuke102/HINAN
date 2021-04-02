@@ -23,6 +23,7 @@ class Core : public QObject {
   Core();
   void SetupMainWindow();
 
+  static void AboutDialog();
   static void ErrorDialog(QString);
   static void InfoDialog(QString);
 };
