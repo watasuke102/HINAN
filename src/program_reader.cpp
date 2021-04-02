@@ -137,7 +137,7 @@ void ProgramReader::Run() {
   emit             ActivatedSignal();
   asIScriptModule* module = engine_->GetModule("main");
 
-  main_context_->Prepare(module->GetFunctionByDecl("int main()"));
+  main_context_->Prepare(module->GetFunctionByName("main"));
   main_context_->Execute();
   qDebug("[Reader] Finished");
   isActive_ = false;
