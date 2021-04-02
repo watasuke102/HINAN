@@ -71,11 +71,14 @@ void UpdateChecker::RequestFinished(QNetworkReply* reply) {
                 .arg(QApplication::applicationVersion())
                 .arg(json["tag_name"].toString());
 
+  QString detail = json["name"].toString() + "\n" +
+                   json["html_url"].toString() + "\n\n" + json["body"].toString();
+
   const int current_version = VersionToInt(QApplication::applicationVersion());
   const int latest_version  = VersionToInt(json["tag_name"].toString());
   if (current_version >= latest_version) {
     message += tr("This software is up to date.");
-    ShowDialog(DialogKind::info, message, json["body"].toString());
+    ShowDialog(DialogKind::info, message, detail);
   } else {
     message +=
         tr("Do you want to download the latest version?<br>(The browser will "
@@ -84,7 +87,7 @@ void UpdateChecker::RequestFinished(QNetworkReply* reply) {
     QMessageBox* question = new QMessageBox();
     question->setWindowTitle(tr("Check for update"));
     question->setText(message);
-    question->setDetailedText(json["body"].toString());
+    question->setDetailedText(detail);
     question->setIconPixmap(QIcon(":/assets/icon/question.svg").pixmap(50, 50));
     question->setStandardButtons(QMessageBox::Yes | QMessageBox::No);
     int r = question->exec();
