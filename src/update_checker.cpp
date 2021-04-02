@@ -35,15 +35,16 @@ UpdateChecker::UpdateChecker(bool isShowDialog = true)
           });
 }
 
-void UpdateChecker::ShowDialog(DialogKind dialog_kind, QString body) {
+void UpdateChecker::ShowDialog(DialogKind dialog_kind, QString body,
+                               QString detail) {
   if (!isShowDialog_) {
     body.replace(QRegExp("<[bh]r>"), "\n");
     qInfo("%s", body.toUtf8().data());
     return;
   }
   switch (dialog_kind) {
-    case DialogKind::info: Core::InfoDialog(body); break;
-    case DialogKind::critical: Core::ErrorDialog(body); break;
+    case DialogKind::info: Core::InfoDialog(body, detail); break;
+    case DialogKind::critical: Core::ErrorDialog(body, detail); break;
   }
 }
 
@@ -55,13 +56,14 @@ void UpdateChecker::Check() {
 void UpdateChecker::RequestFinished(QNetworkReply* reply) {
   QString message;
   if (reply->error()) {
-    ShowDialog(DialogKind::critical, tr("Error occurred"));
+    ShowDialog(DialogKind::critical, tr("Error occurred"),
+               reply->errorString());
     return;
   }
 
   QJsonObject json(QJsonDocument::fromJson(reply->readAll()).object());
   if (!json.contains("tag_name") || !json.contains("assets")) {
-    ShowDialog(DialogKind::critical, tr("Irregular json format"));
+    ShowDialog(DialogKind::critical, tr("Irregular json format"), "");
     return;
   }
   message = tr("Current version: %1<br>Latest version: %2"
@@ -73,12 +75,20 @@ void UpdateChecker::RequestFinished(QNetworkReply* reply) {
   const int latest_version  = VersionToInt(json["tag_name"].toString());
   if (current_version >= latest_version) {
     message += tr("This software is up to date.");
-    ShowDialog(DialogKind::info, message);
+    ShowDialog(DialogKind::info, message, json["body"].toString());
   } else {
     message +=
         tr("Do you want to download the latest version?<br>(The browser will "
            "open)");
-    int r = QMessageBox::question(nullptr, tr("Check for update"), message);
+    // Message box
+    QMessageBox* question = new QMessageBox();
+    question->setWindowTitle(tr("Check for update"));
+    question->setText(message);
+    question->setDetailedText(json["body"].toString());
+    question->setIconPixmap(QIcon(":/assets/icon/question.svg").pixmap(50, 50));
+    question->setStandardButtons(QMessageBox::Yes | QMessageBox::No);
+    int r = question->exec();
+
     if (r == QMessageBox::Yes) {
       const QString asset_name =
 #if defined(_WIN64)

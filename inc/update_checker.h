@@ -20,11 +20,11 @@ namespace hinan {
 class UpdateChecker : public QObject {
   Q_OBJECT
  private:
-  enum class DialogKind { info, critical };
-
   QNetworkAccessManager* manager_;
-  bool                   isShowDialog_;
-  void                   ShowDialog(DialogKind, QString);
+
+  enum class DialogKind { info, critical };
+  bool isShowDialog_;
+  void ShowDialog(DialogKind, QString, QString);
 
  public:
   UpdateChecker(bool);

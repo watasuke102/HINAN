@@ -25,7 +25,9 @@ class Core : public QObject {
 
   static void AboutDialog();
   static void ErrorDialog(QString);
+  static void ErrorDialog(QString, QString);
   static void InfoDialog(QString);
+  static void InfoDialog(QString, QString);
 };
 } // namespace hinan
 

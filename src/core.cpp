@@ -25,8 +25,8 @@ Core::Core() : main_window_(new gui::MainWindow) {
   // Connect
   connect(main_window_, &gui::MainWindow::CloseSignal, &PracticeKit::Instance(),
           &PracticeKit::TerminateScript);
-  connect(PracticeKit::Instance().reader, &ProgramReader::ErrorSignal, this,
-          &Core::ErrorDialog);
+  connect(PracticeKit::Instance().reader, &ProgramReader::ErrorSignal,
+          [=](QString body) { ErrorDialog(body); });
 }
 
 void Core::SetupMainWindow() {
@@ -88,23 +88,31 @@ void Core::AboutDialog() {
   box->show();
 }
 
-void Core::ErrorDialog(QString body) {
+void Core::ErrorDialog(QString body) { ErrorDialog(body, ""); }
+void Core::ErrorDialog(QString body, QString detail) {
   QMessageBox* box = new QMessageBox;
   box->setWindowIcon(QIcon(":/assets/logo.svg"));
   box->setIconPixmap(QIcon(":/assets/icon/error.svg").pixmap(50, 50));
   box->setWindowTitle(tr("Error"));
   box->setText(body);
+  if (!detail.isEmpty()) {
+    box->setDetailedText(detail);
+  }
   qCritical("Error: %s", body.toUtf8().data());
   box->show();
 }
 
-void Core::InfoDialog(QString body) {
+void Core::InfoDialog(QString body) { InfoDialog(body, ""); }
+void Core::InfoDialog(QString body, QString detail) {
   QMessageBox* box = new QMessageBox;
   box->setWindowIcon(QIcon(":/assets/logo.svg"));
   box->setIconPixmap(QIcon(":/assets/icon/info.svg").pixmap(50, 50));
   box->setWindowTitle(tr("Info"));
   box->setText(body);
-  qCritical("Info: %s", body.toUtf8().data());
+  if (!detail.isEmpty()) {
+    box->setDetailedText(detail);
+  }
+  qInfo("Info: %s", body.toUtf8().data());
   box->show();
 }
 
