@@ -44,7 +44,7 @@ void TactSwitches::Update() {
   for (int i = switches_.size() - 1; i >= 0; i--) {
     result  = result << 1;
     int pos = 1 << i;
-    if (!switches_[i]->isChecked() && !(P5DDR & pos)) {
+    if ((!switches_[i]->isDown() || !switches_[i]->isChecked()) && !(P5DDR & pos)) {
       ++result;
     }
   }
