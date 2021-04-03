@@ -25,6 +25,7 @@ class Actions : public QObject {
   QAction* exit_;
   QAction* startstop_script_;
   QAction* reload_script_;
+  QAction* setting_;
   QAction* version_;
   QAction* about_qt_;
   QAction* check_update_;
@@ -35,10 +36,11 @@ class Actions : public QObject {
   QMenu*    run_menu_;
   QMenu*    help_menu_;
 
-  QToolBar* toolbar_;
-  void      CreateActions();
-  void      OpenFileDialog();
-  void      ChangeStartStopActionsIcon();
+  QToolBar*     toolbar_;
+  void          CreateActions();
+  void          OpenFileDialog();
+  void          ChangeStartStopActionsIcon();
+  void          ShowSettingWidget();
   UpdateChecker checker_;
 
  public:

@@ -58,6 +58,10 @@
         <source>View source code</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Setting</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>hinan::ComponentsManager</name>
@@ -168,6 +172,45 @@ Please unzip downloaded file, and copy to %1 and overwrite.</source>
     <name>hinan::gui::MainWindow</name>
     <message>
         <source>Status</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>hinan::gui::SettingWidget</name>
+    <message>
+        <source>Select</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Show splash screen on startup</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Check update on startup</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Update timeout (ms)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Enable toggleable tact switch</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>LED color</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>OK</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Discard</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Apply</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
