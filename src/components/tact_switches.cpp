@@ -10,6 +10,7 @@
 #include "components/tact_switches.h"
 #include "port/port.h"
 #include "practice_kit.h"
+#include "setting_manager.h"
 #include <QLayout>
 #include <QObject>
 #include <QPushButton>
@@ -23,9 +24,12 @@ TactSwitches::TactSwitches(QWidget* parent)
   QHBoxLayout* layout = new QHBoxLayout();
   layout->setSpacing(3);
   switches_.resize(4);
+  const bool checkable =
+      (SettingManager::Instance().GetValue(SettingManager::TactSwitchToggle) !=
+       QString("false"));
   for (int i = 0; i < switches_.size(); i++) {
     switches_[i] = new QPushButton(this);
-    switches_[i]->setCheckable(true);
+    switches_[i]->setCheckable(checkable);
     switches_[i]->setSizePolicy(
         QSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding));
     layout->addWidget(switches_[i]);

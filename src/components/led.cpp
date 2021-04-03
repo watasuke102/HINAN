@@ -10,6 +10,7 @@
 #include "components/led.h"
 #include "port/port.h"
 #include "practice_kit.h"
+#include "setting_manager.h"
 #include <QLayout>
 #include <QList>
 #include <QObject>
@@ -20,9 +21,15 @@
 namespace hinan {
 namespace components {
 LED::LED(QWidget* parent) : ComponentInterface(parent, 63, 155, 95, 30) {
-  setStyleSheet(
-      "QPushButton{ background-color: #220123; }"
-      "QPushButton:checked{ background-color: #ff0123; }");
+  QString style(
+      "QPushButton{ background-color: #222222; }"
+      "QPushButton:checked{ background-color: %1; }");
+  QString led_color =
+      SettingManager::Instance().GetValue(SettingManager::LedColor);
+  if (led_color.isEmpty()) {
+    led_color = "#ff0123";
+  }
+  setStyleSheet(style.arg(led_color));
   QHBoxLayout* layout = new QHBoxLayout();
   layout->setSpacing(2);
   leds_.resize(8);
