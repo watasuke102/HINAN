@@ -53,6 +53,13 @@ void SettingManager::Save() {
   }
   ini_.sync();
 }
+void SettingManager::Load() {
+  QMetaEnum list = QMetaEnum::fromType<SettingList>();
+  for (int i = 0; i < list.keyCount(); i++) {
+    QString key    = list.valueToKey(i);
+    settings_[key] = ini_.value(key, "").toString();
+  }
+}
 
 void SettingManager::SetDefault() {
   QMetaEnum list = QMetaEnum::fromType<SettingList>();

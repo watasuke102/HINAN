@@ -24,6 +24,7 @@
 		"unordered_map": "cpp",
 		"vector": "cpp",
 		"qnetworkrequest": "cpp",
-		"qkeysequence": "cpp"
+		"qkeysequence": "cpp",
+		"qspinbox": "cpp"
 	}
 }

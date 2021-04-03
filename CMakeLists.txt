@@ -31,6 +31,7 @@ qt_wrap_cpp(HEADERS
   inc/components_manager.h
   inc/gui/mainwindow.h
   inc/gui/kit_main_ui.h
+  inc/gui/setting_widget.h
   inc/components/component_interface.h
 )
 set(PROJECT_SOURCES ${HEADERS} ${TS_FILES}
@@ -44,6 +45,7 @@ set(PROJECT_SOURCES ${HEADERS} ${TS_FILES}
   src/components_manager.cpp
   src/gui/mainwindow.cpp
   src/gui/kit_main_ui.cpp
+  src/gui/setting_widget.cpp
   src/components/led.cpp
   src/components/segment.cpp
   src/components/tact_switches.cpp

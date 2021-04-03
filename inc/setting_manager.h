@@ -39,6 +39,7 @@ class SettingManager : public QObject {
   QString GetValue(SettingList);
   void    SetValue(SettingList, QString);
   void    Save();
+  void    Load();
   void    SetDefault();
 
   static SettingManager& Instance();
