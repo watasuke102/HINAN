@@ -14,6 +14,7 @@
 #include <QColorDialog>
 #include <QFormLayout>
 #include <QLayout>
+#include <QMessageBox>
 #include <QMetaEnum>
 #include <QPushButton>
 #include <QWidget>
@@ -21,9 +22,9 @@
 namespace hinan {
 namespace gui {
 SettingWidget::SettingWidget()
-    : update_timeout_(new QSpinBox), check_update_startup_(new QCheckBox),
-      show_splash_(new QCheckBox), tact_switch_toggle_(new QCheckBox),
-      color_indicator_(new QPushButton) {
+    : isChanged_(false), update_timeout_(new QSpinBox),
+      check_update_startup_(new QCheckBox), show_splash_(new QCheckBox),
+      tact_switch_toggle_(new QCheckBox), color_indicator_(new QPushButton) {
   QVBoxLayout* main_layout = new QVBoxLayout;
 
   QFormLayout* form              = new QFormLayout;
@@ -55,9 +56,10 @@ SettingWidget::SettingWidget()
 
   setLayout(main_layout);
 
-  connect(show_color_dialog, &QPushButton::pressed, this, &SettingWidget::UpdateColor);
+  connect(show_color_dialog, &QPushButton::pressed, this,
+          &SettingWidget::UpdateColor);
   connect(ok, &QPushButton::pressed, this, &SettingWidget::Ok);
-  connect(discard, &QPushButton::pressed, this, &SettingWidget::Discard);
+  connect(discard, &QPushButton::pressed, this, &QWidget::close);
   connect(set_default, &QPushButton::pressed, this, &SettingWidget::SetDefault);
 }
 
@@ -83,7 +85,8 @@ void SettingWidget::InitWidgets() {
   color_indicator_->setDisabled(true);
   color_indicator_->setCheckable(true);
   color_indicator_->setChecked(true);
-  led_color_ = QColor(SettingManager::Instance().GetValue(SettingManager::LedColor));
+  led_color_ =
+      QColor(SettingManager::Instance().GetValue(SettingManager::LedColor));
   color_indicator_->setStyleSheet(
       QString("QPushButton{ background-color: #222222; }"
               "QPushButton:checked{ background-color: %1; }")
@@ -121,20 +124,31 @@ void SettingWidget::Ok() {
       QVariant(tact_switch_toggle_->isChecked()).toString());
   SettingManager::Instance().Save();
   Core::InfoDialog(tr("Changes will take effect after restarting software."));
+  isChanged_ = false;
   close();
 }
 void SettingWidget::SetDefault() {
   SettingManager::Instance().SetDefault();
   InitWidgets();
 }
-void SettingWidget::Discard() {
-  SettingManager::Instance().Load();
-  close();
-}
 
+void SettingWidget::paintEvent(QPaintEvent* event) {
+  isChanged_ = true;
+  QWidget::paintEvent(event);
+}
 void SettingWidget::closeEvent(QCloseEvent* event) {
-  Discard();
-  QWidget::closeEvent(event);
+  if (!isChanged_) {
+    QWidget::closeEvent(event);
+    return;
+  }
+  int r =
+      Core::YesNoDialog(tr("Changes will be discard.\nDo you want to close?"));
+  if (r == QMessageBox::Yes) {
+    SettingManager::Instance().Load();
+    QWidget::closeEvent(event);
+  } else {
+    event->ignore();
+  }
 }
 
 } // namespace gui

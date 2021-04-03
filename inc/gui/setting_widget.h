@@ -13,6 +13,7 @@
 #include <QCheckBox>
 #include <QCloseEvent>
 #include <QColor>
+#include <QPaintEvent>
 #include <QPushButton>
 #include <QSpinBox>
 #include <QWidget>
@@ -22,6 +23,7 @@ namespace gui {
 class SettingWidget : public QWidget {
   Q_OBJECT
  private:
+  bool         isChanged_;
   QCheckBox*   show_splash_;
   QCheckBox*   check_update_startup_;
   QSpinBox*    update_timeout_;
@@ -33,12 +35,12 @@ class SettingWidget : public QWidget {
  private slots:
   void UpdateColor();
   void Ok();
-  void Discard();
   void SetDefault();
 
  public:
   SettingWidget();
   void closeEvent(QCloseEvent*);
+  void paintEvent(QPaintEvent*);
 };
 } // namespace gui
 } // namespace hinan

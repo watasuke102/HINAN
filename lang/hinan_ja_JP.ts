@@ -217,5 +217,10 @@ Please unzip downloaded file, and copy to %1 and overwrite.</source>
         <source>Changes will take effect after restarting software.</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Changes will be discard.
+Do you want to close?</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 </TS>
