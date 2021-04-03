@@ -9,6 +9,7 @@
 
 #include "core.h"
 #include "practice_kit.h"
+#include "setting_manager.h"
 #include <QApplication>
 #include <QCommandLineParser>
 
@@ -16,7 +17,11 @@ int main(int argc, char* argv[]) {
   QApplication app(argc, argv);
   Q_INIT_RESOURCE(resources);
   app.setApplicationName("HINAN");
-  app.setApplicationVersion("1.0.0");
+  /**/ app.setApplicationVersion("1.0.0"); /*/
+  app.setApplicationVersion("0.1.0");/**/
+
+  // Initialize settings
+  hinan::SettingManager::Instance();
 
   // Command line option
   QCommandLineParser parser;

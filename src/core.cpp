@@ -6,11 +6,11 @@
 // This Source Code Form is subject to the terms of the Mozilla Public
 // License, v. 2.0. If a copy of the MPL was not distributed with this
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
-
 #include "core.h"
 #include "gui/mainwindow.h"
 #include "port/port.h"
 #include "practice_kit.h"
+#include "setting_manager.h"
 #include "update_checker.h"
 #include <QApplication>
 #include <QDebug>
@@ -36,22 +36,48 @@ void Core::SetupMainWindow() {
   QSplashScreen splash(QApplication::screens().at(0), pixmap);
   int           pos = Qt::AlignRight | Qt::AlignBottom;
   splash.setWindowFlag(Qt::WindowStaysOnTopHint, false);
-  splash.show();
+  {
+    const QString show_splash =
+        SettingManager::Instance().GetValue(SettingManager::ShowSplashScreen);
+    if (show_splash != QString("false")) {
+      splash.show();
+    }
+  }
+  QApplication::processEvents();
+
+  splash.showMessage(tr("Initializing settings..."), pos);
   QApplication::processEvents();
 
   // Check for update
-  splash.showMessage(tr("Checking for update..."), pos);
-  UpdateChecker checker(false);
-  QTimer        timer;
-  timer.setSingleShot(true);
-  QEventLoop loop;
-  connect(&checker, &UpdateChecker::FinishedSignal, &loop, &QEventLoop::quit);
-  connect(&timer, &QTimer::timeout, &loop, &QEventLoop::quit);
-  // 10 sec for timeout
-  timer.start(10000);
+  {
+    QString check_update = SettingManager::Instance().GetValue(
+        SettingManager::CheckUpdateWhenStartup);
+    if (check_update != QString("false")) {
+      int timeout;
+      {
+        bool ok;
+        timeout = SettingManager::Instance()
+                      .GetValue(SettingManager::CheckUpdateTimeOut)
+                      .toInt(&ok);
+        if (!ok) {
+          // 10 second
+          timeout = 10000;
+        }
+      }
+      splash.showMessage(tr("Checking for update..."), pos);
+      UpdateChecker checker(false);
+      QTimer        timer;
+      timer.setSingleShot(true);
+      QEventLoop loop;
+      connect(&checker, &UpdateChecker::FinishedSignal, &loop,
+              &QEventLoop::quit);
+      connect(&timer, &QTimer::timeout, &loop, &QEventLoop::quit);
+      timer.start(timeout);
 
-  checker.Check();
-  loop.exec();
+      checker.Check();
+      loop.exec();
+    }
+  }
 
   // Wait to show splash screen
   splash.showMessage(tr("Loading..."), pos);

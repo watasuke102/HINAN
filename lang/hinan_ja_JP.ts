@@ -112,6 +112,10 @@
         <source>Version</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Initializing settings...</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>hinan::ProgramReader</name>
