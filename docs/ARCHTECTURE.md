@@ -1,4 +1,4 @@
-# HINAN-構成
+# HINAN-クラス構成
 
 ## hinan (namespace)
 全てのクラス等はここに格納される
@@ -66,3 +66,9 @@ P*DRが格納されている
 
 - hinan::port::port_ddr (QStringList)  
 P*DDRが格納されている
+
+---
+
+## アイコン
+[Google Fonts](https://fonts.google.com)から取ってくる  
+"Sharp", "Black"をダウンロードし、外側のストローク（枠線）を1px, #FFFFFFに変更
