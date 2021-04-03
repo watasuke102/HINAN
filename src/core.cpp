@@ -125,7 +125,7 @@ void Core::ErrorDialog(QString body, QString detail) {
     box->setDetailedText(detail);
   }
   qCritical("Error: %s", body.toUtf8().data());
-  box->show();
+  box->exec();
 }
 
 void Core::InfoDialog(QString body) { InfoDialog(body, ""); }
@@ -139,7 +139,21 @@ void Core::InfoDialog(QString body, QString detail) {
     box->setDetailedText(detail);
   }
   qInfo("Info: %s", body.toUtf8().data());
-  box->show();
+  box->exec();
+}
+
+int Core::YesNoDialog(QString body) { return YesNoDialog(body, ""); }
+int Core::YesNoDialog(QString body, QString detail) {
+  QMessageBox* box = new QMessageBox;
+  box->setWindowIcon(QIcon(":/assets/logo.svg"));
+  box->setIconPixmap(QIcon(":/assets/icon/question.svg").pixmap(50, 50));
+  box->setWindowTitle(tr("Question"));
+  box->setText(body);
+  if (!detail.isEmpty()) {
+    box->setDetailedText(detail);
+  }
+  box->setStandardButtons(QMessageBox::Yes | QMessageBox::No);
+  return box->exec();
 }
 
 } // namespace hinan

@@ -120,6 +120,10 @@
         <source>Initializing settings...</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Question</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>hinan::ProgramReader</name>
@@ -136,10 +140,6 @@
     <name>hinan::UpdateChecker</name>
     <message>
         <source>Error occurred</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Check for update</source>
         <translation type="unfinished"></translation>
     </message>
     <message>

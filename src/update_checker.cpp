@@ -72,7 +72,8 @@ void UpdateChecker::RequestFinished(QNetworkReply* reply) {
                 .arg(json["tag_name"].toString());
 
   QString detail = json["name"].toString() + "\n" +
-                   json["html_url"].toString() + "\n\n" + json["body"].toString();
+                   json["html_url"].toString() + "\n\n" +
+                   json["body"].toString();
 
   const int current_version = VersionToInt(QApplication::applicationVersion());
   const int latest_version  = VersionToInt(json["tag_name"].toString());
@@ -83,14 +84,7 @@ void UpdateChecker::RequestFinished(QNetworkReply* reply) {
     message +=
         tr("Do you want to download the latest version?<br>(The browser will "
            "open)");
-    // Message box
-    QMessageBox* question = new QMessageBox();
-    question->setWindowTitle(tr("Check for update"));
-    question->setText(message);
-    question->setDetailedText(detail);
-    question->setIconPixmap(QIcon(":/assets/icon/question.svg").pixmap(50, 50));
-    question->setStandardButtons(QMessageBox::Yes | QMessageBox::No);
-    int r = question->exec();
+    int r = Core::YesNoDialog(message, detail);
 
     if (r == QMessageBox::Yes) {
       const QString asset_name =
