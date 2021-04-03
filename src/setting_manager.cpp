@@ -30,6 +30,7 @@ SettingManager::SettingManager()
   if (!QFile::exists(ini_.fileName())) {
     qDebug("Setting file not found");
     SetDefault();
+    Save();
   }
 }
 SettingManager& SettingManager::Instance() {
@@ -68,7 +69,6 @@ void SettingManager::SetDefault() {
   settings_[list.valueToKey(ShowSplashScreen)]       = "true";
   settings_[list.valueToKey(LedColor)]               = "#ff0123";
   settings_[list.valueToKey(TactSwitchToggle)]       = "true";
-  Save();
 }
 
 } // namespace hinan

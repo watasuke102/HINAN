@@ -11,7 +11,9 @@
 #define HINAN_SETTING_WIDGET_H_
 
 #include <QCheckBox>
+#include <QCloseEvent>
 #include <QColor>
+#include <QPushButton>
 #include <QSpinBox>
 #include <QWidget>
 
@@ -20,20 +22,23 @@ namespace gui {
 class SettingWidget : public QWidget {
   Q_OBJECT
  private:
-  QCheckBox* show_splash_;
-  QCheckBox* check_update_startup_;
-  QSpinBox*  update_timeout_;
-  QCheckBox* tact_switch_toggle_;
-  QColor     led_color_;
+  QCheckBox*   show_splash_;
+  QCheckBox*   check_update_startup_;
+  QSpinBox*    update_timeout_;
+  QCheckBox*   tact_switch_toggle_;
+  QPushButton* color_indicator_;
+  QColor       led_color_;
+  void         InitWidgets();
 
-  private slots:
-   void Ok();
-   void Apply();
-   void Discard();
+ private slots:
+  void UpdateColor();
+  void Ok();
+  void Discard();
+  void SetDefault();
 
-  public:
-   SettingWidget();
-
+ public:
+  SettingWidget();
+  void closeEvent(QCloseEvent*);
 };
 } // namespace gui
 } // namespace hinan

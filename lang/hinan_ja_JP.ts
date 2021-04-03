@@ -210,7 +210,11 @@ Please unzip downloaded file, and copy to %1 and overwrite.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Apply</source>
+        <source>Set default settings</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Changes will take effect after restarting software.</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
