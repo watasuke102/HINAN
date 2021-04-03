@@ -9,6 +9,7 @@
 
 #include "setting_manager.h"
 #include <QApplication>
+#include <QDebug>
 #include <QFile>
 #include <QMetaEnum>
 #include <QObject>
@@ -18,12 +19,16 @@ namespace hinan {
 SettingManager::SettingManager()
     : ini_(QApplication::applicationDirPath() + "/settings.ini",
            QSettings::IniFormat) {
+  ini_.setIniCodec(QTextCodec::codecForName("UTF-8"));
+
   QMetaEnum list = QMetaEnum::fromType<SettingList>();
   for (int i = 0; i < list.keyCount(); i++) {
-    settings_.insert(list.valueToKey(i), "");
+    QString key = list.valueToKey(i);
+    settings_.insert(key, ini_.value(key, "").toString());
   }
-  ini_.setIniCodec(QTextCodec::codecForName("UTF-8"));
-  if (!QFile::exists("settings.ini")) {
+
+  if (!QFile::exists(ini_.fileName())) {
+    qDebug("Setting file not found");
     SetDefault();
   }
 }

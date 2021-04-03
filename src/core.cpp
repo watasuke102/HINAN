@@ -50,7 +50,7 @@ void Core::SetupMainWindow() {
 
   // Check for update
   {
-    QString check_update = SettingManager::Instance().GetValue(
+    const QString check_update = SettingManager::Instance().GetValue(
         SettingManager::CheckUpdateWhenStartup);
     if (check_update != QString("false")) {
       int timeout;
