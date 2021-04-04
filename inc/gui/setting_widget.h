@@ -13,7 +13,7 @@
 #include <QCheckBox>
 #include <QCloseEvent>
 #include <QColor>
-#include <QPaintEvent>
+#include <QMouseEvent>
 #include <QPushButton>
 #include <QSpinBox>
 #include <QWidget>
@@ -36,11 +36,11 @@ class SettingWidget : public QWidget {
   void UpdateColor();
   void Ok();
   void SetDefault();
+  void Changed();
 
  public:
   SettingWidget();
   void closeEvent(QCloseEvent*);
-  void paintEvent(QPaintEvent*);
 };
 } // namespace gui
 } // namespace hinan

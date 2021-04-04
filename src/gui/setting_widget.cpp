@@ -61,6 +61,14 @@ SettingWidget::SettingWidget()
   connect(ok, &QPushButton::pressed, this, &SettingWidget::Ok);
   connect(discard, &QPushButton::pressed, this, &QWidget::close);
   connect(set_default, &QPushButton::pressed, this, &SettingWidget::SetDefault);
+
+  // Show dialog when clicked any widgets
+  connect(show_splash_, &QCheckBox::clicked, this, &SettingWidget::Changed);
+  connect(check_update_startup_, &QCheckBox::clicked, this,
+          &SettingWidget::Changed);
+  connect(update_timeout_, SIGNAL(valueChanged(int)), this, SLOT(Changed()));
+  connect(tact_switch_toggle_, &QCheckBox::clicked, this,
+          &SettingWidget::Changed);
 }
 
 void SettingWidget::InitWidgets() {
@@ -74,6 +82,7 @@ void SettingWidget::InitWidgets() {
           SettingManager::CheckUpdateWhenStartup) != QString("false"));
   // timeout
   update_timeout_->setMaximum(60000);
+  update_timeout_->setSuffix(" ms");
   update_timeout_->setValue(SettingManager::Instance()
                                 .GetValue(SettingManager::CheckUpdateTimeOut)
                                 .toInt());
@@ -94,11 +103,15 @@ void SettingWidget::InitWidgets() {
 }
 
 void SettingWidget::UpdateColor() {
-  led_color_ = QColorDialog::getColor();
+  QColor selected = QColorDialog::getColor(led_color_);
+  if (!selected.isValid())
+    return;
+  led_color_ = selected;
   color_indicator_->setStyleSheet(
       QString("QPushButton{ background-color: #222222; }"
               "QPushButton:checked{ background-color: %1; }")
           .arg(led_color_.name()));
+  Changed();
 }
 
 void SettingWidget::Ok() {
@@ -122,6 +135,7 @@ void SettingWidget::Ok() {
   SettingManager::Instance().SetValue(
       SettingManager::TactSwitchToggle,
       QVariant(tact_switch_toggle_->isChecked()).toString());
+
   SettingManager::Instance().Save();
   Core::InfoDialog(tr("Changes will take effect after restarting software."));
   isChanged_ = false;
@@ -132,10 +146,7 @@ void SettingWidget::SetDefault() {
   InitWidgets();
 }
 
-void SettingWidget::paintEvent(QPaintEvent* event) {
-  isChanged_ = true;
-  QWidget::paintEvent(event);
-}
+void SettingWidget::Changed() { isChanged_ = true; }
 void SettingWidget::closeEvent(QCloseEvent* event) {
   if (!isChanged_) {
     QWidget::closeEvent(event);
