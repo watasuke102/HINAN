@@ -25,6 +25,7 @@ SettingWidget::SettingWidget()
     : isChanged_(false), update_timeout_(new QSpinBox),
       check_update_startup_(new QCheckBox), show_splash_(new QCheckBox),
       tact_switch_toggle_(new QCheckBox), color_indicator_(new QPushButton) {
+  resize(500, 250);
   QVBoxLayout* main_layout = new QVBoxLayout;
 
   QFormLayout* form              = new QFormLayout;
@@ -44,13 +45,15 @@ SettingWidget::SettingWidget()
   main_layout->addLayout(form);
 
   QHBoxLayout* button_box  = new QHBoxLayout;
+  QPushButton* set_default = new QPushButton(tr("Set default settings"));
   QPushButton* ok          = new QPushButton(tr("OK"));
   QPushButton* discard     = new QPushButton(tr("Discard"));
-  QPushButton* set_default = new QPushButton(tr("Set default settings"));
+  QPushButton* apply       = new QPushButton(tr("Apply"));
   // add to layout
+  button_box->addWidget(set_default, 1, Qt::AlignLeft);
   button_box->addWidget(ok);
   button_box->addWidget(discard);
-  button_box->addWidget(set_default);
+  button_box->addWidget(apply);
   button_box->setAlignment(Qt::AlignRight);
   main_layout->addLayout(button_box);
 
@@ -58,9 +61,10 @@ SettingWidget::SettingWidget()
 
   connect(show_color_dialog, &QPushButton::pressed, this,
           &SettingWidget::UpdateColor);
+  connect(set_default, &QPushButton::pressed, this, &SettingWidget::SetDefault);
   connect(ok, &QPushButton::pressed, this, &SettingWidget::Ok);
   connect(discard, &QPushButton::pressed, this, &QWidget::close);
-  connect(set_default, &QPushButton::pressed, this, &SettingWidget::SetDefault);
+  connect(apply, &QPushButton::pressed, this, &SettingWidget::Apply);
 
   // Show dialog when clicked any widgets
   connect(show_splash_, &QCheckBox::clicked, this, &SettingWidget::Changed);
@@ -80,7 +84,7 @@ void SettingWidget::InitWidgets() {
   check_update_startup_->setChecked(
       SettingManager::Instance().GetValue(
           SettingManager::CheckUpdateWhenStartup) != QString("false"));
-  // timeout
+  // timeout (maximum is 1 min)
   update_timeout_->setMaximum(60000);
   update_timeout_->setSuffix(" ms");
   update_timeout_->setValue(SettingManager::Instance()
@@ -114,7 +118,7 @@ void SettingWidget::UpdateColor() {
   Changed();
 }
 
-void SettingWidget::Ok() {
+void SettingWidget::Apply() {
   QMetaEnum list = QMetaEnum::fromType<SettingManager::SettingList>();
   // check update
   SettingManager::Instance().SetValue(
@@ -137,7 +141,10 @@ void SettingWidget::Ok() {
       QVariant(tact_switch_toggle_->isChecked()).toString());
 
   SettingManager::Instance().Save();
-  Core::InfoDialog(tr("Changes will take effect after restarting software."));
+}
+
+void SettingWidget::Ok() {
+  Apply();
   isChanged_ = false;
   close();
 }

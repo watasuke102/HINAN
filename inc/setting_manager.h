@@ -43,6 +43,9 @@ class SettingManager : public QObject {
   void    SetDefault();
 
   static SettingManager& Instance();
+
+ signals:
+  void SettingUpdatedSignal();
 };
 } // namespace hinan
 

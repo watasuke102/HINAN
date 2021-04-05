@@ -53,6 +53,7 @@ void SettingManager::Save() {
     ini_.setValue(key, settings_[key]);
   }
   ini_.sync();
+  emit SettingUpdatedSignal();
 }
 void SettingManager::Load() {
   QMetaEnum list = QMetaEnum::fromType<SettingList>();

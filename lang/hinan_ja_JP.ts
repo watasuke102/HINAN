@@ -217,57 +217,62 @@ Please unzip downloaded file, and copy to %1 and overwrite.</source>
 <context>
     <name>hinan::gui::SettingWidget</name>
     <message>
-        <location filename="../src/gui/setting_widget.cpp" line="31"/>
+        <location filename="../src/gui/setting_widget.cpp" line="32"/>
         <source>Select</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/gui/setting_widget.cpp" line="39"/>
+        <location filename="../src/gui/setting_widget.cpp" line="40"/>
         <source>Show splash screen on startup</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/gui/setting_widget.cpp" line="40"/>
+        <location filename="../src/gui/setting_widget.cpp" line="41"/>
         <source>Check update on startup</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/gui/setting_widget.cpp" line="41"/>
+        <location filename="../src/gui/setting_widget.cpp" line="42"/>
         <source>Update timeout (ms)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/gui/setting_widget.cpp" line="42"/>
+        <location filename="../src/gui/setting_widget.cpp" line="43"/>
         <source>Enable toggleable tact switch</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/gui/setting_widget.cpp" line="43"/>
+        <location filename="../src/gui/setting_widget.cpp" line="44"/>
         <source>LED color</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/gui/setting_widget.cpp" line="47"/>
+        <location filename="../src/gui/setting_widget.cpp" line="49"/>
         <source>OK</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/gui/setting_widget.cpp" line="48"/>
+        <location filename="../src/gui/setting_widget.cpp" line="50"/>
         <source>Discard</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/gui/setting_widget.cpp" line="49"/>
+        <location filename="../src/gui/setting_widget.cpp" line="48"/>
         <source>Set default settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/gui/setting_widget.cpp" line="140"/>
+        <location filename="../src/gui/setting_widget.cpp" line="51"/>
+        <source>Apply</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../src/gui/setting_widget.cpp" line="144"/>
         <source>Changes will take effect after restarting software.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/gui/setting_widget.cpp" line="156"/>
+        <location filename="../src/gui/setting_widget.cpp" line="160"/>
         <source>Changes will be discard.
 Do you want to close?</source>
         <translation type="unfinished"></translation>

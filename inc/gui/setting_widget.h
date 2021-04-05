@@ -34,8 +34,9 @@ class SettingWidget : public QWidget {
 
  private slots:
   void UpdateColor();
-  void Ok();
   void SetDefault();
+  void Apply();
+  void Ok();
   void Changed();
 
  public:
