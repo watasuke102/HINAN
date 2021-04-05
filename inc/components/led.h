@@ -25,6 +25,7 @@ class LED : public ComponentInterface {
  public:
   LED(QWidget*);
   void Update() override;
+  void UpdateStyle();
 };
 } // namespace components
 } // namespace hinan

@@ -21,15 +21,7 @@
 namespace hinan {
 namespace components {
 LED::LED(QWidget* parent) : ComponentInterface(parent, 63, 155, 95, 30) {
-  QString style(
-      "QPushButton{ background-color: #222222; }"
-      "QPushButton:checked{ background-color: %1; }");
-  QString led_color =
-      SettingManager::Instance().GetValue(SettingManager::LedColor);
-  if (led_color.isEmpty()) {
-    led_color = "#ff0123";
-  }
-  setStyleSheet(style.arg(led_color));
+  UpdateStyle();
   QHBoxLayout* layout = new QHBoxLayout();
   layout->setSpacing(2);
   leds_.resize(8);
@@ -40,7 +32,23 @@ LED::LED(QWidget* parent) : ComponentInterface(parent, 63, 155, 95, 30) {
     layout->addWidget(leds_[i]);
   }
   setLayout(layout);
+
+  connect(&SettingManager::Instance(), &SettingManager::SettingUpdatedSignal,
+          this, &LED::UpdateStyle);
 }
+
+void LED::UpdateStyle() {
+  QString style(
+      "QPushButton{ background-color: #222222; }"
+      "QPushButton:checked{ background-color: %1; }");
+  QString led_color =
+      SettingManager::Instance().GetValue(SettingManager::LedColor);
+  if (led_color.isEmpty()) {
+    led_color = "#ff0123";
+  }
+  setStyleSheet(style.arg(led_color));
+}
+
 void LED::Update() {
   const int PBDR  = PracticeKit::Instance().reader->GetPortValue(port::PBDR);
   const int PBDDR = PracticeKit::Instance().reader->GetPortValue(port::PBDDR);

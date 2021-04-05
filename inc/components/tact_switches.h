@@ -25,6 +25,7 @@ class TactSwitches : public ComponentInterface {
  public:
   TactSwitches(QWidget*);
   void Update() override;
+  void UpdateIsCheckable();
 };
 } // namespace components
 } // namespace hinan

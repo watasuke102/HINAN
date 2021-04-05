@@ -267,12 +267,7 @@ Please unzip downloaded file, and copy to %1 and overwrite.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/gui/setting_widget.cpp" line="144"/>
-        <source>Changes will take effect after restarting software.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="../src/gui/setting_widget.cpp" line="160"/>
+        <location filename="../src/gui/setting_widget.cpp" line="163"/>
         <source>Changes will be discard.
 Do you want to close?</source>
         <translation type="unfinished"></translation>

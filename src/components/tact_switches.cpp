@@ -24,17 +24,26 @@ TactSwitches::TactSwitches(QWidget* parent)
   QHBoxLayout* layout = new QHBoxLayout();
   layout->setSpacing(3);
   switches_.resize(4);
-  const bool checkable =
-      (SettingManager::Instance().GetValue(SettingManager::TactSwitchToggle) !=
-       QString("false"));
   for (int i = 0; i < switches_.size(); i++) {
     switches_[i] = new QPushButton(this);
-    switches_[i]->setCheckable(checkable);
     switches_[i]->setSizePolicy(
         QSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding));
     layout->addWidget(switches_[i]);
   }
   setLayout(layout);
+  UpdateIsCheckable();
+
+  connect(&SettingManager::Instance(), &SettingManager::SettingUpdatedSignal,
+          this, &TactSwitches::UpdateIsCheckable);
+}
+
+void TactSwitches::UpdateIsCheckable() {
+  const bool checkable =
+      (SettingManager::Instance().GetValue(SettingManager::TactSwitchToggle) !=
+       QString("false"));
+  for (int i = 0; i < switches_.size(); i++) {
+    switches_[i]->setCheckable(checkable);
+  }
 }
 
 void TactSwitches::Update() {
@@ -44,7 +53,8 @@ void TactSwitches::Update() {
   for (int i = switches_.size() - 1; i >= 0; i--) {
     result  = result << 1;
     int pos = 1 << i;
-    if ((!switches_[i]->isDown() || !switches_[i]->isChecked()) && !(P5DDR & pos)) {
+    if ((!switches_[i]->isDown() || !switches_[i]->isChecked()) &&
+        !(P5DDR & pos)) {
       ++result;
     }
   }
