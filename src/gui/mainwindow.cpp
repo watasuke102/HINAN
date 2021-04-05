@@ -48,6 +48,7 @@ MainWindow::MainWindow() {
 
   connect(PracticeKit::Instance().reader, &ProgramReader::PathChangedSignal,
           this, &MainWindow::UpdateTitle);
+  connect(this, &MainWindow::CloseSignal, &QApplication::quit);
 }
 void MainWindow::UpdateTitle(QString path) {
   if (path.isEmpty()) {
