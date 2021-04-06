@@ -119,37 +119,37 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core.cpp" line="67"/>
+        <location filename="../src/core.cpp" line="55"/>
         <source>Checking for update...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core.cpp" line="83"/>
+        <location filename="../src/core.cpp" line="65"/>
         <source>Loading...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core.cpp" line="94"/>
+        <location filename="../src/core.cpp" line="76"/>
         <source>&lt;h1&gt;HINAN - v%1&lt;/h1&gt;&lt;h3&gt;HINAN Is Not AN emulator&lt;/h3&gt;&lt;hr&gt;&lt;p&gt;This software is released under the Mozilla Public License Version 2.0. &lt;br&gt;This license permissions modification, distribution, patent/commercial/private use. &lt;br&gt;When you exploit this software, you must notice about License and Copyright, disclose source, and include original. &lt;br&gt;An &apos;exploit&apos; as is defined here is not only using software, but also modification, distributing, or include to your production. &lt;/p&gt;&lt;p&gt; HINAN&apos;s source code is diclosed &lt;a href=&apos;https://github.com/watasuke102/HINAN&apos;&gt;here&lt;/a&gt;. If you find any bug or dissatisfaction, please report.&lt;/p&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core.cpp" line="110"/>
+        <location filename="../src/core.cpp" line="92"/>
         <source>Version</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core.cpp" line="122"/>
+        <location filename="../src/core.cpp" line="104"/>
         <source>Error</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core.cpp" line="136"/>
+        <location filename="../src/core.cpp" line="118"/>
         <source>Info</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/core.cpp" line="150"/>
+        <location filename="../src/core.cpp" line="132"/>
         <source>Question</source>
         <translation type="unfinished"></translation>
     </message>
@@ -170,38 +170,38 @@
 <context>
     <name>hinan::UpdateChecker</name>
     <message>
-        <location filename="../src/update_checker.cpp" line="59"/>
+        <location filename="../src/update_checker.cpp" line="80"/>
         <source>Error occurred</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/update_checker.cpp" line="66"/>
+        <location filename="../src/update_checker.cpp" line="87"/>
         <source>Irregular json format</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/update_checker.cpp" line="69"/>
+        <location filename="../src/update_checker.cpp" line="90"/>
         <source>Current version: %1&lt;br&gt;Latest version: %2&lt;hr&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/update_checker.cpp" line="81"/>
+        <location filename="../src/update_checker.cpp" line="102"/>
         <source>This software is up to date.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/update_checker.cpp" line="85"/>
+        <location filename="../src/update_checker.cpp" line="106"/>
         <source>Do you want to download the latest version?&lt;br&gt;(The browser will open)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/update_checker.cpp" line="109"/>
+        <location filename="../src/update_checker.cpp" line="130"/>
         <source>Open the download page in browser.
 Please unzip downloaded file, and copy to %1 and overwrite.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../src/update_checker.cpp" line="113"/>
+        <location filename="../src/update_checker.cpp" line="134"/>
         <source>Cannot find downloadable file.</source>
         <translation type="unfinished"></translation>
     </message>

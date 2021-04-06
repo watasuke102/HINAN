@@ -49,34 +49,16 @@ void Core::SetupMainWindow() {
   QApplication::processEvents();
 
   // Check for update
-  {
-    const QString check_update = SettingManager::Instance().GetValue(
-        SettingManager::CheckUpdateWhenStartup);
-    if (check_update != QString("false")) {
-      int timeout;
-      {
-        bool ok;
-        timeout = SettingManager::Instance()
-                      .GetValue(SettingManager::CheckUpdateTimeOut)
-                      .toInt(&ok);
-        if (!ok) {
-          // 10 second
-          timeout = 10000;
-        }
-      }
-      splash.showMessage(tr("Checking for update..."), pos);
-      UpdateChecker checker(false);
-      QTimer        timer;
-      timer.setSingleShot(true);
-      QEventLoop loop;
-      connect(&checker, &UpdateChecker::FinishedSignal, &loop,
-              &QEventLoop::quit);
-      connect(&timer, &QTimer::timeout, &loop, &QEventLoop::quit);
-      timer.start(timeout);
+  const QString check_update = SettingManager::Instance().GetValue(
+      SettingManager::CheckUpdateWhenStartup);
+  if (check_update != QString("false")) {
+    splash.showMessage(tr("Checking for update..."), pos);
+    UpdateChecker checker(false);
+    QEventLoop    loop;
+    connect(&checker, &UpdateChecker::FinishedSignal, &loop, &QEventLoop::quit);
 
-      checker.Check();
-      loop.exec();
-    }
+    checker.Check();
+    loop.exec();
   }
 
   // Wait to show splash screen

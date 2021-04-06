@@ -13,6 +13,7 @@
 #include <QJsonObject>
 #include <QObject>
 #include <QString>
+#include <QTimer>
 #include <QtNetwork/QNetworkAccessManager>
 #include <QtNetwork/QNetworkReply>
 
@@ -24,6 +25,7 @@ class UpdateChecker : public QObject {
 
   enum class DialogKind { info, critical };
   bool isShowDialog_;
+  QTimer timer_;
   void ShowDialog(DialogKind, QString, QString);
 
  public:

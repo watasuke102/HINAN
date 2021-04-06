@@ -9,12 +9,14 @@
 
 #include "update_checker.h"
 #include "core.h"
+#include "setting_manager.h"
 #include <QApplication>
 #include <QDesktopServices>
 #include <QJsonArray>
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QMessageBox>
+#include <QTimer>
 #include <QUrl>
 #include <QtNetwork/QNetworkAccessManager>
 #include <QtNetwork/QNetworkReply>
@@ -28,11 +30,13 @@ namespace hinan {
 UpdateChecker::UpdateChecker(bool isShowDialog = true)
     : isShowDialog_(isShowDialog) {
   manager_ = new QNetworkAccessManager;
+  timer_.setSingleShot(true);
   connect(manager_, &QNetworkAccessManager::finished,
           [=](QNetworkReply* reply) {
             RequestFinished(reply);
             emit FinishedSignal();
           });
+  // connect(&timer_, &QTimer::timeout, this, &UpdateChecker::FinishedSignal);
 }
 
 void UpdateChecker::ShowDialog(DialogKind dialog_kind, QString body,
@@ -49,6 +53,23 @@ void UpdateChecker::ShowDialog(DialogKind dialog_kind, QString body,
 }
 
 void UpdateChecker::Check() {
+  int timeout;
+  {
+    bool ok;
+    timeout = SettingManager::Instance()
+                  .GetValue(SettingManager::CheckUpdateTimeOut)
+                  .toInt(&ok);
+    if (!ok) {
+      // 10 second
+      timeout = 10000;
+    }
+  }
+  // timer_.start(timeout);
+  QTimer::singleShot(timeout, [=] {
+    qDebug("TIMEOUT");
+    emit FinishedSignal();
+  });
+
   manager_->get(QNetworkRequest(
       QUrl("https://api.github.com/repos/watasuke102/HINAN/releases/latest")));
 }
