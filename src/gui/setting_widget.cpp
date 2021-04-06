@@ -141,11 +141,11 @@ void SettingWidget::Apply() {
       QVariant(tact_switch_toggle_->isChecked()).toString());
 
   SettingManager::Instance().Save();
+  isChanged_ = false;
 }
 
 void SettingWidget::Ok() {
   Apply();
-  isChanged_ = false;
   close();
 }
 void SettingWidget::SetDefault() {
