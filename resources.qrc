@@ -1,5 +1,7 @@
 <!DOCTYPE RCC><RCC version="1.0">
 <qresource>
+    <file>lang/hinan_ja_JP.qm</file>
+
     <file>assets/logo.svg</file>
     <file>assets/splash.svg</file>
     <file>assets/canvas.svg</file>
