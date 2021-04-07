@@ -170,39 +170,39 @@
 <context>
     <name>hinan::UpdateChecker</name>
     <message>
-        <location filename="../src/update_checker.cpp" line="77"/>
+        <location filename="../src/update_checker.cpp" line="73"/>
         <source>Error occurred</source>
         <translation>エラーが発生しました</translation>
     </message>
     <message>
-        <location filename="../src/update_checker.cpp" line="84"/>
+        <location filename="../src/update_checker.cpp" line="80"/>
         <source>Irregular json format</source>
         <translation>不正なjsonフォーマット</translation>
     </message>
     <message>
-        <location filename="../src/update_checker.cpp" line="87"/>
+        <location filename="../src/update_checker.cpp" line="83"/>
         <source>Current version: %1&lt;br&gt;Latest version: %2&lt;hr&gt;</source>
         <translation>現在のバージョン: %1&lt;br&gt;最新のバージョン: %2&lt;hr&gt;</translation>
     </message>
     <message>
-        <location filename="../src/update_checker.cpp" line="99"/>
+        <location filename="../src/update_checker.cpp" line="95"/>
         <source>This software is up to date.</source>
         <translation>ソフトウェアは最新です。</translation>
     </message>
     <message>
-        <location filename="../src/update_checker.cpp" line="103"/>
+        <location filename="../src/update_checker.cpp" line="99"/>
         <source>Do you want to download the latest version?&lt;br&gt;(The browser will open)</source>
         <translation>最新バージョンをダウンロードしますか？&lt;br&gt;（ブラウザが開きます）</translation>
     </message>
     <message>
-        <location filename="../src/update_checker.cpp" line="127"/>
+        <location filename="../src/update_checker.cpp" line="123"/>
         <source>Open the download page in browser.
 Please unzip downloaded file, and copy to %1 and overwrite.</source>
         <translation>ダウンロードページをブラウザで開きました。
 ダウンロードしたzipファイルを展開し、中身を%1にコピーして上書きしてください。</translation>
     </message>
     <message>
-        <location filename="../src/update_checker.cpp" line="131"/>
+        <location filename="../src/update_checker.cpp" line="127"/>
         <source>Cannot find downloadable file.</source>
         <translation>ダウンロード可能なファイルを見つけることができませんでした。</translation>
     </message>

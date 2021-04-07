@@ -31,12 +31,9 @@ UpdateChecker::UpdateChecker(bool isShowDialog = true)
     : isShowDialog_(isShowDialog) {
   manager_ = new QNetworkAccessManager;
   timer_.setSingleShot(true);
-  connect(manager_, &QNetworkAccessManager::finished,
-          [=](QNetworkReply* reply) {
-            RequestFinished(reply);
-            emit FinishedSignal();
-          });
-  // connect(&timer_, &QTimer::timeout, this, &UpdateChecker::FinishedSignal);
+  connect(manager_, &QNetworkAccessManager::finished, this,
+          &UpdateChecker::RequestFinished);
+  connect(&timer_, &QTimer::timeout, this, &UpdateChecker::FinishedSignal);
 }
 
 void UpdateChecker::ShowDialog(DialogKind dialog_kind, QString body,
@@ -64,11 +61,7 @@ void UpdateChecker::Check() {
       timeout = 10000;
     }
   }
-  // timer_.start(timeout);
-  QTimer::singleShot(timeout, [=] {
-    qDebug("TIMEOUT");
-    emit FinishedSignal();
-  });
+  timer_.start(timeout);
 
   manager_->get(QNetworkRequest(
       QUrl("https://api.github.com/repos/watasuke102/HINAN/releases/latest")));
@@ -135,5 +128,7 @@ void UpdateChecker::RequestFinished(QNetworkReply* reply) {
       }
     }
   }
+  timer_.stop();
+  emit FinishedSignal();
 }
 } // namespace hinan
