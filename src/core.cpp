@@ -25,8 +25,6 @@ Core::Core() : main_window_(new gui::MainWindow) {
   // Connect
   connect(main_window_, &gui::MainWindow::CloseSignal, &PracticeKit::Instance(),
           &PracticeKit::TerminateScript);
-  connect(PracticeKit::Instance().reader, &ProgramReader::ErrorSignal,
-          [=](QString body) { ErrorDialog(body); });
 }
 
 void Core::SetupMainWindow() {

@@ -114,42 +114,42 @@
 <context>
     <name>hinan::Core</name>
     <message>
-        <location filename="../src/core.cpp" line="48"/>
+        <location filename="../src/core.cpp" line="46"/>
         <source>Initializing settings...</source>
         <translation>設定の初期化中...</translation>
     </message>
     <message>
-        <location filename="../src/core.cpp" line="55"/>
+        <location filename="../src/core.cpp" line="53"/>
         <source>Checking for update...</source>
         <translation>アップデートの確認中...</translation>
     </message>
     <message>
-        <location filename="../src/core.cpp" line="65"/>
+        <location filename="../src/core.cpp" line="63"/>
         <source>Loading...</source>
         <translation>読み込み中...</translation>
     </message>
     <message>
-        <location filename="../src/core.cpp" line="76"/>
+        <location filename="../src/core.cpp" line="74"/>
         <source>&lt;h1&gt;HINAN - v%1&lt;/h1&gt;&lt;h3&gt;HINAN Is Not AN emulator&lt;/h3&gt;&lt;hr&gt;&lt;p&gt;This software is released under the Mozilla Public License Version 2.0. &lt;br&gt;This license permissions modification, distribution, patent/commercial/private use. &lt;br&gt;When you exploit this software, you must notice about License and Copyright, disclose source, and include original. &lt;br&gt;An &apos;exploit&apos; as is defined here is not only using software, but also modification, distributing, or include to your production. &lt;/p&gt;&lt;p&gt; HINAN&apos;s source code is diclosed &lt;a href=&apos;https://github.com/watasuke102/HINAN&apos;&gt;here&lt;/a&gt;. If you find any bug or dissatisfaction, please report.&lt;/p&gt;</source>
         <translation>&lt;h1&gt;HINAN - v%1&lt;/h1&gt;&lt;h3&gt;HINAN Is Not AN emulator&lt;/h3&gt;&lt;hr&gt;&lt;p&gt;このソフトウェアは Mozilla Public License Version 2.0 の下配布されています。 &lt;br&gt;このライセンスは改変・再配布・特許/商用/個人利用を許可します。&lt;br&gt;このソフトウェアを利用する際は、ライセンス及び著作権についてを明記し、ソースコードを公開し、オリジナルを含めてください。 &lt;br&gt;ここでの &quot;利用&quot; はソフトウェアを使用することだけではなく、改変・再配布及び貴方の作品に含めることを指します。&lt;/p&gt;&lt;p&gt; HINANのソースコードは&lt;a href=&apos;https://github.com/watasuke102/HINAN&apos;&gt;こちら&lt;/a&gt;で公開されています。もしバグや機能要望があれば報告をお願いします。&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../src/core.cpp" line="92"/>
+        <location filename="../src/core.cpp" line="90"/>
         <source>Version</source>
         <translation>バージョン情報</translation>
     </message>
     <message>
-        <location filename="../src/core.cpp" line="104"/>
+        <location filename="../src/core.cpp" line="102"/>
         <source>Error</source>
         <translation>エラー</translation>
     </message>
     <message>
-        <location filename="../src/core.cpp" line="118"/>
+        <location filename="../src/core.cpp" line="116"/>
         <source>Info</source>
         <translation>情報</translation>
     </message>
     <message>
-        <location filename="../src/core.cpp" line="132"/>
+        <location filename="../src/core.cpp" line="130"/>
         <source>Question</source>
         <translation>質問</translation>
     </message>
@@ -157,12 +157,17 @@
 <context>
     <name>hinan::ProgramReader</name>
     <message>
-        <location filename="../src/program_reader.cpp" line="111"/>
+        <location filename="../src/program_reader.cpp" line="87"/>
+        <source>File (%1) cannot open</source>
+        <translation>ファイル （%1）を開くことが出来ませんでした</translation>
+    </message>
+    <message>
+        <location filename="../src/program_reader.cpp" line="112"/>
         <source>Cannot build the script</source>
         <translation>スクリプトをビルドできませんでした</translation>
     </message>
     <message>
-        <location filename="../src/program_reader.cpp" line="140"/>
+        <location filename="../src/program_reader.cpp" line="141"/>
         <source>Engine is not yet to initialized</source>
         <translation>エンジンが初期化されていません</translation>
     </message>

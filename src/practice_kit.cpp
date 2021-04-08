@@ -8,6 +8,7 @@
 // file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 #include "practice_kit.h"
+#include "core.h"
 #include "program_reader.h"
 #include <QThread>
 #include <QTreeWidget>
@@ -30,6 +31,8 @@ PracticeKit::PracticeKit() {
           &ComponentsManager::Run);
   connect(reader, &ProgramReader::DeactivatedSignal, components_manager,
           &ComponentsManager::Terminate);
+  connect(reader, &ProgramReader::ErrorSignal,
+          [](QString s) { Core::ErrorDialog(s); });
   connect(this, &PracticeKit::ResizeComponentsSignal, components_manager,
           &ComponentsManager::Resize);
 

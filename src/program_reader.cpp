@@ -57,9 +57,8 @@ bool ProgramReader::IsActive() { return isActive_; }
 QString ProgramReader::GetPath() { return path_; }
 
 void ProgramReader::SetPath(QUrl url) {
-  Terminate();
   QString path(url.toString());
-  qDebug() << path;
+  Terminate();
 #if defined(_WIN64)
   path = path.remove("file:///");
 #elif defined(__linux)
