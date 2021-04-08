@@ -66,7 +66,6 @@ void ProgramReader::SetPath(QUrl url) {
   path = path.remove("file://");
 #endif
   path_ = path;
-  qDebug() << path_;
   emit PathChangedSignal(path_);
   Load();
 }
@@ -85,8 +84,11 @@ void ProgramReader::Load() {
   QFile   file;
   // Open program file and read without include
   file.setFileName(path_);
-  if (!file.open(QIODevice::ReadOnly))
-    qFatal("File cannot open (%s)", path_.toUtf8().data());
+  if (!file.open(QIODevice::ReadOnly)) {
+    emit ErrorSignal(tr("File (%1) cannot open").arg(path_.toUtf8().data()));
+    path_ = "";
+    return;
+  }
   QString read;
   while (!file.atEnd()) {
     read = file.readLine();
