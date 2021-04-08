@@ -37,11 +37,11 @@ class Actions : public QObject {
   QMenu*    help_menu_;
 
   QToolBar*     toolbar_;
+  UpdateChecker checker_;
   void          CreateActions();
   void          OpenFileDialog();
   void          ChangeStartStopActionsIcon();
   void          ShowSettingWidget();
-  UpdateChecker checker_;
 
  public:
   Actions();

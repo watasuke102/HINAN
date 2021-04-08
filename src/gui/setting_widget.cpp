@@ -15,15 +15,14 @@
 #include <QFormLayout>
 #include <QLayout>
 #include <QMessageBox>
-#include <QMetaEnum>
 #include <QPushButton>
 #include <QWidget>
 
 namespace hinan {
 namespace gui {
 SettingWidget::SettingWidget()
-    : isChanged_(false), update_timeout_(new QSpinBox),
-      check_update_startup_(new QCheckBox), show_splash_(new QCheckBox),
+    : isChanged_(false), show_splash_(new QCheckBox),
+      check_update_startup_(new QCheckBox), update_timeout_(new QSpinBox),
       tact_switch_toggle_(new QCheckBox), color_indicator_(new QPushButton) {
   resize(500, 250);
   QVBoxLayout* main_layout = new QVBoxLayout;
@@ -119,7 +118,6 @@ void SettingWidget::UpdateColor() {
 }
 
 void SettingWidget::Apply() {
-  QMetaEnum list = QMetaEnum::fromType<SettingManager::SettingList>();
   // check update
   SettingManager::Instance().SetValue(
       SettingManager::CheckUpdateWhenStartup,

@@ -12,7 +12,7 @@
 <context>
     <name>hinan::Actions</name>
     <message>
-        <location filename="../src/actions.cpp" line="34"/>
+        <location filename="../src/actions.cpp" line="33"/>
         <source>File</source>
         <translation>ファイル</translation>
     </message>
@@ -22,7 +22,7 @@
         <translation>実行</translation>
     </message>
     <message>
-        <location filename="../src/actions.cpp" line="35"/>
+        <location filename="../src/actions.cpp" line="34"/>
         <source>Help</source>
         <translation>ヘルプ</translation>
     </message>
@@ -218,57 +218,57 @@ Please unzip downloaded file, and copy to %1 and overwrite.</source>
 <context>
     <name>hinan::gui::SettingWidget</name>
     <message>
-        <location filename="../src/gui/setting_widget.cpp" line="32"/>
+        <location filename="../src/gui/setting_widget.cpp" line="31"/>
         <source>Select</source>
         <translation>選択</translation>
     </message>
     <message>
-        <location filename="../src/gui/setting_widget.cpp" line="40"/>
+        <location filename="../src/gui/setting_widget.cpp" line="39"/>
         <source>Show splash screen on startup</source>
         <translation>起動時にスプラッシュスクリーンを表示</translation>
     </message>
     <message>
-        <location filename="../src/gui/setting_widget.cpp" line="41"/>
+        <location filename="../src/gui/setting_widget.cpp" line="40"/>
         <source>Check update on startup</source>
         <translation>起動時にアップデートを確認する</translation>
     </message>
     <message>
-        <location filename="../src/gui/setting_widget.cpp" line="42"/>
+        <location filename="../src/gui/setting_widget.cpp" line="41"/>
         <source>Update timeout (ms)</source>
         <translation>アップデートがタイムアウトするまでの時間 （ミリ秒）</translation>
     </message>
     <message>
-        <location filename="../src/gui/setting_widget.cpp" line="43"/>
+        <location filename="../src/gui/setting_widget.cpp" line="42"/>
         <source>Enable toggleable tact switch</source>
         <translation>タクトスイッチをトグル可能にする</translation>
     </message>
     <message>
-        <location filename="../src/gui/setting_widget.cpp" line="44"/>
+        <location filename="../src/gui/setting_widget.cpp" line="43"/>
         <source>LED color</source>
         <translation>LEDの色</translation>
     </message>
     <message>
-        <location filename="../src/gui/setting_widget.cpp" line="48"/>
+        <location filename="../src/gui/setting_widget.cpp" line="47"/>
         <source>Set default settings</source>
         <translation>初期設定を読み込む</translation>
     </message>
     <message>
-        <location filename="../src/gui/setting_widget.cpp" line="49"/>
+        <location filename="../src/gui/setting_widget.cpp" line="48"/>
         <source>OK</source>
         <translation>OK</translation>
     </message>
     <message>
-        <location filename="../src/gui/setting_widget.cpp" line="50"/>
+        <location filename="../src/gui/setting_widget.cpp" line="49"/>
         <source>Discard</source>
         <translation>破棄</translation>
     </message>
     <message>
-        <location filename="../src/gui/setting_widget.cpp" line="51"/>
+        <location filename="../src/gui/setting_widget.cpp" line="50"/>
         <source>Apply</source>
         <translation>適用</translation>
     </message>
     <message>
-        <location filename="../src/gui/setting_widget.cpp" line="163"/>
+        <location filename="../src/gui/setting_widget.cpp" line="161"/>
         <source>Changes will be discard.
 Do you want to close?</source>
         <translation>変更は破棄されます。

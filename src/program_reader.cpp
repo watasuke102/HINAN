@@ -35,7 +35,7 @@ ProgramReader::ProgramReader() {
     r = engine_->RegisterGlobalProperty(function_name.arg(str).toUtf8().data(),
                                         &map_[str]);
     if (r < 0) {
-      qFatal("Failed to register property: %s", str);
+      qFatal("Failed to register property: %s", str.toUtf8().data());
     }
   }
 }

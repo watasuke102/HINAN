@@ -11,6 +11,7 @@ set(CMAKE_AUTORCC ON)
 
 set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_FLAGS "-Wall")
 
 find_package(QT NAMES Qt6 Qt5 COMPONENTS Widgets LinguistTools Svg Network REQUIRED)
 find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets LinguistTools Svg Network REQUIRED)

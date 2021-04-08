@@ -30,7 +30,7 @@ QRect Expantion(QRect base, double rate) {
 
 namespace hinan {
 ComponentsManager::ComponentsManager()
-    : widget_(new QWidget), isTerminated_(false) {
+    : isTerminated_(false), widget_(new QWidget) {
   components_.append(new components::LED(widget_));
   components_.append(new components::Segment(widget_));
   components_.append(new components::TactSwitches(widget_));
