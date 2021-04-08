@@ -103,9 +103,9 @@ void UpdateChecker::RequestFinished(QNetworkReply* reply) {
     if (r == QMessageBox::Yes) {
       const QString asset_name =
 #if defined(_WIN64)
-          "windows-x64"
+          "windows"
 #elif defined(__linux)
-          "linux-x64"
+          "linux"
 #endif
           ".zip";
       QJsonArray array    = json["assets"].toArray();
