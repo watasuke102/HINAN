@@ -15,9 +15,9 @@ set(CMAKE_CXX_FLAGS "-Wall")
 
 find_package(QT NAMES Qt6 Qt5 COMPONENTS Widgets LinguistTools Svg Network REQUIRED)
 find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets LinguistTools Svg Network REQUIRED)
-set(AS_ADD_ON /usr/share/angelscript/add_on)
+set(AS_PATH /home/watasuke/Documents/angelscript)
 
-include_directories("./inc" ${AS_ADD_ON})
+include_directories("./inc" ${AS_PATH}/angelscript/include ${AS_PATH}/add_on)
 set(TS_FILES lang/${PROJECT_NAME}_ja_JP.ts)
 qt5_add_resources(RESOURCES resources.qrc)
 
@@ -51,8 +51,8 @@ set(PROJECT_SOURCES ${HEADERS} ${TS_FILES}
   src/components/segment.cpp
   src/components/tact_switches.cpp
   src/components/toggle_switches.cpp
-  ${AS_ADD_ON}/scriptbuilder/scriptbuilder.cpp
-  ${AS_ADD_ON}/scriptstdstring/scriptstdstring.cpp
+  ${AS_PATH}/add_on/scriptbuilder/scriptbuilder.cpp
+  ${AS_PATH}/add_on/scriptstdstring/scriptstdstring.cpp
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
@@ -69,5 +69,6 @@ target_link_libraries(
   Qt${QT_VERSION_MAJOR}::Svg
   Qt${QT_VERSION_MAJOR}::Network
   Qt${QT_VERSION_MAJOR}::Widgets
-  -langelscript
+  ${AS_PATH}/angelscript/lib/libangelscript.a
+  -pthread
 )
