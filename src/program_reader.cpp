@@ -58,7 +58,15 @@ QString ProgramReader::GetPath() { return path_; }
 
 void ProgramReader::SetPath(QUrl url) {
   Terminate();
-  path_ = url.toString().remove("file://");
+  QString path(url.toString());
+  qDebug() << path;
+#if defined(_WIN64)
+  path = path.remove("file:///");
+#elif defined(__linux)
+  path = path.remove("file://");
+#endif
+  path_ = path;
+  qDebug() << path_;
   emit PathChangedSignal(path_);
   Load();
 }

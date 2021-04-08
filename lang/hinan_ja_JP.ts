@@ -157,12 +157,12 @@
 <context>
     <name>hinan::ProgramReader</name>
     <message>
-        <location filename="../src/program_reader.cpp" line="103"/>
+        <location filename="../src/program_reader.cpp" line="111"/>
         <source>Cannot build the script</source>
         <translation>スクリプトをビルドできませんでした</translation>
     </message>
     <message>
-        <location filename="../src/program_reader.cpp" line="132"/>
+        <location filename="../src/program_reader.cpp" line="140"/>
         <source>Engine is not yet to initialized</source>
         <translation>エンジンが初期化されていません</translation>
     </message>
