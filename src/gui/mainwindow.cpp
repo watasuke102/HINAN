@@ -62,6 +62,13 @@ void MainWindow::closeEvent(QCloseEvent* event) {
   emit CloseSignal();
   QMainWindow::closeEvent(event);
 }
+
+void MainWindow::dragEnterEvent(QDragEnterEvent* event) {
+  if (event->mimeData()->hasUrls()) {
+    event->acceptProposedAction();
+  }
+  QMainWindow::dragEnterEvent(event);
+}
 void MainWindow::dropEvent(QDropEvent* event) {
   if (event->mimeData()->hasUrls()) {
     PracticeKit::Instance().reader->SetPath(event->mimeData()->urls()[0]);

@@ -12,6 +12,7 @@
 
 #include <QCloseEvent>
 #include <QDropEvent>
+#include <QDragEnterEvent>
 #include <QMainWindow>
 #include <QObject>
 #include <QString>
@@ -24,6 +25,7 @@ class MainWindow : public QMainWindow {
   MainWindow();
   void UpdateTitle(QString);
   void closeEvent(QCloseEvent*);
+  void dragEnterEvent(QDragEnterEvent*);
   void dropEvent(QDropEvent*);
 
  signals:
