@@ -167,7 +167,7 @@
         <translation>スクリプトをビルドできませんでした</translation>
     </message>
     <message>
-        <location filename="../src/program_reader.cpp" line="144"/>
+        <location filename="../src/program_reader.cpp" line="145"/>
         <source>Engine is not yet to initialized</source>
         <translation>エンジンが初期化されていません</translation>
     </message>
