@@ -53,9 +53,18 @@ void TactSwitches::Update() {
   for (int i = switches_.size() - 1; i >= 0; i--) {
     result  = result << 1;
     int pos = 1 << i;
-    if ((!switches_[i]->isDown() || !switches_[i]->isChecked()) &&
-        !(P5DDR & pos)) {
-      ++result;
+
+    const bool ddr_is_input = ((P5DDR & pos) == 0);
+    bool       button_is_pressed;
+    if (switches_[i]->isCheckable()) {
+      button_is_pressed = switches_[i]->isChecked();
+    } else {
+      button_is_pressed = switches_[i]->isDown();
+    }
+    // When button is not pressed or DDR is not input, DR is 1
+    // (When button is pressed "and" DDR is input, DR is 0)
+    if (!button_is_pressed || !ddr_is_input) {
+      result++;
     }
   }
   PracticeKit::Instance().reader->SetPortValue(port::P5DR, result);
