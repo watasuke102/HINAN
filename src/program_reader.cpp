@@ -141,7 +141,8 @@ void ProgramReader::Terminate() {
 
 void ProgramReader::Run() {
   if (engine_ == 0 || path_.isEmpty()) {
-  // FIXME
+    QApplication::beep();
+    // FIXME
 #if !defined(_WIN64)
     emit ErrorSignal(tr("Engine is not yet to initialized"));
 #endif
