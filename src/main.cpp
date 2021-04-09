@@ -18,8 +18,7 @@ int main(int argc, char* argv[]) {
   QApplication app(argc, argv);
   Q_INIT_RESOURCE(resources);
   app.setApplicationName("HINAN");
-  /**/ app.setApplicationVersion("1.0.0"); /*/
-app.setApplicationVersion("0.1.0");/**/
+  app.setApplicationVersion("1.1.0");
 
   QTranslator translator;
   if (QLocale::system().name() == "ja_JP") {
