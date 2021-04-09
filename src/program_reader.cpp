@@ -124,6 +124,9 @@ void ProgramReader::Load() {
 void ProgramReader::Terminate() {
   qDebug("[Reader] Terminated");
   isActive_ = false;
+  for (auto str : port::port_list) {
+    map_[str] = 0;
+  }
   emit DeactivatedSignal();
   if (!path_.isEmpty()) {
     main_context_->Abort();
